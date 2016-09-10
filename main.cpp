@@ -1,6 +1,7 @@
 #include <iostream>
+#include "Logger.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Logger::getInstance().log("Hola");
     return 0;
 }
