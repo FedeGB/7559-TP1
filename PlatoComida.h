@@ -21,6 +21,9 @@ public:
 
     PlatoComida();
     PlatoComida(std::string, float);
+
+    // Constructor de copia
+    PlatoComida(const PlatoComida&);
     ~PlatoComida();
     float getPrecio();
     std::string getNombre();

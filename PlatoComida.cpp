@@ -15,6 +15,13 @@ PlatoComida::PlatoComida(std::string name, float price) {
     this->precio = price;
     this->status = PlatoComida::NUEVOPEDIDO;
 }
+
+PlatoComida::PlatoComida(const PlatoComida& original) {
+    nombre = original.nombre;
+    precio = original.precio;
+    status = original.status;
+}
+
 float PlatoComida::getPrecio() {
     return this->precio;
 }
