@@ -17,7 +17,8 @@ private:
 
 public:
     // Constructor que carga segun el archivo de configuracion el menu con los platos
-    Menu(std::string);
+    Menu();
+    bool fill(std::string);
     PlatoComida eleccionRandom();
 
 };

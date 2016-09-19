@@ -4,9 +4,11 @@
 
 #include "Menu.h"
 
-Menu::Menu(std::string path) {
-/* TODO: A definir si se hace el open de vuelta, si se pasa el file
-  o si se tiene ya algo bien parceado como constructor */
+Menu::Menu() {
+}
+
+bool Menu::fill(std::string) {
+    return  true;
 }
 
 PlatoComida Menu::eleccionRandom() {
