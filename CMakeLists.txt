@@ -3,5 +3,5 @@ project(TP1)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp PlatoComida.cpp PlatoComida.h Menu.cpp Menu.h Logger.cpp Logger.h ConfigLoader.cpp ConfigLoader.h)
+set(SOURCE_FILES src/main.cpp src/PlatoComida.cpp src/PlatoComida.h src/Menu.cpp src/Menu.h src/Logger.cpp src/Logger.h src/ConfigLoader.cpp src/ConfigLoader.h)
 add_executable(TP1 ${SOURCE_FILES})
