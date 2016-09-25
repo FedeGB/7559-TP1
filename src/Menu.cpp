@@ -40,12 +40,12 @@ bool Menu::fill(std::string str) {
             if(valueNumber == 0) {
                 nombrePlato = tokenInner;
             } else if(valueNumber == 1) {
-                if(stringIsValidFloat(tokenInner)) {
+                if(stringIsValidPrice(tokenInner)) {
                     precioPlato = std::stof(tokenInner);
                     nuevoPlato = new PlatoComida(nombrePlato, precioPlato);
                     this->platosDisponibles.push_back(nuevoPlato);
                 } else {
-                    throw "Los precios del menu deben ser numeros con decimales";
+                    throw "Los precios del menu deben ser numeros con decimales positivos";
                 }
             } else {
                 throw "Hay parametros demás en el menu";
@@ -70,8 +70,4 @@ PlatoComida Menu::eleccionRandom() {
         throw "Error de seleccion, evitando seg fault";
     }
     return PlatoComida(*this->platosDisponibles[seleccion]);
-}
-
-bool Menu::stringIsValidFloat(std::string str) {
-    return true;
 }

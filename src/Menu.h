@@ -15,7 +15,6 @@
 class Menu {
 private:
     std::vector<PlatoComida*> platosDisponibles;
-    bool stringIsValidFloat(std::string);
 
 public:
     // Constructor que carga segun el archivo de configuracion el menu con los platos

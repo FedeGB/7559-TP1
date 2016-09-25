@@ -29,3 +29,12 @@ bool stringIsInt(std::string str) {
 
     return (*pointer == 0) ;
 }
+
+
+bool stringIsValidPrice(std::string str) {
+    std::istringstream iss(str);
+    float f;
+    iss >> std::noskipws >> f; // Espacio al principio es considerado como invalido
+    if(str[0] == '-') return false; // No puede ser negativo
+    return iss.eof() && !iss.fail(); // Chequeamos que sea un float valido
+}

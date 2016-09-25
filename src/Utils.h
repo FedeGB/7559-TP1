@@ -7,12 +7,15 @@
 
 #include <stdlib.h>
 #include <string>
+#include <sstream>
 
 int getRandomInt(int, int);
 
 void trim(std::string&);
 
 bool stringIsInt(std::string);
+
+bool stringIsValidPrice(std::string);
 
 
 #endif //TP1_UTILS_H
