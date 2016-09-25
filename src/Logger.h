@@ -1,7 +1,7 @@
 #ifndef TP1_LOGGER_H
 #define TP1_LOGGER_H
 
-#include <bits/stringfwd.h>
+#include <string.h>
 
 class Logger {
 private:

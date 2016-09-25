@@ -2,7 +2,6 @@
 // Created by fedenote on 9/18/16.
 //
 
-#include <iostream>
 #include "ConfigLoader.h"
 
 
@@ -87,24 +86,3 @@ void ConfigLoader::setValueWithKey(std::string key, std::string value) {
     }
 }
 
-void ConfigLoader::trim(std::string &str) {
-    const std::string whitespace = " \t";
-    const auto strBegin = str.find_first_not_of(whitespace);
-    if (strBegin == std::string::npos)
-        return; // vacio
-
-    const auto strEnd = str.find_last_not_of(whitespace);
-    const auto strRange = strEnd - strBegin + 1;
-
-    str = str.substr(strBegin, strRange);
-}
-
-bool ConfigLoader::stringIsInt(std::string str) {
-    if(str.empty() || ((!isdigit(str[0])) && (str[0] != '-')))
-        return false;
-
-    char * pointer ;
-    strtol(str.c_str(), &pointer, 10) ;
-
-    return (*pointer == 0) ;
-}

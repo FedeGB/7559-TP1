@@ -2,7 +2,6 @@
 // Created by fedenote on 9/10/16.
 //
 
-#include <iostream>
 #include "Menu.h"
 
 Menu::Menu() {
@@ -29,16 +28,15 @@ bool Menu::fill(std::string str) {
     std::string tokenOuter;
     std::string tokenInner;
     PlatoComida* nuevoPlato;
-    while ((posOuter = str.find(delimiterMenu)) != std::string::npos) {
+    float precioPlato;
+    while ((posOuter = str.find(delimiterMenu))) {
         tokenOuter = str.substr(prevOuter, posOuter);
         valueNumber = 0;
         std::string nombrePlato = "";
-        float precioPlato;
         prevInner = 0;
-        std:: cout << tokenOuter << std::endl;
-        while ((posInner = tokenOuter.find(delimiterPlato)) != std::string::npos) {
+        while ((posInner = tokenOuter.find(delimiterPlato))) {
             tokenInner = tokenOuter.substr(prevInner, posInner);
-            std::cout << tokenInner << std::endl;
+            trim(tokenInner);
             if(valueNumber == 0) {
                 nombrePlato = tokenInner;
             } else if(valueNumber == 1) {
@@ -52,10 +50,12 @@ bool Menu::fill(std::string str) {
             } else {
                 throw "Hay parametros demás en el menu";
             }
+            if(posInner == std::string::npos) break;
             valueNumber++;
-            prevInner = posInner + 1;
+            tokenOuter = tokenOuter.substr(posInner + 1, tokenOuter.length() - posInner + 1);
         }
-        prevOuter = posOuter + 1;
+        if(posOuter == std::string::npos) break;
+        str = str.substr(posOuter + 1, str.length() - posOuter + 1);
     }
     return  true;
 }

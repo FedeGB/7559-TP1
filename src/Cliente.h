@@ -10,14 +10,17 @@
 #include <iostream>
 #include <string>
 #include <sys/types.h> 
+#include "Logger.h"
+#include "Semaforo.h"
+#include "IDSemaforos.h"
 
 class Cliente : public Proceso {
 public:
-    Cliente(int plata);
+    Cliente(int id,int plata);
 
 private:
+    int id;
     int plata;
-
     void _run();
 };
 

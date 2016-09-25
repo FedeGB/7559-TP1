@@ -22,9 +22,6 @@ private:
     Menu menuRestaurante;
 
     void setValueWithKey(std::string, std::string);
-    void trim(std::string &str);
-    bool stringIsInt(std::string);
-    bool stringMenuValid(std::string);
 
 public:
     ConfigLoader(std::string);
