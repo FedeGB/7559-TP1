@@ -30,7 +30,7 @@ int Semaforo :: get() {
 }
 
 int Semaforo :: crear() {
-    LockFile lock(this->nombre /*+ std::to_string(projId)*/);
+    LockFile lock(this->nombre);
     lock.tomarLock();
     ///home/horacio/git/7559-TP1/asd0
     key_t clave = ftok ( nombre.c_str(),projId );
@@ -66,7 +66,7 @@ int Semaforo :: inicializar () const {
     return resultado;
 }
 
-int Semaforo ::p() const { // decrementar
+int Semaforo ::decrementar() const {
 
     struct sembuf operacion;
 
@@ -81,7 +81,7 @@ int Semaforo ::p() const { // decrementar
     return resultado;
 }
 
-int Semaforo ::v() const { // incrementar
+int Semaforo ::incrementar() const {
 
     struct sembuf operacion;
 

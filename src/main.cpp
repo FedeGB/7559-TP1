@@ -29,12 +29,13 @@ int main() {
     Logger::getInstance().log("Se cargaron mozos: " + std::to_string(config.getMozos()));
     Logger::getInstance().log("Se cargaron recep: " + std::to_string(config.getRecepcionistas()));
 
-    Semaforo sem_entrada("/tmp/asdasdasd", SEM_ENTRADA, 0);
+    //creacion de semaforos
+    Semaforo sem_entrada(ARCHIVO_SEMAFOROS_ENTRADA, SEM_ENTRADA, 0);
     sem_entrada.crear();
-
-    Semaforo sem_recepcion("/tmp/as123d", SEM_RECEPCION, 0);
+    Semaforo sem_recepcion(ARCHIVO_SEMAFOROS_ENTRADA, SEM_RECEPCION, 0);
     sem_recepcion.crear();
 
+    // creacion de clientes
     int clientes = 10;
     vector<pid_t> clientesPIDs;
     for(int i = 0; i < clientes; ++i){
@@ -43,14 +44,19 @@ int main() {
         clientesPIDs.push_back(clientePID);
     }
 
+    // creacion de recepcionistas
     Recepcionista recepcionista1("carlos1");
     pid_t recepcionista1PID = recepcionista1.run();
-    //Recepcionista recepcionista2("carlos2");
-    //pid_t recepcionista2PID = recepcionista2.run();
-    //Recepcionista recepcionista3("carlos3");
-    //pid_t recepcionista3PID = recepcionista3.run();
+    Recepcionista recepcionista2("carlos2");
+    pid_t recepcionista2PID = recepcionista2.run();
+    Recepcionista recepcionista3("carlos3");
+    pid_t recepcionista3PID = recepcionista3.run();
 
-    sleep(30);
 
+    sleep(60); // TODO
+
+    // eliminar semaforos
+    sem_entrada.eliminar();
+    sem_recepcion.eliminar();
     return 0;
 }

@@ -26,8 +26,8 @@ public:
 
     ~Semaforo();
 
-    int v() const;
-    int p() const;
+    int incrementar() const;
+    int decrementar() const;
 
     int crear();
 
