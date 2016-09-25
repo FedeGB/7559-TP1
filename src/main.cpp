@@ -9,16 +9,14 @@ using namespace std;
 int main() {
     Logger::getInstance().log("Iniciando");
     ConfigLoader config("data.conf");
-    if(!config.status()) {
-        Logger::getInstance().log("No se pudo cargar el archivo de configuracion");
-        return 1;
-    }
     try {
         if (!config.loadConfig()) {
-            Logger::getInstance().log("No se pudo cargar el archivo de configuracion");
+            Logger::getInstance().log("No se pudo abrir el archivo de configuracion");
+            return 1;
         }
     } catch(const char* ex) {
         Logger::getInstance().log(ex);
+        config.closeFile();
         return 1;
     }
     Logger::getInstance().log("Se cargaron mesas: " + std::to_string(config.getMesas()));

@@ -10,25 +10,27 @@
 #include "Menu.h"
 #include <sstream>
 #include <algorithm>
+#include <sys/stat.h>
 
 class ConfigLoader {
 private:
+    std::string confPath;
     std::ifstream fileStream;
     int cantMesas;
     int cantMozos;
     int cantRecepcionistas;
-    bool statusGood;
     Menu menuRestaurante;
 
     void setValueWithKey(std::string, std::string);
     void trim(std::string &str);
     bool stringIsInt(std::string);
+    bool stringMenuValid(std::string);
 
 public:
     ConfigLoader(std::string);
     ~ConfigLoader();
-    bool status();
     bool loadConfig();
+    void closeFile();
 
     int getMozos();
     int getMesas();

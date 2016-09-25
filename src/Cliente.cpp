@@ -11,5 +11,5 @@ Cliente::Cliente(int plata) {
 
 void Cliente::_run() {
     std::cout << "Soy un proceso cliente, tengo plata " << plata << std::endl;
-    //Logger::getInstance().log("Soy un proceso cliente, tengo plata " + plata);
+//    Logger::getInstance().log("Soy un proceso cliente, tengo plata " + plata);
 }

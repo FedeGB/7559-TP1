@@ -10,16 +10,11 @@ ConfigLoader::ConfigLoader(std::string path) {
     cantMozos = 0;
     cantMesas = 0;
     cantRecepcionistas = 0;
-    fileStream.open(path, std::ifstream::in);
-    statusGood = fileStream.is_open();
+    confPath = path;
 }
 
 ConfigLoader::~ConfigLoader() {
-    if(fileStream.is_open()) fileStream.close();
-}
-
-bool ConfigLoader::status() {
-    return statusGood;
+    this->closeFile();
 }
 
 int ConfigLoader::getMozos() {
@@ -38,13 +33,19 @@ Menu ConfigLoader::getMenu() {
     return menuRestaurante;
 }
 
+void ConfigLoader::closeFile() {
+    if(fileStream.is_open())
+        fileStream.close();
+}
+
 bool ConfigLoader::loadConfig() {
-    if(!statusGood) {
-        return statusGood;
+    struct stat buffer;
+    if(stat (this->confPath.c_str(), &buffer) != 0) {
+        return false;
     }
+    fileStream.open(this->confPath, std::ifstream::in);
     if(!fileStream.is_open()) {
-        statusGood = false;
-        return  statusGood;
+        return  false;
     }
     std::string line;
     while(fileStream.good() && std::getline(fileStream, line)) {
@@ -80,7 +81,9 @@ void ConfigLoader::setValueWithKey(std::string key, std::string value) {
         }
         cantMesas = std::stoi(value);
     } else if(key.compare("menu") == 0) {
-        menuRestaurante.fill(value);
+        if(!menuRestaurante.fill(value)) {
+            throw "Configuración invalida para el menu";
+        }
     }
 }
 
@@ -88,7 +91,7 @@ void ConfigLoader::trim(std::string &str) {
     const std::string whitespace = " \t";
     const auto strBegin = str.find_first_not_of(whitespace);
     if (strBegin == std::string::npos)
-        return; // no content
+        return; // vacio
 
     const auto strEnd = str.find_last_not_of(whitespace);
     const auto strRange = strEnd - strBegin + 1;
