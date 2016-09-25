@@ -13,11 +13,11 @@
 
 class Cliente : public Proceso {
 public:
-    Cliente(int plata);
+    Cliente(int id,int plata);
 
 private:
+    int id;
     int plata;
-
     void _run();
 };
 
