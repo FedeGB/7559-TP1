@@ -1,8 +1,8 @@
 #include <iostream>
 #include <unistd.h>
 #include "Logger.h"
-#include "Cliente.h"
-#include "Recepcionista.h"
+#include "Procesos/Cliente.h"
+#include "Procesos/Recepcionista.h"
 #include "ConfigLoader.h"
 
 

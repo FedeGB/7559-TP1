@@ -7,12 +7,12 @@
 
 
 #include <bits/stringfwd.h>
-#include "Utils.h"
+#include "../Utils.h"
 #include "Proceso.h"
 #include <string>
-#include "Logger.h"
-#include "Semaforo.h"
-#include "IDSemaforos.h"
+#include "../Logger.h"
+#include "../Estructuras/Semaforo.h"
+#include "../Estructuras/IDSemaforos.h"
 #include <unistd.h>
 
 class Recepcionista : public Proceso {

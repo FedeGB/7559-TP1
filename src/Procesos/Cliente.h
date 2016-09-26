@@ -10,9 +10,9 @@
 #include <iostream>
 #include <string>
 #include <sys/types.h> 
-#include "Logger.h"
-#include "Semaforo.h"
-#include "IDSemaforos.h"
+#include "../Logger.h"
+#include "../Estructuras/Semaforo.h"
+#include "../Estructuras/IDSemaforos.h"
 
 class Cliente : public Proceso {
 public:
