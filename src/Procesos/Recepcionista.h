@@ -17,10 +17,14 @@
 
 class Recepcionista : public Proceso {
 public:
-    Recepcionista(std::string nombre);
+    Recepcionista(std::string nombre, Semaforo sem_entrada,
+                  Semaforo sem_recepcion);
 
 private:
     std::string nombre;
+    Semaforo sem_entrada;
+    Semaforo sem_recepcion;
+
     void _run();
 };
 

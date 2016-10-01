@@ -16,7 +16,7 @@ int main() {
             Logger::getInstance().log("No se pudo abrir el archivo de configuracion");
             return 1;
         }
-    } catch(const char* ex) {
+    } catch (const char *ex) {
         Logger::getInstance().log(ex);
         config.closeFile();
         return 1;
@@ -27,30 +27,28 @@ int main() {
     Menu menu = config.getMenu();
     PlatoComida platoRandom = menu.eleccionRandom();
     Logger::getInstance().log("Se cargo el menu y un plato random es: " +
-                                platoRandom.getNombre() + " con un precio de: " +
+                              platoRandom.getNombre() + " con un precio de: " +
                               std::to_string(platoRandom.getPrecio()));
 
     //creacion de semaforos
-    Semaforo sem_entrada(ARCHIVO_SEMAFOROS_ENTRADA, SEM_ENTRADA, 0);
-    sem_entrada.crear();
-    Semaforo sem_recepcion(ARCHIVO_SEMAFOROS_ENTRADA, SEM_RECEPCION, 0);
-    sem_recepcion.crear();
+    Semaforo sem_entrada(SEM_ENTRADA, 0);
+    Semaforo sem_recepcion(SEM_RECEPCION, 0);
 
     // creacion de clientes
     int clientes = 10;
     vector<pid_t> clientesPIDs;
-    for(int i = 0; i < clientes; ++i){
-        Cliente cliente(i,i*10+100);
+    for (int i = 0; i < clientes; ++i) {
+        Cliente cliente(i, i * 10 + 100, sem_entrada, sem_recepcion);
         pid_t clientePID = cliente.run();
         clientesPIDs.push_back(clientePID);
     }
 
     // creacion de recepcionistas
-    Recepcionista recepcionista1("carlos1");
+    Recepcionista recepcionista1("carlos1", sem_entrada, sem_recepcion);
     pid_t recepcionista1PID = recepcionista1.run();
-    Recepcionista recepcionista2("carlos2");
+    Recepcionista recepcionista2("carlos2", sem_entrada, sem_recepcion);
     pid_t recepcionista2PID = recepcionista2.run();
-    Recepcionista recepcionista3("carlos3");
+    Recepcionista recepcionista3("carlos3", sem_entrada, sem_recepcion);
     pid_t recepcionista3PID = recepcionista3.run();
 
 

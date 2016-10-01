@@ -16,11 +16,14 @@
 
 class Cliente : public Proceso {
 public:
-    Cliente(int id,int plata);
+    Cliente(int id, int plata, Semaforo sem_entrada, Semaforo sem_recepcion);
 
 private:
     int id;
     int plata;
+    Semaforo sem_entrada;
+    Semaforo sem_recepcion;
+
     void _run();
 };
 

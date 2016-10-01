@@ -1,44 +1,26 @@
-//
-// Created by horacio on 9/24/16.
-//
-
-#ifndef TP1_SEMAFORO_H
-#define TP1_SEMAFORO_H
-
+#ifndef SEMAFORO_H_
+#define SEMAFORO_H_
 
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <sys/types.h>
 #include <string>
-#include "LockFile.h"
-#include <stdexcept>
-#include <iostream>
-#include <string.h>
 
 class Semaforo {
 
 private:
-    int id;
-    int valorInicial;
-    std::string nombre;
-    int projId;
+	int id;
+	int valorInicial;
 
-    int inicializar() const;
+	int inicializar () const;
 
 public:
-    Semaforo(const std::string &nombre, const int projId, const int valorInicial);
+	Semaforo ( const std::string& nombre,const int valorInicial );
+	~Semaforo();
 
-    ~Semaforo();
-
-    int incrementar() const;
-    int decrementar() const;
-
-    int crear();
-
-    int get();
-
-    void eliminar() const;
+	int p () const; // decrementa
+	int v () const; // incrementa
+	void eliminar () const;
 };
 
-
-#endif //TP1_SEMAFORO_H
+#endif /* SEMAFORO_H_ */
