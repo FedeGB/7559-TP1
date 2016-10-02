@@ -57,5 +57,6 @@ int main() {
     // eliminar semaforos
     sem_entrada.eliminar();
     sem_recepcion.eliminar();
+    Logger::destruir();
     return 0;
 }

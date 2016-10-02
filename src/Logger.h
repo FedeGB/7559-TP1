@@ -2,25 +2,32 @@
 #define TP1_LOGGER_H
 
 #include <string.h>
+#include <time.h>
+#include <iostream>
+#include <ctime>
+#include "Estructuras/Archivo.h"
+#include "Estructuras/LockFile.h"
 
 class Logger {
 private:
-    Logger() {
 
-    }
+    static Logger* instancia;
+    static Archivo* archivo;
+    static LockFile* lock;
 
-    ~Logger() {
-    }
+    Logger();
+
+    ~Logger();
+
+    std::string obtenerFecha();
 
 public:
-    Logger(const Logger &) = delete;
+    //Logger(const Logger &) = delete;
 
-    Logger &operator=(const Logger &) = delete;
+    //Logger &operator=(const Logger &) = delete;
 
-    static Logger &getInstance() {
-        static Logger instance;
-        return instance;
-    }
+    static Logger &getInstance();
+    static void destruir();
 
     void log(const std::string &msg);
 };
