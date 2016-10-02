@@ -6,7 +6,8 @@ Archivo::Archivo(std::string ruta) {
 
     if (this->fd == -1) {
 
-        std::cout << "Error al abrir el archivo: " << strerror(errno) << std::endl;
+        std::string errMsg = std::string(std::string (strerror(errno)));
+        throw "Fallo al abrir archivo: " + errMsg;
 
     }
 
@@ -22,7 +23,8 @@ void Archivo::escribir(std::string datos) {
 
     if (resultado == -1) {
 
-        std::cout << "Error al escribir en el archivo: " << strerror(errno) << std::endl;
+        std::string errMsg = std::string(std::string (strerror(errno)));
+        throw "Fallo al escribir en el archivo: " + errMsg;
 
     }
 

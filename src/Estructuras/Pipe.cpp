@@ -10,20 +10,37 @@ Pipe::~Pipe() {
 }
 
 void Pipe :: setearModo ( const int modo ) {
+	int retorno;
 	if ( modo == LECTURA ) {
-		close ( this->descriptores[1] );
+		retorno = close ( this->descriptores[1] );
 		this->escritura = false;
 
 	} else if ( modo == ESCRITURA ) {
-		close ( this->descriptores[0] );
+		retorno = close ( this->descriptores[0] );
 		this->lectura = false;
 	}
+
+	if (retorno == -1) {
+
+		std::string errMsg = std::string(std::string (strerror(errno)));
+		throw "Fallo al cerrar el pipe: " + errMsg;
+
+	}
+
 }
 
 ssize_t Pipe :: escribir ( const void* dato,int datoSize ) {
 	if ( this->lectura == true ) {
-		close ( this->descriptores[0] );
+
+		if( close ( this->descriptores[0] ) == -1 ){
+
+			std::string errMsg = std::string(std::string (strerror(errno)));
+			throw "Fallo al cerrar el pipe: " + errMsg;
+
+		}
+
 		this->lectura = false;
+
 	}
 
 	return write ( this->descriptores[1],dato,datoSize );
@@ -31,7 +48,14 @@ ssize_t Pipe :: escribir ( const void* dato,int datoSize ) {
 
 ssize_t Pipe :: leer ( void* buffer,const int buffSize ) {
 	if ( this->escritura == true ) {
-		close ( this->descriptores[1] );
+
+		if( close ( this->descriptores[1] ) == -1 ){
+
+			std::string errMsg = std::string(std::string (strerror(errno)));
+			throw "Fallo al cerrar el pipe: " + errMsg;
+
+		}
+
 		this->escritura = false;
 	}
 
@@ -54,12 +78,26 @@ int Pipe :: getFdEscritura () const {
 
 void Pipe :: cerrar () {
 	if ( this->lectura == true ) {
-		close ( this->descriptores[0] );
+
+		if( close ( this->descriptores[0] ) == -1 ){
+
+			std::string errMsg = std::string(std::string (strerror(errno)));
+			throw "Fallo al cerrar el pipe: " + errMsg;
+
+		}
+
 		this->lectura = false;
 	}
 
 	if ( this->escritura == true ) {
-		close ( this->descriptores[1] );
+
+		if( close ( this->descriptores[1] ) == -1 ){
+
+			std::string errMsg = std::string(std::string (strerror(errno)));
+			throw "Fallo al cerrar el pipe: " + errMsg;
+
+		}
+		
 		this->escritura = false;
 	}
 }

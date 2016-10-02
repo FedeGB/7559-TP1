@@ -8,6 +8,13 @@ FifoEscritura::~FifoEscritura() {
 
 void FifoEscritura::abrir() {
 	fd = open ( nombre.c_str(),O_WRONLY );
+
+	if (fd == -1) {
+
+		std::string errMsg = std::string(std::string (strerror(errno)));
+		throw "Fallo al abrir el fifo escritura: " + errMsg;
+
+	}
 }
 
 ssize_t FifoEscritura::escribir(const void* buffer,const ssize_t buffsize) const {
