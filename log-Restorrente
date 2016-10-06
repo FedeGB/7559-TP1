@@ -1,0 +1,515 @@
+06/10/16 08:50:12 Iniciando
+06/10/16 08:50:12 Se cargaron mesas: 10
+06/10/16 08:50:12 Se cargaron mozos: 5
+06/10/16 08:50:12 Se cargaron recep: 2
+06/10/16 08:50:12 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 08:50:12 Creado cliente 0, con plata 100
+06/10/16 08:50:12 cliente 0 llego a la entrada
+06/10/16 08:50:12 cliente 0 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 1, con plata 110
+06/10/16 08:50:12 cliente 1 llego a la entrada
+06/10/16 08:50:12 cliente 1 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 2, con plata 120
+06/10/16 08:50:12 cliente 2 llego a la entrada
+06/10/16 08:50:12 cliente 2 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 3, con plata 130
+06/10/16 08:50:12 cliente 3 llego a la entrada
+06/10/16 08:50:12 cliente 3 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 4, con plata 140
+06/10/16 08:50:12 cliente 4 llego a la entrada
+06/10/16 08:50:12 cliente 4 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 5, con plata 150
+06/10/16 08:50:12 cliente 5 llego a la entrada
+06/10/16 08:50:12 cliente 5 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 6, con plata 160
+06/10/16 08:50:12 cliente 6 llego a la entrada
+06/10/16 08:50:12 cliente 6 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 7, con plata 170
+06/10/16 08:50:12 cliente 7 llego a la entrada
+06/10/16 08:50:12 cliente 7 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 8, con plata 180
+06/10/16 08:50:12 cliente 8 llego a la entrada
+06/10/16 08:50:12 cliente 8 fue atendido por un recepcionista
+06/10/16 08:50:12 Creado cliente 9, con plata 190
+06/10/16 08:50:12 cliente 9 llego a la entrada
+06/10/16 08:50:12 cliente 9 fue atendido por un recepcionista
+06/10/16 08:50:12 Recepcionista carlos1 creado
+06/10/16 08:50:12 Recepcionista carlos2 creado
+06/10/16 08:50:12 Recepcionista carlos3 creado
+06/10/16 08:56:59 Iniciando
+06/10/16 08:56:59 Se cargaron mesas: 10
+06/10/16 08:56:59 Se cargaron mozos: 5
+06/10/16 08:56:59 Se cargaron recep: 2
+06/10/16 08:56:59 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 08:56:59 Creado cliente 0, con plata 100
+06/10/16 08:56:59 cliente 0 llego a la entrada
+06/10/16 08:56:59 cliente 0 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 1, con plata 110
+06/10/16 08:56:59 cliente 1 llego a la entrada
+06/10/16 08:56:59 cliente 1 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 2, con plata 120
+06/10/16 08:56:59 cliente 2 llego a la entrada
+06/10/16 08:56:59 cliente 2 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 3, con plata 130
+06/10/16 08:56:59 cliente 3 llego a la entrada
+06/10/16 08:56:59 cliente 3 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 4, con plata 140
+06/10/16 08:56:59 Creado cliente 5, con plata 150
+06/10/16 08:56:59 cliente 4 llego a la entrada
+06/10/16 08:56:59 cliente 5 llego a la entrada
+06/10/16 08:56:59 cliente 5 fue atendido por un recepcionista
+06/10/16 08:56:59 cliente 4 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 6, con plata 160
+06/10/16 08:56:59 cliente 6 llego a la entrada
+06/10/16 08:56:59 cliente 6 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 7, con plata 170
+06/10/16 08:56:59 cliente 7 llego a la entrada
+06/10/16 08:56:59 cliente 7 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 8, con plata 180
+06/10/16 08:56:59 cliente 8 llego a la entrada
+06/10/16 08:56:59 cliente 8 fue atendido por un recepcionista
+06/10/16 08:56:59 Creado cliente 9, con plata 190
+06/10/16 08:56:59 cliente 9 llego a la entrada
+06/10/16 08:56:59 cliente 9 fue atendido por un recepcionista
+06/10/16 08:56:59 Recepcionista carlos1 creado
+06/10/16 08:56:59 Recepcionista carlos2 creado
+06/10/16 08:56:59 Recepcionista carlos3 creado
+06/10/16 09:13:21 Iniciando
+06/10/16 09:13:21 Se cargaron mesas: 10
+06/10/16 09:13:21 Se cargaron mozos: 5
+06/10/16 09:13:21 Se cargaron recep: 2
+06/10/16 09:13:21 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:13:41 Iniciando
+06/10/16 09:13:41 Se cargaron mesas: 10
+06/10/16 09:13:41 Se cargaron mozos: 5
+06/10/16 09:13:41 Se cargaron recep: 2
+06/10/16 09:13:41 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:14:16 Iniciando
+06/10/16 09:14:16 Se cargaron mesas: 10
+06/10/16 09:14:16 Se cargaron mozos: 5
+06/10/16 09:14:16 Se cargaron recep: 2
+06/10/16 09:14:16 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 09:14:16 Creado cliente 0, con plata 100
+06/10/16 09:14:16 cliente 0 llego a la entrada
+06/10/16 09:14:16 cliente 0 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 1, con plata 110
+06/10/16 09:14:16 cliente 1 llego a la entrada
+06/10/16 09:14:16 cliente 1 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 2, con plata 120
+06/10/16 09:14:16 cliente 2 llego a la entrada
+06/10/16 09:14:16 cliente 2 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 3, con plata 130
+06/10/16 09:14:16 cliente 3 llego a la entrada
+06/10/16 09:14:16 cliente 3 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 4, con plata 140
+06/10/16 09:14:16 cliente 4 llego a la entrada
+06/10/16 09:14:16 cliente 4 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 5, con plata 150
+06/10/16 09:14:16 cliente 5 llego a la entrada
+06/10/16 09:14:16 cliente 5 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 6, con plata 160
+06/10/16 09:14:16 cliente 6 llego a la entrada
+06/10/16 09:14:16 cliente 6 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 7, con plata 170
+06/10/16 09:14:16 cliente 7 llego a la entrada
+06/10/16 09:14:16 cliente 7 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 8, con plata 180
+06/10/16 09:14:16 cliente 8 llego a la entrada
+06/10/16 09:14:16 cliente 8 fue atendido por un recepcionista
+06/10/16 09:14:16 Creado cliente 9, con plata 190
+06/10/16 09:14:16 cliente 9 llego a la entrada
+06/10/16 09:14:16 cliente 9 fue atendido por un recepcionista
+06/10/16 09:14:32 Iniciando
+06/10/16 09:14:32 Se cargaron mesas: 10
+06/10/16 09:14:32 Se cargaron mozos: 5
+06/10/16 09:14:32 Se cargaron recep: 2
+06/10/16 09:14:32 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:14:32 Creado cliente 0, con plata 100
+06/10/16 09:14:32 cliente 0 llego a la entrada
+06/10/16 09:14:32 Creado cliente 1, con plata 110
+06/10/16 09:14:32 cliente 1 llego a la entrada
+06/10/16 09:14:32 Creado cliente 2, con plata 120
+06/10/16 09:14:32 cliente 2 llego a la entrada
+06/10/16 09:14:32 Creado cliente 3, con plata 130
+06/10/16 09:14:32 Creado cliente 4, con plata 140
+06/10/16 09:14:32 cliente 4 llego a la entrada
+06/10/16 09:14:32 cliente 3 llego a la entrada
+06/10/16 09:14:32 Creado cliente 5, con plata 150
+06/10/16 09:14:32 cliente 5 llego a la entrada
+06/10/16 09:14:32 Creado cliente 6, con plata 160
+06/10/16 09:14:32 cliente 6 llego a la entrada
+06/10/16 09:14:32 Creado cliente 7, con plata 170
+06/10/16 09:14:32 cliente 7 llego a la entrada
+06/10/16 09:14:32 Creado cliente 8, con plata 180
+06/10/16 09:14:32 cliente 8 llego a la entrada
+06/10/16 09:14:32 Creado cliente 9, con plata 190
+06/10/16 09:14:32 cliente 9 llego a la entrada
+06/10/16 09:43:02 Iniciando
+06/10/16 09:43:02 Se cargaron mesas: 10
+06/10/16 09:43:02 Se cargaron mozos: 5
+06/10/16 09:43:02 Se cargaron recep: 2
+06/10/16 09:43:02 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:43:02 Creado cliente 0, con plata 100
+06/10/16 09:43:02 cliente 0 llego a la entrada
+06/10/16 09:43:02 Creado cliente 1, con plata 110
+06/10/16 09:43:02 cliente 1 llego a la entrada
+06/10/16 09:43:02 Creado cliente 2, con plata 120
+06/10/16 09:43:02 cliente 2 llego a la entrada
+06/10/16 09:43:02 Creado cliente 3, con plata 130
+06/10/16 09:43:02 cliente 3 llego a la entrada
+06/10/16 09:43:02 Creado cliente 4, con plata 140
+06/10/16 09:43:02 cliente 4 llego a la entrada
+06/10/16 09:43:02 Creado cliente 5, con plata 150
+06/10/16 09:43:02 cliente 5 llego a la entrada
+06/10/16 09:43:02 Creado cliente 6, con plata 160
+06/10/16 09:43:02 cliente 6 llego a la entrada
+06/10/16 09:43:02 Creado cliente 7, con plata 170
+06/10/16 09:43:02 cliente 7 llego a la entrada
+06/10/16 09:43:02 Creado cliente 8, con plata 180
+06/10/16 09:43:02 cliente 8 llego a la entrada
+06/10/16 09:43:02 Creado cliente 9, con plata 190
+06/10/16 09:43:02 cliente 9 llego a la entrada
+06/10/16 09:43:31 Iniciando
+06/10/16 09:43:31 Se cargaron mesas: 10
+06/10/16 09:43:31 Se cargaron mozos: 5
+06/10/16 09:43:31 Se cargaron recep: 2
+06/10/16 09:43:31 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:44:02 cliente 1 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 0 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 4 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 6 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 3 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 2 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 5 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 7 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 8 fue atendido por un recepcionista
+06/10/16 09:44:02 cliente 9 fue atendido por un recepcionista
+06/10/16 09:48:04 Iniciando
+06/10/16 09:48:04 Se cargaron mesas: 10
+06/10/16 09:48:04 Se cargaron mozos: 5
+06/10/16 09:48:04 Se cargaron recep: 2
+06/10/16 09:48:04 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 09:48:04 Creado cliente 0, con plata 100
+06/10/16 09:48:04 cliente 0 llego a la entrada
+06/10/16 09:48:04 Creado cliente 1, con plata 110
+06/10/16 09:48:04 cliente 1 llego a la entrada
+06/10/16 09:48:04 Creado cliente 2, con plata 120
+06/10/16 09:48:04 cliente 2 llego a la entrada
+06/10/16 09:48:04 Creado cliente 3, con plata 130
+06/10/16 09:48:04 cliente 3 llego a la entrada
+06/10/16 09:48:04 Creado cliente 4, con plata 140
+06/10/16 09:48:04 cliente 4 llego a la entrada
+06/10/16 09:48:04 Creado cliente 5, con plata 150
+06/10/16 09:48:04 cliente 5 llego a la entrada
+06/10/16 09:48:04 Creado cliente 6, con plata 160
+06/10/16 09:48:04 cliente 6 llego a la entrada
+06/10/16 09:48:04 Creado cliente 7, con plata 170
+06/10/16 09:48:04 cliente 7 llego a la entrada
+06/10/16 09:48:04 Creado cliente 8, con plata 180
+06/10/16 09:48:04 cliente 8 llego a la entrada
+06/10/16 09:48:04 Creado cliente 9, con plata 190
+06/10/16 09:48:04 cliente 9 llego a la entrada
+06/10/16 09:49:04 cliente 2 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 5 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 0 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 7 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 4 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 8 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 6 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 3 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 1 fue atendido por un recepcionista
+06/10/16 09:49:04 cliente 9 fue atendido por un recepcionista
+06/10/16 09:49:34 Iniciando
+06/10/16 09:49:34 Se cargaron mesas: 10
+06/10/16 09:49:34 Se cargaron mozos: 5
+06/10/16 09:49:34 Se cargaron recep: 2
+06/10/16 09:49:34 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 09:49:34 Creado cliente 0, con plata 100
+06/10/16 09:49:34 cliente 0 llego a la entrada
+06/10/16 09:49:34 Creado cliente 1, con plata 110
+06/10/16 09:49:34 cliente 1 llego a la entrada
+06/10/16 09:49:34 Creado cliente 2, con plata 120
+06/10/16 09:49:34 cliente 2 llego a la entrada
+06/10/16 09:49:34 Creado cliente 3, con plata 130
+06/10/16 09:49:34 cliente 3 llego a la entrada
+06/10/16 09:49:34 Creado cliente 4, con plata 140
+06/10/16 09:49:34 cliente 4 llego a la entrada
+06/10/16 09:49:34 Creado cliente 5, con plata 150
+06/10/16 09:49:34 cliente 5 llego a la entrada
+06/10/16 09:49:34 Creado cliente 6, con plata 160
+06/10/16 09:49:34 cliente 6 llego a la entrada
+06/10/16 09:49:34 Creado cliente 7, con plata 170
+06/10/16 09:49:34 cliente 7 llego a la entrada
+06/10/16 09:49:34 Creado cliente 8, con plata 180
+06/10/16 09:49:34 cliente 8 llego a la entrada
+06/10/16 09:49:34 Creado cliente 9, con plata 190
+06/10/16 09:49:34 cliente 9 llego a la entrada
+06/10/16 09:50:34 cliente 1 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 8 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 3 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 5 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 6 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 2 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 4 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 0 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 9 fue atendido por un recepcionista
+06/10/16 09:50:34 cliente 7 fue atendido por un recepcionista
+06/10/16 10:00:56 Iniciando
+06/10/16 10:00:56 Se cargaron mesas: 10
+06/10/16 10:00:56 Se cargaron mozos: 5
+06/10/16 10:00:56 Se cargaron recep: 2
+06/10/16 10:00:56 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 10:00:56 Creado cliente 0, con plata 100
+06/10/16 10:00:56 cliente 0 llego a la entrada
+06/10/16 10:00:56 cliente 0 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 1, con plata 110
+06/10/16 10:00:56 cliente 1 llego a la entrada
+06/10/16 10:00:56 cliente 1 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 2, con plata 120
+06/10/16 10:00:56 cliente 2 llego a la entrada
+06/10/16 10:00:56 cliente 2 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 3, con plata 130
+06/10/16 10:00:56 cliente 3 llego a la entrada
+06/10/16 10:00:56 cliente 3 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 4, con plata 140
+06/10/16 10:00:56 cliente 4 llego a la entrada
+06/10/16 10:00:56 cliente 4 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 5, con plata 150
+06/10/16 10:00:56 cliente 5 llego a la entrada
+06/10/16 10:00:56 cliente 5 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 6, con plata 160
+06/10/16 10:00:56 cliente 6 llego a la entrada
+06/10/16 10:00:56 cliente 6 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 7, con plata 170
+06/10/16 10:00:56 cliente 7 llego a la entrada
+06/10/16 10:00:56 cliente 7 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 8, con plata 180
+06/10/16 10:00:56 cliente 8 llego a la entrada
+06/10/16 10:00:56 cliente 8 fue atendido por un recepcionista
+06/10/16 10:00:56 Creado cliente 9, con plata 190
+06/10/16 10:00:56 cliente 9 llego a la entrada
+06/10/16 10:00:56 cliente 9 fue atendido por un recepcionista
+06/10/16 10:00:56 Recepcionista carlos1 creado
+06/10/16 10:00:56 Recepcionista carlos2 creado
+06/10/16 10:00:56 Recepcionista carlos3 creado
+06/10/16 10:01:13 Iniciando
+06/10/16 10:01:13 Se cargaron mesas: 10
+06/10/16 10:01:13 Se cargaron mozos: 5
+06/10/16 10:01:13 Se cargaron recep: 2
+06/10/16 10:01:13 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 10:01:13 Creado cliente 0, con plata 100
+06/10/16 10:01:13 cliente 0 llego a la entrada
+06/10/16 10:01:13 Creado cliente 1, con plata 110
+06/10/16 10:01:13 cliente 1 llego a la entrada
+06/10/16 10:01:13 Creado cliente 2, con plata 120
+06/10/16 10:01:13 cliente 2 llego a la entrada
+06/10/16 10:01:13 Creado cliente 3, con plata 130
+06/10/16 10:01:13 cliente 3 llego a la entrada
+06/10/16 10:01:13 Creado cliente 4, con plata 140
+06/10/16 10:01:13 cliente 4 llego a la entrada
+06/10/16 10:01:13 Creado cliente 5, con plata 150
+06/10/16 10:01:13 cliente 5 llego a la entrada
+06/10/16 10:01:13 Creado cliente 6, con plata 160
+06/10/16 10:01:13 cliente 6 llego a la entrada
+06/10/16 10:01:13 Creado cliente 7, con plata 170
+06/10/16 10:01:13 cliente 7 llego a la entrada
+06/10/16 10:01:13 Creado cliente 8, con plata 180
+06/10/16 10:01:13 Creado cliente 9, con plata 190
+06/10/16 10:01:13 cliente 8 llego a la entrada
+06/10/16 10:01:13 cliente 9 llego a la entrada
+06/10/16 10:01:13 Recepcionista carlos1 creado
+06/10/16 10:01:13 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:01:13 cliente 0 fue atendido por un recepcionista
+06/10/16 10:01:13 Recepcionista carlos2 creado
+06/10/16 10:01:13 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:01:13 cliente 1 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 2 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 3 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 4 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 5 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 6 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 7 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 8 fue atendido por un recepcionista
+06/10/16 10:01:13 cliente 9 fue atendido por un recepcionista
+06/10/16 10:01:13 Recepcionista carlos3 creado
+06/10/16 10:01:19 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:01:19 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:02:37 Iniciando
+06/10/16 10:02:37 Se cargaron mesas: 10
+06/10/16 10:02:37 Se cargaron mozos: 5
+06/10/16 10:02:37 Se cargaron recep: 2
+06/10/16 10:02:37 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 10:02:37 Creado cliente 0, con plata 100
+06/10/16 10:02:37 cliente 0 llego a la entrada
+06/10/16 10:02:37 Creado cliente 1, con plata 110
+06/10/16 10:02:37 cliente 1 llego a la entrada
+06/10/16 10:02:37 Creado cliente 2, con plata 120
+06/10/16 10:02:37 cliente 2 llego a la entrada
+06/10/16 10:02:37 Creado cliente 3, con plata 130
+06/10/16 10:02:37 cliente 3 llego a la entrada
+06/10/16 10:02:37 Creado cliente 4, con plata 140
+06/10/16 10:02:37 cliente 4 llego a la entrada
+06/10/16 10:02:37 Creado cliente 5, con plata 150
+06/10/16 10:02:37 cliente 5 llego a la entrada
+06/10/16 10:02:37 Creado cliente 6, con plata 160
+06/10/16 10:02:37 cliente 6 llego a la entrada
+06/10/16 10:02:37 Creado cliente 7, con plata 170
+06/10/16 10:02:37 cliente 7 llego a la entrada
+06/10/16 10:02:37 Creado cliente 8, con plata 180
+06/10/16 10:02:37 cliente 8 llego a la entrada
+06/10/16 10:02:37 Creado cliente 9, con plata 190
+06/10/16 10:02:37 cliente 9 llego a la entrada
+06/10/16 10:02:37 Recepcionista carlos1 creado
+06/10/16 10:02:37 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:02:37 cliente 0 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 1 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 2 fue atendido por un recepcionista
+06/10/16 10:02:37 Recepcionista carlos2 creado
+06/10/16 10:02:37 cliente 3 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 4 fue atendido por un recepcionista
+06/10/16 10:02:37 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:02:37 cliente 5 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 6 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 7 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 8 fue atendido por un recepcionista
+06/10/16 10:02:37 cliente 9 fue atendido por un recepcionista
+06/10/16 10:02:37 Recepcionista carlos3 creado
+06/10/16 10:02:43 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:02:43 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:12:09 Iniciando
+06/10/16 10:12:09 Se cargaron mesas: 10
+06/10/16 10:12:09 Se cargaron mozos: 5
+06/10/16 10:12:09 Se cargaron recep: 2
+06/10/16 10:12:09 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 10:12:09 Creado cliente 0, con plata 100
+06/10/16 10:12:09 cliente 0 llego a la entrada
+06/10/16 10:12:09 Creado cliente 1, con plata 110
+06/10/16 10:12:09 cliente 1 llego a la entrada
+06/10/16 10:12:09 Creado cliente 2, con plata 120
+06/10/16 10:12:09 cliente 2 llego a la entrada
+06/10/16 10:12:09 Creado cliente 3, con plata 130
+06/10/16 10:12:09 cliente 3 llego a la entrada
+06/10/16 10:12:09 Creado cliente 4, con plata 140
+06/10/16 10:12:09 Creado cliente 5, con plata 150
+06/10/16 10:12:09 cliente 4 llego a la entrada
+06/10/16 10:12:09 cliente 5 llego a la entrada
+06/10/16 10:12:09 Creado cliente 6, con plata 160
+06/10/16 10:12:09 cliente 6 llego a la entrada
+06/10/16 10:12:09 Creado cliente 7, con plata 170
+06/10/16 10:12:09 cliente 7 llego a la entrada
+06/10/16 10:12:09 Creado cliente 8, con plata 180
+06/10/16 10:12:09 Creado cliente 9, con plata 190
+06/10/16 10:12:09 cliente 8 llego a la entrada
+06/10/16 10:12:09 cliente 9 llego a la entrada
+06/10/16 10:12:09 Recepcionista carlos1 creado
+06/10/16 10:12:09 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:12:09 Recepcionista carlos2 creado
+06/10/16 10:12:09 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:12:09 Recepcionista carlos3 creado
+06/10/16 10:12:09 Recepcionista carlos3 esta atendiendo a un cliente
+06/10/16 10:12:15 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:12:15 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:12:15 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:12:15 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:12:15 Recepcionista carlos3 termino de atender a un cliente
+06/10/16 10:12:15 Recepcionista carlos3 esta atendiendo a un cliente
+06/10/16 10:12:21 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:12:21 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:12:21 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:12:21 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:12:21 Recepcionista carlos3 termino de atender a un cliente
+06/10/16 10:12:21 Recepcionista carlos3 esta atendiendo a un cliente
+06/10/16 10:12:28 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:12:28 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:12:28 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:12:28 Recepcionista carlos3 termino de atender a un cliente
+06/10/16 10:12:40 Iniciando
+06/10/16 10:12:40 Se cargaron mesas: 10
+06/10/16 10:12:40 Se cargaron mozos: 5
+06/10/16 10:12:40 Se cargaron recep: 2
+06/10/16 10:12:40 Se cargo el menu y un plato random es: sandwich jamon y queso con un precio de: 13.000000
+06/10/16 10:12:40 Creado cliente 0, con plata 100
+06/10/16 10:12:40 cliente 0 llego a la entrada
+06/10/16 10:12:40 Creado cliente 1, con plata 110
+06/10/16 10:12:40 cliente 1 llego a la entrada
+06/10/16 10:12:40 Creado cliente 2, con plata 120
+06/10/16 10:12:40 cliente 2 llego a la entrada
+06/10/16 10:12:40 Creado cliente 3, con plata 130
+06/10/16 10:12:40 cliente 3 llego a la entrada
+06/10/16 10:12:40 Creado cliente 4, con plata 140
+06/10/16 10:12:40 cliente 4 llego a la entrada
+06/10/16 10:12:40 Creado cliente 5, con plata 150
+06/10/16 10:12:40 cliente 5 llego a la entrada
+06/10/16 10:12:40 Creado cliente 6, con plata 160
+06/10/16 10:12:40 cliente 6 llego a la entrada
+06/10/16 10:12:40 Creado cliente 7, con plata 170
+06/10/16 10:12:40 cliente 7 llego a la entrada
+06/10/16 10:12:40 Creado cliente 8, con plata 180
+06/10/16 10:12:40 cliente 8 llego a la entrada
+06/10/16 10:12:40 Creado cliente 9, con plata 190
+06/10/16 10:12:40 cliente 9 llego a la entrada
+06/10/16 10:12:40 Recepcionista carlos1 creado
+06/10/16 10:12:40 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:12:40 cliente 0 fue atendido por un recepcionista
+06/10/16 10:12:40 Recepcionista carlos2 creado
+06/10/16 10:12:40 cliente 1 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 2 fue atendido por un recepcionista
+06/10/16 10:12:40 Recepcionista carlos3 creado
+06/10/16 10:12:40 Recepcionista carlos3 esta atendiendo a un cliente
+06/10/16 10:12:40 cliente 3 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 4 fue atendido por un recepcionista
+06/10/16 10:12:40 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:12:40 cliente 6 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 7 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 8 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 9 fue atendido por un recepcionista
+06/10/16 10:12:40 cliente 5 fue atendido por un recepcionista
+06/10/16 10:12:48 Recepcionista carlos3 termino de atender a un cliente
+06/10/16 10:12:48 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:12:48 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:13:40 Iniciando
+06/10/16 10:13:40 Se cargaron mesas: 10
+06/10/16 10:13:40 Se cargaron mozos: 5
+06/10/16 10:13:40 Se cargaron recep: 2
+06/10/16 10:13:40 Se cargo el menu y un plato random es: milanesa de pollo con un precio de: 10.000000
+06/10/16 10:13:40 Creado cliente 0, con plata 100
+06/10/16 10:13:40 cliente 0 llego a la entrada
+06/10/16 10:13:40 Recepcionista carlos3 esta atendiendo a un cliente
+06/10/16 10:13:40 cliente 0 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 1, con plata 110
+06/10/16 10:13:40 cliente 1 llego a la entrada
+06/10/16 10:13:40 Recepcionista carlos2 esta atendiendo a un cliente
+06/10/16 10:13:40 cliente 1 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 2, con plata 120
+06/10/16 10:13:40 cliente 2 llego a la entrada
+06/10/16 10:13:40 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:13:40 cliente 2 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 3, con plata 130
+06/10/16 10:13:40 cliente 3 llego a la entrada
+06/10/16 10:13:40 cliente 3 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 4, con plata 140
+06/10/16 10:13:40 cliente 4 llego a la entrada
+06/10/16 10:13:40 cliente 4 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 5, con plata 150
+06/10/16 10:13:40 cliente 5 llego a la entrada
+06/10/16 10:13:40 cliente 5 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 6, con plata 160
+06/10/16 10:13:40 cliente 6 llego a la entrada
+06/10/16 10:13:40 cliente 6 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 7, con plata 170
+06/10/16 10:13:40 cliente 7 llego a la entrada
+06/10/16 10:13:40 cliente 7 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 8, con plata 180
+06/10/16 10:13:40 cliente 8 llego a la entrada
+06/10/16 10:13:40 cliente 8 fue atendido por un recepcionista
+06/10/16 10:13:40 Creado cliente 9, con plata 190
+06/10/16 10:13:40 cliente 9 llego a la entrada
+06/10/16 10:13:40 cliente 9 fue atendido por un recepcionista
+06/10/16 10:13:40 Recepcionista carlos1 creado
+06/10/16 10:13:40 Recepcionista carlos1 esta atendiendo a un cliente
+06/10/16 10:13:40 Recepcionista carlos2 creado
+06/10/16 10:13:40 Recepcionista carlos3 creado
+06/10/16 10:13:46 Recepcionista carlos1 termino de atender a un cliente
+06/10/16 10:13:49 Recepcionista carlos3 termino de atender a un cliente
+06/10/16 10:13:49 Recepcionista carlos2 termino de atender a un cliente
+06/10/16 10:13:49 Recepcionista carlos1 termino de atender a un cliente
