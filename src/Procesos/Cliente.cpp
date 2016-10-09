@@ -19,6 +19,4 @@ void Cliente::_run() {
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     sem_recepcion.p();
     Logger::getInstance().log("cliente " + std::to_string(id) + " fue atendido por un recepcionista");
-
-    sleep(60); // TODO: despues sacarlo, pero por ahora tiene que estar porque sino por el SEM_UNDO se vuelve a habilitar el semaforo
 }

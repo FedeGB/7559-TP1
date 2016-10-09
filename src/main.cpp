@@ -31,8 +31,8 @@ int main() {
                               std::to_string(platoRandom.getPrecio()));
 
     //creacion de semaforos
-    Semaforo sem_entrada(SEM_ENTRADA, 0);
-    Semaforo sem_recepcion(SEM_RECEPCION, 0);
+    Semaforo sem_entrada(SEM_ENTRADA, 0, false);
+    Semaforo sem_recepcion(SEM_RECEPCION, 0, false);
 
     // creacion de clientes
     int clientes = 10;

@@ -9,18 +9,20 @@
 class Semaforo {
 
 private:
-	int id;
-	int valorInicial;
+    int id;
+    int valorInicial;
+    bool undo;
 
-	int inicializar () const;
+    int inicializar() const;
 
 public:
-	Semaforo ( const std::string& nombre,const int valorInicial );
-	~Semaforo();
+    Semaforo(int projID, const int valorInicial, bool undo);
 
-	int p () const; // decrementa
-	int v () const; // incrementa
-	void eliminar () const;
+    ~Semaforo();
+
+    int p() const; // decrementa
+    int v() const; // incrementa
+    void eliminar() const;
 };
 
 #endif /* SEMAFORO_H_ */

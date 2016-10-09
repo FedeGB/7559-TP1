@@ -5,7 +5,7 @@
 #ifndef TP1_SEMAFOROS_H
 #define TP1_SEMAFOROS_H
 
-#define SEM_ENTRADA "archivos_ftok/semaforo_entrada"
-#define SEM_RECEPCION "archivos_ftok/semaforo_recepcion"
+#define SEM_ENTRADA 1
+#define SEM_RECEPCION 2
 
 #endif //TP1_SEMAFOROS_H
