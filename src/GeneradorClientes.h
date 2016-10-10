@@ -13,10 +13,12 @@
 #include <stdexcept>
 
 class GeneradorClientes {
-
+private:
+    FifoLectura fifoRecepcionLectura;
+    FifoLectura fifoLivingLectura;
 public:
-    GeneradorClientes();
-    pid_t cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,FifoLectura fifoRecepcionLectura);
+    GeneradorClientes(FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura);
+    pid_t cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living);
 
 };
 

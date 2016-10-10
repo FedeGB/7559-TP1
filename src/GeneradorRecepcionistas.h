@@ -22,12 +22,14 @@ class GeneradorRecepcionistas {
 private:
 
     int cantidadRecepcionistas;
+    FifoEscritura fifoRecepcionEscritura;
+    FifoEscritura fifoLivingEscritura;
 
 public:
 
-    GeneradorRecepcionistas(int cantidadDeRecepcionistas);
+    GeneradorRecepcionistas(int cantidadDeRecepcionistas,FifoEscritura fifoRecepcionEscritura,FifoEscritura fifoLivingEscritura);
 
-    pid_t cargarRecepcionistas(Semaforo sem_entrada,Semaforo sem_recepcion,FifoEscritura fifoRecepcionEscritura,int cantidadDeMesas);
+    pid_t cargarRecepcionistas(Semaforo sem_entrada,Semaforo sem_recepcion,Semaforo sem_living,int cantidadDeMesas);
 
 };
 

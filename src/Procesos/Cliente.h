@@ -15,20 +15,29 @@
 #include "../Estructuras/IDSemaforos.h"
 #include "../Estructuras/FifoLectura.h"
 #include "../Constantes.h"
+#include "../Mesas.h"
 
 class Cliente : public Proceso {
-public:
-    Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,FifoLectura fifoRecepcionLectura);
 
 private:
     int id;
     int plata;
     Semaforo sem_entrada;
     Semaforo sem_recepcion;
+    Semaforo sem_living;
     FifoLectura fifoRecepcionLectura;
+    FifoLectura fifoLivingLectura;
+    int mesaAsignada;
+
+public:
+    Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living,FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura);
+
+private:
 
     void _run();
     void esperarMesa();
+    void pedirPlatos();
+    void esperarEnElLiving();
 };
 
 

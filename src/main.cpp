@@ -41,36 +41,46 @@ int main() {
     Mesas mesas(config.getMesas());
     mesas.armarMesas();
 
+    AdministradorLiving administradorLiving;
+    administradorLiving.armarLiving();
+
     sleep(5);
 
     //creacion de semaforos
     Semaforo sem_entrada(SEM_ENTRADA, 0, false);
     Semaforo sem_recepcion(SEM_RECEPCION, 0, false);
+    Semaforo sem_living(SEM_LIVING, 0, false);
 
     //creacion fifos recepcion
     FifoLectura fifoRecepcionLectura(ARCHIVO_FIFO);
     FifoEscritura fifoRecepcionEscritura(ARCHIVO_FIFO);
+    FifoLectura fifoLivingLectura(ARCHIVO_FIFO_LIVING);
+    FifoEscritura fifoLivingEscritura(ARCHIVO_FIFO_LIVING);
 
-    GeneradorRecepcionistas recepcionistas(config.getRecepcionistas());
-    pid_t pid_recepcionistas = recepcionistas.cargarRecepcionistas(sem_entrada, sem_recepcion,fifoRecepcionEscritura,config.getMesas());
+    GeneradorRecepcionistas recepcionistas(config.getRecepcionistas(),fifoRecepcionEscritura,fifoLivingEscritura);
+    pid_t pid_recepcionistas = recepcionistas.cargarRecepcionistas(sem_entrada, sem_recepcion,sem_living,config.getMesas());
 
-    GeneradorClientes clientes;
-    pid_t pid_clientes = clientes.cargarClientes(sem_entrada, sem_recepcion,fifoRecepcionLectura);
+    GeneradorClientes clientes(fifoRecepcionLectura,fifoLivingLectura);
+    pid_t pid_clientes = clientes.cargarClientes(sem_entrada, sem_recepcion, sem_living);
 
     waitpid(pid_clientes,NULL,0);
 
     // eliminar semaforos
     sem_entrada.eliminar();
     sem_recepcion.eliminar();
+    sem_living.eliminar();
 
     waitpid(pid_recepcionistas,NULL,0);
 
     // eliminar fifos recepcion
     fifoRecepcionEscritura.eliminar();
     fifoRecepcionLectura.eliminar();
+    fifoLivingEscritura.eliminar();
+    fifoLivingLectura.eliminar();
 
     mesas.desarmarMesas();
-
+    administradorLiving.desarmarLiving();
+    Logger::getInstance().log("FIN");
     Logger::destruir();
     return 0;
 }

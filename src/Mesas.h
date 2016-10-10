@@ -10,12 +10,19 @@
 #include "Constantes.h"
 #include "Estructuras/LockFile.h"
 #include "Estructuras/MemoriaCompartida.h"
+#include "AdministradorLiving.h"
+#include "Logger.h"
 
 class Mesas {
+
+private:
+    int numeroDeMesas;
+    std::vector< MemoriaCompartida<bool> > memorias;
 
 public:
 
     Mesas(int numeroDeMesas);
+    Mesas();
 
     void armarMesas();
 
@@ -23,12 +30,16 @@ public:
 
     int obtenerMesaLibre();
 
+    int obtenerMesaDesocupada();
+
+    void desocuparMesa(int numeroDeMesa);
+
     ~Mesas();
 
 private:
-    int numeroDeMesas;
-    //LockFile *lock;
-    std::vector< MemoriaCompartida<bool> > memorias;
+
+    bool verificarSiHayClientesEnElLiving();
+    int buscarMesaLibre();
 
 };
 

@@ -6,20 +6,20 @@
 #define TP1_CONSTANTES_H
 
 
-#define CLIENTES 4
+#define CLIENTES 10
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
+#define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define LOCK_RECEPCION "/tmp/lockRecepcion"
 #define LOCK_MESAS "/tmp/lockMesas"
+#define LOCK_LIVING "/tmp/lockLiving"
+#define LOCK_LIVING_ESPERA "/tmp/lockLivingEspera"
 #define MEMORIA_COMPARTIDA_MESAS "/bin/bash"
+#define MEMORIA_CLIENTES_LIVING "/bin/bash"
 
 struct asignarMesa {
     int mesa;
     bool living;
 };
 
-struct Mesa {
-    int numeroDeMesa;
-    bool libre;
-};
 
 #endif //TP1_CONSTANTES_H

@@ -4,11 +4,13 @@
 
 #include "GeneradorClientes.h"
 
-GeneradorClientes::GeneradorClientes(){
+GeneradorClientes::GeneradorClientes(FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura)
+        :fifoRecepcionLectura(fifoRecepcionLectura),
+         fifoLivingLectura(fifoLivingLectura){
 
 }
 
-pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,FifoLectura fifoRecepcionLectura) {
+pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living) {
 
     pid_t pid = fork();
 
@@ -21,10 +23,11 @@ pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recep
     if (pid == 0) {
 
         fifoRecepcionLectura.abrir();
+        fifoLivingLectura.abrir();
 
         for (int i = 0; i < CLIENTES; ++i) {
 
-            Cliente cliente(i, sem_entrada, sem_recepcion,fifoRecepcionLectura);
+            Cliente cliente(i, sem_entrada, sem_recepcion,sem_living,fifoRecepcionLectura,fifoLivingLectura);
             cliente.run();
 
         }
@@ -36,6 +39,7 @@ pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recep
         }
 
         fifoRecepcionLectura.cerrar();
+        fifoLivingLectura.cerrar();
 
         exit(0);
 

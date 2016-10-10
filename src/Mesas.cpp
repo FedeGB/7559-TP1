@@ -3,13 +3,15 @@
 //
 
 #include "Mesas.h"
-#include "Logger.h"
 
 Mesas::Mesas(int numeroDeMesas) {
 
     this->numeroDeMesas = numeroDeMesas;
 
-    //lock = new LockFile(LOCK_MESAS);
+
+}
+
+Mesas::Mesas() {
 
 }
 
@@ -41,6 +43,54 @@ void Mesas::desarmarMesas() {
 }
 
 int Mesas::obtenerMesaLibre() {
+
+    if( this->verificarSiHayClientesEnElLiving() ) {
+
+        return -1;
+
+    }
+
+    return this->buscarMesaLibre();
+
+
+}
+
+int Mesas::obtenerMesaDesocupada(){
+
+    return this->buscarMesaLibre();
+
+}
+
+void Mesas::desocuparMesa(int numeroDeMesa) {
+
+    LockFile lock(LOCK_MESAS);
+
+    lock.tomarLock();
+
+    MemoriaCompartida<bool> memoria;
+    memoria.crear( MEMORIA_COMPARTIDA_MESAS, numeroDeMesa );
+
+    memoria.escribir(true);
+
+    memoria.liberar();
+
+    lock.liberarLock();
+
+}
+
+
+Mesas::~Mesas() {
+
+}
+
+bool Mesas::verificarSiHayClientesEnElLiving() {
+
+    AdministradorLiving administradorLiving;
+
+    return administradorLiving.hayClientesEnElLiving();
+}
+
+int Mesas::buscarMesaLibre() {
 
     int mesaAsignada = -1;
 
@@ -76,9 +126,4 @@ int Mesas::obtenerMesaLibre() {
 }
 
 
-Mesas::~Mesas() {
-
-    //delete lock;
-
-}
 

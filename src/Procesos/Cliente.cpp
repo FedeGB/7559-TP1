@@ -4,12 +4,13 @@
 
 #include "Cliente.h"
 
-
-Cliente::Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,FifoLectura fifoRecepcionLectura)
+Cliente::Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living,FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura)
         : id(id),
           sem_entrada(sem_entrada),
           sem_recepcion(sem_recepcion),
-          fifoRecepcionLectura(fifoRecepcionLectura){
+          sem_living(sem_living),
+          fifoRecepcionLectura(fifoRecepcionLectura),
+          fifoLivingLectura(fifoLivingLectura){
 
     this->plata = id * 10 + 100;
 
@@ -54,14 +55,63 @@ void Cliente::esperarMesa() {
     Logger::getInstance().log("cliente " + std::to_string(id) + " fue atendido por un recepcionista");
 
     if (!mesaAsignada.living){
-        Logger::getInstance().log("cliente " + std::to_string(id) + " le toco la mesa " + std::to_string(mesaAsignada.mesa));
+
+        this->mesaAsignada = mesaAsignada.mesa;
+
+        this->pedirPlatos();
+
     } else {
 
-        Logger::getInstance().log("cliente " + std::to_string(id) + " mesas ocupadas, voy al living ");
+        this->esperarEnElLiving();
     }
 
+}
 
+void Cliente::pedirPlatos() {
 
+    Logger::getInstance().log("cliente " + std::to_string(id) + " le toco la mesa " + std::to_string(mesaAsignada));
+    Logger::getInstance().log("cliente " + std::to_string(id) + " falta implementar comidas, me voy");
 
+    //Sleep para que simule una espera antes de liberar la mesa
+    sleep(2);
+
+    Mesas mesa;
+
+    mesa.desocuparMesa(mesaAsignada);
+
+    sem_living.v();
+
+}
+
+void Cliente::esperarEnElLiving() {
+
+    Logger::getInstance().log("cliente " + std::to_string(id) + " mesas ocupadas, voy al living ");
+
+    AdministradorLiving administradorLiving;
+    administradorLiving.agregarClienteAlLiving();
+
+    char* buffer;
+
+    buffer = new char[sizeof(int)];
+
+    fifoLivingLectura.obtenerCopia();
+
+    LockFile lock(LOCK_LIVING_ESPERA);
+
+    lock.tomarLock();
+
+    fifoLivingLectura.leer(buffer,sizeof(int));
+
+    lock.liberarLock();
+
+    fifoLivingLectura.cerrar();
+
+    memcpy(&mesaAsignada,buffer,sizeof(int));
+
+    delete buffer;
+
+    Logger::getInstance().log("cliente " + std::to_string(id) + " se libero mesa, voy a comer ");
+
+    this->pedirPlatos();
 
 }

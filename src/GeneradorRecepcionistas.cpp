@@ -1,12 +1,15 @@
 #include "GeneradorRecepcionistas.h"
+#include "Procesos/RecepcionLiving.h"
 
-GeneradorRecepcionistas::GeneradorRecepcionistas(int cantidadDeRecepcionistas) {
+GeneradorRecepcionistas::GeneradorRecepcionistas(int cantidadDeRecepcionistas,FifoEscritura fifoRecepcionEscritura,FifoEscritura fifoLivingEscritura)
+        :fifoRecepcionEscritura(fifoRecepcionEscritura),
+         fifoLivingEscritura(fifoLivingEscritura){
 
     this->cantidadRecepcionistas = cantidadDeRecepcionistas;
 
 }
 
-pid_t GeneradorRecepcionistas::cargarRecepcionistas(Semaforo sem_entrada,Semaforo sem_recepcion,FifoEscritura fifoRecepcionEscritura,int cantidadDeMesas) {
+pid_t GeneradorRecepcionistas::cargarRecepcionistas(Semaforo sem_entrada,Semaforo sem_recepcion,Semaforo sem_living,int cantidadDeMesas) {
 
     pid_t pid = fork();
 
@@ -19,6 +22,7 @@ pid_t GeneradorRecepcionistas::cargarRecepcionistas(Semaforo sem_entrada,Semafor
     if (pid == 0) {
 
         fifoRecepcionEscritura.abrir();
+        fifoLivingEscritura.abrir();
 
         for( int i = 0 ; i < cantidadRecepcionistas ; i++){
 
@@ -27,13 +31,17 @@ pid_t GeneradorRecepcionistas::cargarRecepcionistas(Semaforo sem_entrada,Semafor
 
         }
 
-        for (int i = 0; i < cantidadRecepcionistas; ++i) {
+        RecepcionLiving recepcionistaLiving(sem_living,fifoLivingEscritura,cantidadDeMesas);
+        recepcionistaLiving.run();
+
+        for (int i = 0; i <= cantidadRecepcionistas; ++i) {
 
             wait(NULL);
 
         }
 
         fifoRecepcionEscritura.cerrar();
+        fifoLivingEscritura.cerrar();
 
         exit(0);
 
