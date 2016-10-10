@@ -5,9 +5,14 @@
 #include "Cliente.h"
 
 
-Cliente::Cliente(int id, int plata, Semaforo sem_entrada, Semaforo sem_recepcion) : id(id), plata(plata),
-                                                                                    sem_entrada(sem_entrada),
-                                                                                    sem_recepcion(sem_recepcion) {
+Cliente::Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,FifoLectura fifoRecepcionLectura)
+        : id(id),
+          sem_entrada(sem_entrada),
+          sem_recepcion(sem_recepcion),
+          fifoRecepcionLectura(fifoRecepcionLectura){
+
+    this->plata = id * 10 + 100;
+
 }
 
 void Cliente::_run() {
@@ -18,5 +23,45 @@ void Cliente::_run() {
 
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     sem_recepcion.p();
+
+    this->esperarMesa();
+
+}
+
+void Cliente::esperarMesa() {
+
+    struct asignarMesa mesaAsignada;
+    char* buffer;
+
+    buffer = new char[sizeof(mesaAsignada)];
+
+    fifoRecepcionLectura.obtenerCopia();
+
+    LockFile lock(LOCK_RECEPCION);
+
+    lock.tomarLock();
+
+    fifoRecepcionLectura.leer(buffer,sizeof(mesaAsignada));
+
+    lock.liberarLock();
+
+    fifoRecepcionLectura.cerrar();
+
+    memcpy(&mesaAsignada,buffer,sizeof(mesaAsignada));
+
+    delete buffer;
+
     Logger::getInstance().log("cliente " + std::to_string(id) + " fue atendido por un recepcionista");
+
+    if (!mesaAsignada.living){
+        Logger::getInstance().log("cliente " + std::to_string(id) + " le toco la mesa " + std::to_string(mesaAsignada.mesa));
+    } else {
+
+        Logger::getInstance().log("cliente " + std::to_string(id) + " mesas ocupadas, voy al living ");
+    }
+
+
+
+
+
 }

@@ -3,6 +3,7 @@
 //
 
 #include "LockFile.h"
+#include "../Logger.h"
 
 LockFile :: LockFile ( const std::string nombre ) {
     this->nombre = nombre;
@@ -13,6 +14,7 @@ LockFile :: LockFile ( const std::string nombre ) {
     int openFd = open( this->nombre.c_str(),O_CREAT|O_WRONLY,0777 );
     if(openFd < 0) {
         std::string errMsg = std::string(std::string (strerror(errno)));
+        Logger::getInstance().log(errMsg);
         throw "Fallo al abrir lock file with number: " + errMsg;
     }
     this->fd = openFd;
@@ -23,6 +25,7 @@ int LockFile :: tomarLock () {
     int lock = fcntl ( this->fd,F_SETLKW,&(this->fl) );
     if(lock < 0 ) {
         std::string errMsg = std::string(std::string (strerror(errno)));
+        Logger::getInstance().log(errMsg);
         throw "Fallo al abrir lock file with number: " + errMsg;
     }
     return lock;

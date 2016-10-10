@@ -4,6 +4,14 @@
 #include "Procesos/Cliente.h"
 #include "Procesos/Recepcionista.h"
 #include "ConfigLoader.h"
+#include "GeneradorRecepcionistas.h"
+#include "GeneradorClientes.h"
+#include "Estructuras/FifoLectura.h"
+#include "Estructuras/FifoEscritura.h"
+#include "Mesas.h"
+#include "Estructuras/MemoriaCompartida2.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 using namespace std;
@@ -30,33 +38,39 @@ int main() {
                               platoRandom.getNombre() + " con un precio de: " +
                               std::to_string(platoRandom.getPrecio()));
 
+    Mesas mesas(config.getMesas());
+    mesas.armarMesas();
+
+    sleep(5);
+
     //creacion de semaforos
     Semaforo sem_entrada(SEM_ENTRADA, 0, false);
     Semaforo sem_recepcion(SEM_RECEPCION, 0, false);
 
-    // creacion de clientes
-    int clientes = 10;
-    vector<pid_t> clientesPIDs;
-    for (int i = 0; i < clientes; ++i) {
-        Cliente cliente(i, i * 10 + 100, sem_entrada, sem_recepcion);
-        pid_t clientePID = cliente.run();
-        clientesPIDs.push_back(clientePID);
-    }
+    //creacion fifos recepcion
+    FifoLectura fifoRecepcionLectura(ARCHIVO_FIFO);
+    FifoEscritura fifoRecepcionEscritura(ARCHIVO_FIFO);
 
-    // creacion de recepcionistas
-    Recepcionista recepcionista1("carlos1", sem_entrada, sem_recepcion);
-    pid_t recepcionista1PID = recepcionista1.run();
-    Recepcionista recepcionista2("carlos2", sem_entrada, sem_recepcion);
-    pid_t recepcionista2PID = recepcionista2.run();
-    Recepcionista recepcionista3("carlos3", sem_entrada, sem_recepcion);
-    pid_t recepcionista3PID = recepcionista3.run();
+    GeneradorRecepcionistas recepcionistas(config.getRecepcionistas());
+    pid_t pid_recepcionistas = recepcionistas.cargarRecepcionistas(sem_entrada, sem_recepcion,fifoRecepcionEscritura,config.getMesas());
 
+    GeneradorClientes clientes;
+    pid_t pid_clientes = clientes.cargarClientes(sem_entrada, sem_recepcion,fifoRecepcionLectura);
 
-    sleep(60); // TODO
+    waitpid(pid_clientes,NULL,0);
 
     // eliminar semaforos
     sem_entrada.eliminar();
     sem_recepcion.eliminar();
+
+    waitpid(pid_recepcionistas,NULL,0);
+
+    // eliminar fifos recepcion
+    fifoRecepcionEscritura.eliminar();
+    fifoRecepcionLectura.eliminar();
+
+    mesas.desarmarMesas();
+
     Logger::destruir();
     return 0;
 }

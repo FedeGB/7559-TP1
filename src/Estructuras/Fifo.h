@@ -15,6 +15,7 @@ public:
 	virtual void abrir() = 0;
 	void cerrar();
 	void eliminar() const;
+	void obtenerCopia();
 
 protected:
 	std::string nombre;
