@@ -15,7 +15,11 @@ void Configurador::crearEstructuras() {
     sem_entrada = new Semaforo(SEM_ENTRADA, 0, false);
     sem_recepcion = new Semaforo(SEM_RECEPCION, 0, false);
     sem_living = new Semaforo(SEM_LIVING, 0, false);
-    //semaforosPedidoDeMesas;
+
+    for (int i=0;i< config->getMesas();i++) {
+        semaforosPedidoDeMesas[i] = new Semaforo(SEM_MESAS+i,0,false);
+    }
+
     fifoRecepcionLectura = new FifoLectura(ARCHIVO_FIFO);
     fifoRecepcionEscritura = new FifoEscritura(ARCHIVO_FIFO);
     fifoLivingLectura = new FifoLectura(ARCHIVO_FIFO_LIVING);

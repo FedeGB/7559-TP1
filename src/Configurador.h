@@ -20,7 +20,7 @@ private:
     Semaforo *sem_entrada;
     Semaforo *sem_recepcion;
     Semaforo *sem_living;
-    std::map<int,Semaforo> semaforosPedidoDeMesas;
+    std::map<int,Semaforo*> semaforosPedidoDeMesas;
     FifoLectura *fifoRecepcionLectura;
     FifoEscritura *fifoRecepcionEscritura;
     FifoLectura *fifoLivingLectura;

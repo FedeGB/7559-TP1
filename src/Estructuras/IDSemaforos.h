@@ -8,5 +8,6 @@
 #define SEM_ENTRADA 1
 #define SEM_RECEPCION 2
 #define SEM_LIVING 3
+#define SEM_MESAS 4
 
 #endif //TP1_SEMAFOROS_H
