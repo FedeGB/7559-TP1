@@ -10,6 +10,7 @@
 #include "Estructuras/FifoEscritura.h"
 #include "Mesas.h"
 #include "Estructuras/MemoriaCompartida2.h"
+#include "Configurador.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -38,7 +39,17 @@ int main() {
                               platoRandom.getNombre() + " con un precio de: " +
                               std::to_string(platoRandom.getPrecio()));
 
-    Mesas mesas(config.getMesas());
+    Configurador configurador(&config);
+    configurador.crearEstructuras();
+    configurador.simular();
+    configurador.destruirEstructuras();
+
+    Logger::getInstance().log("FIN");
+    Logger::destruir();
+
+    return 0;
+
+    /*Mesas mesas(config.getMesas());
     mesas.armarMesas();
 
     AdministradorLiving administradorLiving;
@@ -82,5 +93,5 @@ int main() {
     administradorLiving.desarmarLiving();
     Logger::getInstance().log("FIN");
     Logger::destruir();
-    return 0;
+    return 0;*/
 }
