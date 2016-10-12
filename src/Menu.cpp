@@ -8,13 +8,13 @@ Menu::Menu() {
 }
 
 Menu::~Menu() {
-    std::vector<PlatoComida*>::iterator it = this->platosDisponibles.begin();
-    while(it != this->platosDisponibles.end()) {
-        if((*it) != NULL) {
-            delete (*it);
-        }
-        it++;
-    }
+//    std::vector<PlatoComida*>::iterator it = this->platosDisponibles.begin();
+//    while(it != this->platosDisponibles.end()) {
+//        if((*it) != NULL) {
+//            delete (*it);
+//        }
+//        it++;
+//    }
 }
 
 bool Menu::fill(std::string str) {
@@ -42,7 +42,7 @@ bool Menu::fill(std::string str) {
             } else if(valueNumber == 1) {
                 if(stringIsValidPrice(tokenInner)) {
                     precioPlato = std::stof(tokenInner);
-                    nuevoPlato = new PlatoComida(nombrePlato, precioPlato);
+                    PlatoComida nuevoPlato = PlatoComida(nombrePlato, precioPlato);
                     this->platosDisponibles.push_back(nuevoPlato);
                 } else {
                     throw "Los precios del menu deben ser numeros con decimales positivos";
@@ -69,5 +69,5 @@ PlatoComida Menu::eleccionRandom() {
     if(seleccion >= this->platosDisponibles.size()) {
         throw "Error de seleccion, evitando seg fault";
     }
-    return PlatoComida(*this->platosDisponibles[seleccion]);
+    return PlatoComida(this->platosDisponibles[seleccion]);
 }
