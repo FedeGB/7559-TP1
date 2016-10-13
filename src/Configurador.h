@@ -13,6 +13,8 @@
 #include "Estructuras/FifoEscritura.h"
 #include "GeneradorRecepcionistas.h"
 #include "GeneradorClientes.h"
+#include "GeneradorMozos.h"
+#include "ClientesPorComer.h"
 
 class Configurador {
 private:
@@ -25,12 +27,17 @@ private:
     FifoEscritura *fifoRecepcionEscritura;
     FifoLectura *fifoLivingLectura;
     FifoEscritura *fifoLivingEscritura;
+    FifoEscritura *fifoMozosEscritura;
+    FifoLectura *fifoMozosLectura;
     GeneradorRecepcionistas *recepcionistas;
     GeneradorClientes *clientes;
+    GeneradorMozos *mozos;
     Mesas *mesas;
     AdministradorLiving *administradorLiving;
+    ClientesPorComer clientesPorComer;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;
+    pid_t pid_mozos;
 
 public:
     Configurador(ConfigLoader *config);
@@ -41,6 +48,7 @@ public:
 private:
     void cargarGeneradorDeClientes();
     void cagarGeneradorDeRecepcionistas();
+    void cargarGeneradorDeMozos();
 
 };
 

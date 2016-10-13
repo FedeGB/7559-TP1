@@ -16,6 +16,7 @@
 #include "../Estructuras/FifoLectura.h"
 #include "../Constantes.h"
 #include "../Mesas.h"
+#include "../Estructuras/FifoEscritura.h"
 
 class Cliente : public Proceso {
 
@@ -27,7 +28,9 @@ private:
     Semaforo *sem_living;
     FifoLectura *fifoRecepcionLectura;
     FifoLectura *fifoLivingLectura;
+    FifoEscritura *fifoMozosEscritura;
     int mesaAsignada;
+    std::map<int,Semaforo*> semaforosPedidoDeMesas;
 
 public:
 
@@ -42,6 +45,10 @@ public:
     void setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura);
 
     void setFifoLivingLectura(FifoLectura *fifoLivingLectura);
+
+    void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
+
+    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
 
 private:
 

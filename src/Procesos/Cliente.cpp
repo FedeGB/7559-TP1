@@ -3,6 +3,7 @@
 //
 
 #include "Cliente.h"
+#include "../ClientesPorComer.h"
 
 Cliente::Cliente(int id){
 
@@ -66,10 +67,36 @@ void Cliente::esperarMesa() {
 void Cliente::pedirPlatos() {
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " le toco la mesa " + std::to_string(mesaAsignada));
-    Logger::getInstance().log("cliente " + std::to_string(id) + " falta implementar comidas, me voy");
+    //Logger::getInstance().log("cliente " + std::to_string(id) + " falta implementar comidas, me voy");
 
     //Sleep para que simule una espera antes de liberar la mesa
-    sleep(2);
+
+    struct indicacionAlMozo pedidoDePlato;
+
+    pedidoDePlato.numeroDeMesa = mesaAsignada;
+    pedidoDePlato.pedido = true;
+
+    fifoMozosEscritura->obtenerCopia();
+
+    //Realizo tres pedidos
+    //Tendria que ser con los platos y la cantidad de plata
+    for(int i=0;i<3;i++){
+
+        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a pedir un plato");
+
+        fifoMozosEscritura->escribir(&pedidoDePlato,sizeof(pedidoDePlato));
+
+        semaforosPedidoDeMesas[mesaAsignada]->p();
+
+    }
+
+    fifoMozosEscritura->cerrar();
+
+    ClientesPorComer clientesPorComer;
+    clientesPorComer.descontarCliente();
+    clientesPorComer.liberar();
+
+    Logger::getInstance().log("cliente " + std::to_string(id) + " el mozo entrego mi plato, ahora me voy");
 
     Mesas mesa;
 
@@ -82,6 +109,13 @@ void Cliente::pedirPlatos() {
     delete sem_recepcion;
     delete fifoLivingLectura;
     delete fifoRecepcionLectura;
+    delete fifoMozosEscritura;
+
+    for(auto const &ent1 : semaforosPedidoDeMesas) {
+
+        delete ent1.second;
+
+    }
 
 }
 
@@ -136,4 +170,12 @@ void Cliente::setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura) {
 
 void Cliente::setFifoLivingLectura(FifoLectura *fifoLivingLectura) {
     Cliente::fifoLivingLectura = fifoLivingLectura;
+}
+
+void Cliente::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas) {
+    Cliente::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
+}
+
+void Cliente::setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura) {
+    Cliente::fifoMozosEscritura = fifoMozosEscritura;
 }
