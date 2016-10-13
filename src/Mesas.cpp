@@ -8,7 +8,6 @@ Mesas::Mesas(int numeroDeMesas) {
 
     this->numeroDeMesas = numeroDeMesas;
 
-
 }
 
 Mesas::Mesas() {

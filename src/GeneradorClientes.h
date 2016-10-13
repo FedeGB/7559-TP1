@@ -6,6 +6,7 @@
 #include "Procesos/Cliente.h"
 #include "Estructuras/FifoLectura.h"
 #include "Constantes.h"
+#include "Estructuras/FifoEscritura.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -16,6 +17,10 @@ class GeneradorClientes {
 private:
     FifoLectura *fifoRecepcionLectura;
     FifoLectura *fifoLivingLectura;
+    FifoEscritura *fifoMozosEscritura;
+    std::map<int,Semaforo*> semaforosPedidoDeMesas;
+
+private:
     Semaforo *sem_entrada;
     Semaforo *sem_recepcion;
     Semaforo *sem_living;
@@ -35,6 +40,10 @@ public:
     void setSem_recepcion(Semaforo *sem_recepcion);
 
     void setSem_living(Semaforo *sem_living);
+
+    void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
+
+    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
 
 private:
     void configurarCliente(Cliente &cliente);
