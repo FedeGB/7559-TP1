@@ -22,15 +22,26 @@ class Cliente : public Proceso {
 private:
     int id;
     int plata;
-    Semaforo sem_entrada;
-    Semaforo sem_recepcion;
-    Semaforo sem_living;
-    FifoLectura fifoRecepcionLectura;
-    FifoLectura fifoLivingLectura;
+    Semaforo *sem_entrada;
+    Semaforo *sem_recepcion;
+    Semaforo *sem_living;
+    FifoLectura *fifoRecepcionLectura;
+    FifoLectura *fifoLivingLectura;
     int mesaAsignada;
 
 public:
-    Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living,FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura);
+
+    Cliente(int id);
+
+    void setSem_entrada(Semaforo *sem_entrada);
+
+    void setSem_recepcion(Semaforo *sem_recepcion);
+
+    void setSem_living(Semaforo *sem_living);
+
+    void setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura);
+
+    void setFifoLivingLectura(FifoLectura *fifoLivingLectura);
 
 private:
 

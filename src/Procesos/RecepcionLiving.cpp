@@ -6,9 +6,7 @@
 #include "../Mesas.h"
 
 
-RecepcionLiving::RecepcionLiving(Semaforo sem_living, FifoEscritura fifoLivingEscritura,int cantidadDeMesas)
-        : sem_living(sem_living),
-          fifoLivingEscritura(fifoLivingEscritura) {
+RecepcionLiving::RecepcionLiving(int cantidadDeMesas) {
 
     this->cantidadDeMesas = cantidadDeMesas;
 }
@@ -16,17 +14,17 @@ RecepcionLiving::RecepcionLiving(Semaforo sem_living, FifoEscritura fifoLivingEs
 void RecepcionLiving::_run(){
 
 
-    fifoLivingEscritura.obtenerCopia();
+    fifoLivingEscritura->obtenerCopia();
     //fifoLivingEscritura.abrir();
 
-    while (sem_living.p() > -1) {
+    while (sem_living->p() > -1) {
         AdministradorLiving administradorLiving;
         Mesas mesas(cantidadDeMesas);
 
         if(administradorLiving.hayClientesEnElLiving()){
 
             int mesaLibre = mesas.obtenerMesaDesocupada();
-            fifoLivingEscritura.escribir(&mesaLibre, sizeof(int));
+            fifoLivingEscritura->escribir(&mesaLibre, sizeof(int));
 
             administradorLiving.sacarClienteDelLiving();
 
@@ -34,6 +32,17 @@ void RecepcionLiving::_run(){
 
     }
 
-    fifoLivingEscritura.cerrar();
+    fifoLivingEscritura->cerrar();
 
+    delete fifoLivingEscritura;
+    delete sem_living;
+
+}
+
+void RecepcionLiving::setSem_living(Semaforo *sem_living) {
+    RecepcionLiving::sem_living = sem_living;
+}
+
+void RecepcionLiving::setFifoLivingEscritura(FifoEscritura *fifoLivingEscritura) {
+    RecepcionLiving::fifoLivingEscritura = fifoLivingEscritura;
 }

@@ -9,6 +9,7 @@
 #include "Procesos/Recepcionista.h"
 #include "Estructuras/FifoEscritura.h"
 #include "Constantes.h"
+#include "Procesos/RecepcionLiving.h"
 
 #include <string>
 
@@ -22,14 +23,31 @@ class GeneradorRecepcionistas {
 private:
 
     int cantidadRecepcionistas;
-    FifoEscritura fifoRecepcionEscritura;
-    FifoEscritura fifoLivingEscritura;
-
+    FifoEscritura *fifoRecepcionEscritura;
+    FifoEscritura *fifoLivingEscritura;
+    Semaforo *sem_entrada;
+    Semaforo *sem_recepcion;
+    Semaforo *sem_living;
 public:
 
-    GeneradorRecepcionistas(int cantidadDeRecepcionistas,FifoEscritura fifoRecepcionEscritura,FifoEscritura fifoLivingEscritura);
+    GeneradorRecepcionistas(int cantidadDeRecepcionistas);
 
-    pid_t cargarRecepcionistas(Semaforo sem_entrada,Semaforo sem_recepcion,Semaforo sem_living,int cantidadDeMesas);
+    pid_t cargarRecepcionistas(int cantidadDeMesas);
+
+    void setFifoRecepcionEscritura(FifoEscritura *fifoRecepcionEscritura);
+
+    void setFifoLivingEscritura(FifoEscritura *fifoLivingEscritura);
+
+    void setSem_entrada(Semaforo *sem_entrada);
+
+    void setSem_recepcion(Semaforo *sem_recepcion);
+
+    void setSem_living(Semaforo *sem_living);
+
+private:
+
+    void cargarRecepcionista(Recepcionista &recepcionista);
+    void cargarRecepcionistaLiving(RecepcionLiving &recepcionistaLiving);
 
 };
 

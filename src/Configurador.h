@@ -38,6 +38,10 @@ public:
     void destruirEstructuras();
     void simular();
 
+private:
+    void cargarGeneradorDeClientes();
+    void cagarGeneradorDeRecepcionistas();
+
 };
 
 
