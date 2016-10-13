@@ -13,8 +13,10 @@
 #define LOCK_MESAS "/tmp/lockMesas"
 #define LOCK_LIVING "/tmp/lockLiving"
 #define LOCK_LIVING_ESPERA "/tmp/lockLivingEspera"
+#define LOCK_CAJA "/tmp/lockCaja"
 #define MEMORIA_COMPARTIDA_MESAS "/bin/bash"
 #define MEMORIA_CLIENTES_LIVING "/bin/bash"
+#define MEMORIA_DINERO_CAJA "/bin/bash"
 
 struct asignarMesa {
     int mesa;
