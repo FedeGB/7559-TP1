@@ -4,13 +4,11 @@
 
 #include "GeneradorClientes.h"
 
-GeneradorClientes::GeneradorClientes(FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura)
-        :fifoRecepcionLectura(fifoRecepcionLectura),
-         fifoLivingLectura(fifoLivingLectura){
+GeneradorClientes::GeneradorClientes(){
 
 }
 
-pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living) {
+pid_t GeneradorClientes::cargarClientes() {
 
     pid_t pid = fork();
 
@@ -22,12 +20,13 @@ pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recep
 
     if (pid == 0) {
 
-        fifoRecepcionLectura.abrir();
-        fifoLivingLectura.abrir();
+        fifoRecepcionLectura->abrir();
+        fifoLivingLectura->abrir();
 
         for (int i = 0; i < CLIENTES; ++i) {
 
-            Cliente cliente(i, sem_entrada, sem_recepcion,sem_living,fifoRecepcionLectura,fifoLivingLectura);
+            Cliente cliente(i);
+            this->configurarCliente(cliente);
             cliente.run();
 
         }
@@ -38,8 +37,14 @@ pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recep
 
         }
 
-        fifoRecepcionLectura.cerrar();
-        fifoLivingLectura.cerrar();
+        fifoRecepcionLectura->cerrar();
+        fifoLivingLectura->cerrar();
+
+        delete fifoLivingLectura;
+        delete fifoRecepcionLectura;
+        delete sem_entrada;
+        delete sem_recepcion;
+        delete sem_living;
 
         exit(0);
 
@@ -48,5 +53,35 @@ pid_t GeneradorClientes::cargarClientes(Semaforo sem_entrada, Semaforo sem_recep
         return pid;
 
     }
+
+}
+
+void GeneradorClientes::setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura) {
+    GeneradorClientes::fifoRecepcionLectura = fifoRecepcionLectura;
+}
+
+void GeneradorClientes::setFifoLivingLectura(FifoLectura *fifoLivingLectura) {
+    GeneradorClientes::fifoLivingLectura = fifoLivingLectura;
+}
+
+void GeneradorClientes::setSem_entrada(Semaforo *sem_entrada) {
+    GeneradorClientes::sem_entrada = sem_entrada;
+}
+
+void GeneradorClientes::setSem_recepcion(Semaforo *sem_recepcion) {
+    GeneradorClientes::sem_recepcion = sem_recepcion;
+}
+
+void GeneradorClientes::setSem_living(Semaforo *sem_living) {
+    GeneradorClientes::sem_living = sem_living;
+}
+
+void GeneradorClientes::configurarCliente(Cliente &cliente) {
+
+    cliente.setSem_recepcion(sem_recepcion);
+    cliente.setSem_living(sem_living);
+    cliente.setSem_entrada(sem_entrada);
+    cliente.setFifoRecepcionLectura(fifoRecepcionLectura);
+    cliente.setFifoLivingLectura(fifoLivingLectura);
 
 }

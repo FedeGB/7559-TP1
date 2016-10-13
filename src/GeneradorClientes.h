@@ -14,11 +14,30 @@
 
 class GeneradorClientes {
 private:
-    FifoLectura fifoRecepcionLectura;
-    FifoLectura fifoLivingLectura;
+    FifoLectura *fifoRecepcionLectura;
+    FifoLectura *fifoLivingLectura;
+    Semaforo *sem_entrada;
+    Semaforo *sem_recepcion;
+    Semaforo *sem_living;
+
 public:
-    GeneradorClientes(FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura);
-    pid_t cargarClientes(Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living);
+
+    GeneradorClientes();
+
+    pid_t cargarClientes();
+
+    void setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura);
+
+    void setFifoLivingLectura(FifoLectura *fifoLivingLectura);
+
+    void setSem_entrada(Semaforo *sem_entrada);
+
+    void setSem_recepcion(Semaforo *sem_recepcion);
+
+    void setSem_living(Semaforo *sem_living);
+
+private:
+    void configurarCliente(Cliente &cliente);
 
 };
 

@@ -13,14 +13,21 @@
 
 class RecepcionLiving : public Proceso {
 
+private:
+    int cantidadDeMesas;
+    Semaforo *sem_living;
+    FifoEscritura *fifoLivingEscritura;
+
 public:
 
-    RecepcionLiving(Semaforo sem_living,FifoEscritura fifoLivingEscritura,int cantidadDeMesas);
+    RecepcionLiving(int cantidadDeMesas);
+
+    void setSem_living(Semaforo *sem_living);
+
+    void setFifoLivingEscritura(FifoEscritura *fifoLivingEscritura);
 
 private:
-    Semaforo sem_living;
-    FifoEscritura fifoLivingEscritura;
-    int cantidadDeMesas;
+
 
     void _run();
 

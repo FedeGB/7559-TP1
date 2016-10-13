@@ -10,6 +10,7 @@
 #include "Estructuras/FifoEscritura.h"
 #include "Mesas.h"
 #include "Estructuras/MemoriaCompartida2.h"
+#include "Configurador.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -32,13 +33,23 @@ int main() {
     Logger::getInstance().log("Se cargaron mesas: " + std::to_string(config.getMesas()));
     Logger::getInstance().log("Se cargaron mozos: " + std::to_string(config.getMozos()));
     Logger::getInstance().log("Se cargaron recep: " + std::to_string(config.getRecepcionistas()));
-    Menu menu = config.getMenu();
+    /*Menu menu = config.getMenu();
     PlatoComida platoRandom = menu.eleccionRandom();
     Logger::getInstance().log("Se cargo el menu y un plato random es: " +
                               platoRandom.getNombre() + " con un precio de: " +
-                              std::to_string(platoRandom.getPrecio()));
+                              std::to_string(platoRandom.getPrecio()));*/
 
-    Mesas mesas(config.getMesas());
+    Configurador configurador(&config);
+    configurador.crearEstructuras();
+    configurador.simular();
+    configurador.destruirEstructuras();
+
+    Logger::getInstance().log("FIN");
+    Logger::destruir();
+
+    return 0;
+
+    /*Mesas mesas(config.getMesas());
     mesas.armarMesas();
 
     AdministradorLiving administradorLiving;
@@ -82,5 +93,5 @@ int main() {
     administradorLiving.desarmarLiving();
     Logger::getInstance().log("FIN");
     Logger::destruir();
-    return 0;
+    return 0;*/
 }

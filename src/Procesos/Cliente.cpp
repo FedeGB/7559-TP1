@@ -4,26 +4,22 @@
 
 #include "Cliente.h"
 
-Cliente::Cliente(int id, Semaforo sem_entrada, Semaforo sem_recepcion,Semaforo sem_living,FifoLectura fifoRecepcionLectura,FifoLectura fifoLivingLectura)
-        : id(id),
-          sem_entrada(sem_entrada),
-          sem_recepcion(sem_recepcion),
-          sem_living(sem_living),
-          fifoRecepcionLectura(fifoRecepcionLectura),
-          fifoLivingLectura(fifoLivingLectura){
+Cliente::Cliente(int id){
 
+    this->id = id;
     this->plata = id * 10 + 100;
 
 }
 
 void Cliente::_run() {
+
     Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
 
-    sem_entrada.v(); // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
+    sem_entrada->v(); // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
     Logger::getInstance().log("cliente " + std::to_string(id) + " llego a la entrada");
 
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
-    sem_recepcion.p();
+    sem_recepcion->p();
 
     this->esperarMesa();
 
@@ -36,17 +32,17 @@ void Cliente::esperarMesa() {
 
     buffer = new char[sizeof(mesaAsignada)];
 
-    fifoRecepcionLectura.obtenerCopia();
+    fifoRecepcionLectura->obtenerCopia();
 
     LockFile lock(LOCK_RECEPCION);
 
     lock.tomarLock();
 
-    fifoRecepcionLectura.leer(buffer,sizeof(mesaAsignada));
+    fifoRecepcionLectura->leer(buffer,sizeof(mesaAsignada));
 
     lock.liberarLock();
 
-    fifoRecepcionLectura.cerrar();
+    fifoRecepcionLectura->cerrar();
 
     memcpy(&mesaAsignada,buffer,sizeof(mesaAsignada));
 
@@ -79,7 +75,13 @@ void Cliente::pedirPlatos() {
 
     mesa.desocuparMesa(mesaAsignada);
 
-    sem_living.v();
+    sem_living->v();
+
+    delete sem_entrada;
+    delete sem_living;
+    delete sem_recepcion;
+    delete fifoLivingLectura;
+    delete fifoRecepcionLectura;
 
 }
 
@@ -94,17 +96,17 @@ void Cliente::esperarEnElLiving() {
 
     buffer = new char[sizeof(int)];
 
-    fifoLivingLectura.obtenerCopia();
+    fifoLivingLectura->obtenerCopia();
 
     LockFile lock(LOCK_LIVING_ESPERA);
 
     lock.tomarLock();
 
-    fifoLivingLectura.leer(buffer,sizeof(int));
+    fifoLivingLectura->leer(buffer,sizeof(int));
 
     lock.liberarLock();
 
-    fifoLivingLectura.cerrar();
+    fifoLivingLectura->cerrar();
 
     memcpy(&mesaAsignada,buffer,sizeof(int));
 
@@ -114,4 +116,24 @@ void Cliente::esperarEnElLiving() {
 
     this->pedirPlatos();
 
+}
+
+void Cliente::setSem_entrada(Semaforo *sem_entrada) {
+    Cliente::sem_entrada = sem_entrada;
+}
+
+void Cliente::setSem_recepcion(Semaforo *sem_recepcion) {
+    Cliente::sem_recepcion = sem_recepcion;
+}
+
+void Cliente::setSem_living(Semaforo *sem_living) {
+    Cliente::sem_living = sem_living;
+}
+
+void Cliente::setFifoRecepcionLectura(FifoLectura *fifoRecepcionLectura) {
+    Cliente::fifoRecepcionLectura = fifoRecepcionLectura;
+}
+
+void Cliente::setFifoLivingLectura(FifoLectura *fifoLivingLectura) {
+    Cliente::fifoLivingLectura = fifoLivingLectura;
 }

@@ -20,19 +20,26 @@
 #include <unistd.h>
 
 class Recepcionista : public Proceso {
-public:
-    Recepcionista(std::string nombre, Semaforo sem_entrada,
-                  Semaforo sem_recepcion,FifoEscritura fifoRecepcionEscritura,int cantidadDeMesas);
 
-    ~Recepcionista();
 private:
     int cantidadDeMesas;
     std::string nombre;
-    Semaforo sem_entrada;
-    Semaforo sem_recepcion;
-    FifoEscritura fifoRecepcionEscritura;
-    MemoriaCompartida2<Mesas> *memoria;
+    FifoEscritura *fifoRecepcionEscritura;
+    Semaforo *sem_entrada;
+    Semaforo *sem_recepcion;
+public:
 
+    Recepcionista(std::string nombre, int cantidadDeMesas);
+
+    void setSem_entrada(Semaforo *sem_entrada);
+
+    void setSem_recepcion(Semaforo *sem_recepcion);
+
+    void setFifoRecepcionEscritura(FifoEscritura *fifoRecepcionEscritura);
+
+    ~Recepcionista();
+
+private:
     void _run();
     void asignarMesa();
 };

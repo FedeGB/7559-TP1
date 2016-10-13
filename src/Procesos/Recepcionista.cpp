@@ -4,8 +4,7 @@
 
 #include "Recepcionista.h"
 
-Recepcionista::Recepcionista(std::string nombre, Semaforo sem_entrada,Semaforo sem_recepcion,FifoEscritura fifoRecepcionEscritura,int cantidadDeMesas) : nombre(nombre), sem_entrada(sem_entrada),
-                                                                               sem_recepcion(sem_recepcion),fifoRecepcionEscritura(fifoRecepcionEscritura) {
+Recepcionista::Recepcionista(std::string nombre, int cantidadDeMesas) : nombre(nombre) {
 
     this->cantidadDeMesas = cantidadDeMesas;
 
@@ -15,13 +14,13 @@ void Recepcionista::_run() {
 
     Logger::getInstance().log("Recepcionista " + nombre + " creado");
 
-    fifoRecepcionEscritura.obtenerCopia();
-    fifoRecepcionEscritura.abrir();
+    fifoRecepcionEscritura->obtenerCopia();
+    fifoRecepcionEscritura->abrir();
 
-    while (sem_entrada.p() > -1) { //mientras haya clientes en la entrada (si no hay niguno bloque aca)
+    while (sem_entrada->p() > -1) { //mientras haya clientes en la entrada (si no hay niguno bloque aca)
 
         //recibo a cliente:
-        sem_recepcion.v();
+        sem_recepcion->v();
         Logger::getInstance().log("Recepcionista " + nombre + " esta atendiendo a un cliente");
 
         sleep(5 + getRandomInt(1, 5)); // tiempo que tardo en atenderlo
@@ -31,7 +30,11 @@ void Recepcionista::_run() {
         Logger::getInstance().log("Recepcionista " + nombre + " termino de atender a un cliente");
     }
 
-    fifoRecepcionEscritura.cerrar();
+    fifoRecepcionEscritura->cerrar();
+
+    delete fifoRecepcionEscritura;
+    delete sem_entrada;
+    delete sem_recepcion;
 
 }
 
@@ -45,7 +48,7 @@ void Recepcionista::asignarMesa() {
 
     mesaAsignada.living = (mesaAsignada.mesa == -1);
 
-    fifoRecepcionEscritura.escribir(&mesaAsignada,sizeof(mesaAsignada));
+    fifoRecepcionEscritura->escribir(&mesaAsignada,sizeof(mesaAsignada));
 
     Logger::getInstance().log("Recepcionista " + nombre + " asigna mesa "+ std::to_string(mesaAsignada.mesa));
 
@@ -54,4 +57,16 @@ void Recepcionista::asignarMesa() {
 Recepcionista::~Recepcionista() {
 
 
+}
+
+void Recepcionista::setSem_entrada(Semaforo *sem_entrada) {
+    Recepcionista::sem_entrada = sem_entrada;
+}
+
+void Recepcionista::setSem_recepcion(Semaforo *sem_recepcion) {
+    Recepcionista::sem_recepcion = sem_recepcion;
+}
+
+void Recepcionista::setFifoRecepcionEscritura(FifoEscritura *fifoRecepcionEscritura) {
+    Recepcionista::fifoRecepcionEscritura = fifoRecepcionEscritura;
 }
