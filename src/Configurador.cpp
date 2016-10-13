@@ -26,14 +26,18 @@ void Configurador::crearEstructuras() {
     fifoLivingEscritura = new FifoEscritura(ARCHIVO_FIFO_LIVING);
     fifoMozosEscritura = new FifoEscritura(ARCHIVO_FIFO_MOZOS);
     fifoMozosLectura = new FifoLectura(ARCHIVO_FIFO_MOZOS);
+    fifoCocineroEscritura = new FifoEscritura(ARCHIVO_FIFO_COCINERO);
+    fifoCocineroLectura = new FifoLectura(ARCHIVO_FIFO_COCINERO);
 
     recepcionistas = new GeneradorRecepcionistas(config->getRecepcionistas());
     clientes = new GeneradorClientes();
     mozos = new GeneradorMozos(config->getMozos());
+    cocinero = new Cocinero();
 
     this->cagarGeneradorDeRecepcionistas();
     this->cargarGeneradorDeClientes();
     this->cargarGeneradorDeMozos();
+    this->cargarCocinero();
 
     mesas = new Mesas(config->getMesas());
     administradorLiving = new AdministradorLiving();
@@ -51,6 +55,8 @@ void Configurador::simular() {
     pid_clientes = clientes->cargarClientes();
 
     pid_mozos = mozos->cargarMozos();
+
+    pid_cocinero = cocinero->run();
 
     waitpid(pid_clientes,NULL,0);
 
@@ -73,6 +79,8 @@ void Configurador::destruirEstructuras() {
     fifoRecepcionLectura->eliminar();
     fifoLivingEscritura->eliminar();
     fifoLivingLectura->eliminar();
+    fifoCocineroEscritura->eliminar();
+    fifoCocineroLectura->eliminar();
     mesas->desarmarMesas();
     administradorLiving->desarmarLiving();
     clientesPorComer.liberar();
@@ -93,6 +101,8 @@ void Configurador::destruirEstructuras() {
     delete fifoRecepcionLectura;
     delete fifoMozosEscritura;
     delete fifoMozosLectura;
+    delete fifoCocineroEscritura;
+    delete fifoCocineroLectura;
     delete recepcionistas;
     delete clientes;
     delete mesas;
@@ -126,5 +136,10 @@ void Configurador::cargarGeneradorDeMozos() {
 
     mozos->setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     mozos->setFifoMozosLectura(fifoMozosLectura);
+    mozos->setFifoCocineroEscritura(fifoCocineroEscritura);
+}
 
+void Configurador::cargarCocinero(){
+    cocinero->setFifoMozosEscritura(fifoMozosEscritura);
+    cocinero->setFifoCocineroLectura(fifoCocineroLectura);
 }

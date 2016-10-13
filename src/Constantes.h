@@ -10,6 +10,7 @@
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define ARCHIVO_FIFO_MOZOS "/tmp/fifoMozos"
+#define ARCHIVO_FIFO_COCINERO "/tmp/fifoCocinero"
 #define LOCK_RECEPCION "/tmp/lockRecepcion"
 #define LOCK_MESAS "/tmp/lockMesas"
 #define LOCK_LIVING "/tmp/lockLiving"
@@ -31,6 +32,11 @@ struct asignarMesa {
 struct indicacionAlMozo {
     int numeroDeMesa;
     bool pedido;
+};
+
+struct ordenDeComida {
+    int numeroDeMesa;
+    int numeroPlato; // temporal
 };
 
 

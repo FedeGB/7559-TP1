@@ -3,6 +3,7 @@
 //
 
 #include "GeneradorMozos.h"
+#include "Estructuras/FifoEscritura.h"
 
 GeneradorMozos::GeneradorMozos(int cantidadDeMozos) {
     this->cantidadDeMozos = cantidadDeMozos;
@@ -21,6 +22,7 @@ pid_t GeneradorMozos::cargarMozos() {
     if (pid == 0) {
 
         fifoMozosLectura->abrir();
+        fifoCocineroEscritura->abrir();
 
 
         for (int i = 0; i < cantidadDeMozos; ++i) {
@@ -38,8 +40,11 @@ pid_t GeneradorMozos::cargarMozos() {
         }
 
         fifoMozosLectura->cerrar();
+        fifoCocineroEscritura->cerrar();
 
         delete fifoMozosLectura;
+        delete fifoCocineroEscritura;
+
         for(auto const &ent1 : semaforosPedidoDeMesas) {
 
             delete ent1.second;
@@ -68,8 +73,13 @@ void GeneradorMozos::setFifoMozosLectura(FifoLectura *fifoMozosLectura) {
 void GeneradorMozos::configurarMozos(Mozo &mozo) {
 
     mozo.setFifoPedidoMozo(fifoMozosLectura);
+    mozo.setFifoCocineroEscritura(fifoCocineroEscritura);
     mozo.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
 
+}
+
+void GeneradorMozos::setFifoCocineroEscritura(FifoEscritura * f){
+    this->fifoCocineroEscritura = f;
 }
 
 

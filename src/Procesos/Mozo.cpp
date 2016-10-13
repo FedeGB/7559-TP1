@@ -5,6 +5,8 @@
 #include "Mozo.h"
 #include "../Logger.h"
 #include "../ClientesPorComer.h"
+#include "../Estructuras/FifoEscritura.h"
+#include "../Utils.h"
 
 
 Mozo::Mozo(int id) {
@@ -19,6 +21,10 @@ void Mozo::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosP
     Mozo::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
 }
 
+void Mozo::setFifoCocineroEscritura(FifoEscritura* f){
+    this->fifoCocineroEscritura = f;
+}
+
 Mozo::Mozo() {
 
 }
@@ -30,6 +36,7 @@ void Mozo::_run() {
     char* buffer;
 
     fifoPedidoMozo->obtenerCopia();
+    fifoCocineroEscritura->obtenerCopia();
 
     LockFile lock(LOCK_MOZOS);
 
@@ -75,8 +82,10 @@ void Mozo::_run() {
     clientesPorComer.liberar();
 
     fifoPedidoMozo->cerrar();
+    fifoCocineroEscritura->cerrar();
 
     delete fifoPedidoMozo;
+    delete fifoCocineroEscritura;
 
     for(auto const &ent1 : semaforosPedidoDeMesas) {
 
@@ -92,16 +101,25 @@ void Mozo::solicitarPedidoAlCocinero() {
 
     sleep(3);
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " no hay cocinero, por lo que entrego plato vacio");
+    int platoSolicitado = getRandomInt(1,14); // TODO: el numero de plato ( o struct) debe venir del cliente
 
+    ordenDeComida orden;
+    orden.numeroDeMesa = pedido.numeroDeMesa;
+    orden.numeroPlato = platoSolicitado;
 
-    //Estas dos lineas irian en el metodo entregarPedidoAlCliente
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " entrego pedido a la meza: " + std::to_string(pedido.numeroDeMesa));
+    fifoCocineroEscritura->escribir(&orden,sizeof(ordenDeComida));
 
-    semaforosPedidoDeMesas[pedido.numeroDeMesa]->v();
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " mando un pedido de plato " +  std::to_string(orden.numeroPlato)
+                              +" de la mesa " + std::to_string(orden.numeroDeMesa) + " al cocinero");
 
 }
 
 void Mozo::entregarPedidoAlCliente() {
+
+    //Estas dos lineas irian en el metodo entregarPedidoAlCliente
+
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " entrego pedido a la meza: " + std::to_string(pedido.numeroDeMesa));
+
+    semaforosPedidoDeMesas[pedido.numeroDeMesa]->v();
 
 }

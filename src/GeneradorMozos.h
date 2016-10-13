@@ -10,6 +10,7 @@
 #include "Estructuras/Semaforo.h"
 #include "Estructuras/FifoLectura.h"
 #include "Procesos/Mozo.h"
+#include "Estructuras/FifoEscritura.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -21,6 +22,7 @@ private:
     int cantidadDeMozos;
     std::map<int,Semaforo*> semaforosPedidoDeMesas;
     FifoLectura *fifoMozosLectura;
+    FifoEscritura *fifoCocineroEscritura;
 
 public:
 
@@ -31,6 +33,8 @@ public:
     void setFifoMozosLectura(FifoLectura *fifoMozosLectura);
 
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
+
+    void setFifoCocineroEscritura(FifoEscritura *f);
 
 private:
 

@@ -15,6 +15,7 @@
 #include "GeneradorClientes.h"
 #include "GeneradorMozos.h"
 #include "ClientesPorComer.h"
+#include "Procesos/Cocinero.h"
 
 class Configurador {
 private:
@@ -29,15 +30,19 @@ private:
     FifoEscritura *fifoLivingEscritura;
     FifoEscritura *fifoMozosEscritura;
     FifoLectura *fifoMozosLectura;
+    FifoEscritura *fifoCocineroEscritura;
+    FifoLectura *fifoCocineroLectura;
     GeneradorRecepcionistas *recepcionistas;
     GeneradorClientes *clientes;
     GeneradorMozos *mozos;
+    Cocinero* cocinero;
     Mesas *mesas;
     AdministradorLiving *administradorLiving;
     ClientesPorComer clientesPorComer;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;
     pid_t pid_mozos;
+    pid_t pid_cocinero;
 
 public:
     Configurador(ConfigLoader *config);
@@ -50,6 +55,7 @@ private:
     void cagarGeneradorDeRecepcionistas();
     void cargarGeneradorDeMozos();
 
+    void cargarCocinero();
 };
 
 
