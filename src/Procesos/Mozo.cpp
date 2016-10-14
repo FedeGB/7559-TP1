@@ -37,8 +37,6 @@ void Mozo::_run() {
 
     Logger::getInstance().log("Mozo " + std::to_string(id) + " creado");
 
-    char* buffer;
-
     fifoPedidoMozo->obtenerCopia();
     fifoMozosCocineroLectura->obtenerCopia();
     fifoCocineroEscritura->obtenerCopia();
@@ -58,7 +56,6 @@ void Mozo::_run() {
         //Se cerro el fifo de los clientes
         if(leido == 0){
             lock.liberarLock();
-            delete buffer;
             break;
         }
 

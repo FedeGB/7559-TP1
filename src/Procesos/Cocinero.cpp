@@ -12,9 +12,7 @@ Cocinero::Cocinero() {
 
 void Cocinero::_run() {
     fifoMozosCocineroEscritura->abrir();
-    fifoMozosCocineroEscritura->obtenerCopia();
     fifoCocineroLectura->abrir();
-    fifoCocineroLectura->obtenerCopia();
 
     while (1) {
         ordenDeComida orden;
