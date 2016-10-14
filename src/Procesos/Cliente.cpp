@@ -4,6 +4,7 @@
 
 #include "Cliente.h"
 #include "../ClientesPorComer.h"
+#include "../Utils.h"
 
 Cliente::Cliente(int id){
 
@@ -71,10 +72,11 @@ void Cliente::pedirPlatos() {
 
     //Sleep para que simule una espera antes de liberar la mesa
 
-    struct indicacionAlMozo pedidoDePlato;
+    ordenDeComida pedidoDePlato;
 
     pedidoDePlato.numeroDeMesa = mesaAsignada;
-    pedidoDePlato.pedido = true;
+    // todo: numerode plato (o mas cosas en el struct) de acuerdo al menu disponible
+    pedidoDePlato.numeroPlato = getRandomInt(1,17);
 
     fifoMozosEscritura->obtenerCopia();
 

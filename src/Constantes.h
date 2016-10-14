@@ -29,11 +29,6 @@ struct asignarMesa {
     bool living;
 };
 
-//pedido: si es true es de un cliente, si es false es del cocinero
-struct indicacionAlMozo {
-    int numeroDeMesa;
-    bool pedido;
-};
 
 struct ordenDeComida {
     int numeroDeMesa;

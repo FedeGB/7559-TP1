@@ -3,8 +3,11 @@
 //
 
 #include "Utils.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 int getRandomInt(int min, int max){
+    srand(getpid());
     return rand()%(max-min + 1) + min;
 }
 

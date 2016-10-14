@@ -18,7 +18,7 @@ void Cocinero::_run() {
 
     while (1) {
         ordenDeComida orden;
-        ssize_t leido = fifoCocineroLectura->leer(&orden, sizeof(ordenDeComida));
+        ssize_t leido = fifoCocineroLectura->leer(&orden, sizeof(orden));
 
         //Se cerro el fifo del cocinero
         if (leido == 0) {
@@ -43,13 +43,10 @@ void Cocinero::_run() {
 }
 
 void Cocinero::enviarComidaAMozos(int numeroPlato, int numeroMesa) {
-
-    //TODO: usar numeroPlato
-
-    struct indicacionAlMozo entregaComida;
+    ordenDeComida entregaComida;
 
     entregaComida.numeroDeMesa = numeroMesa;
-    entregaComida.pedido = false;
+    entregaComida.numeroPlato = numeroPlato;
 
 
     Logger::getInstance().log(

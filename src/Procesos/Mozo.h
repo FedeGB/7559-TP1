@@ -23,7 +23,6 @@ private:
     FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
     std::map<int,Semaforo*> semaforosPedidoDeMesas;
-    struct indicacionAlMozo pedido;
 
 public:
 
@@ -41,9 +40,9 @@ private:
 
     void _run();
 
-    void solicitarPedidoAlCocinero();
+    void solicitarPedidoAlCocinero(ordenDeComida orden);
 
-    void entregarPedidoAlCliente(int numeroDeMesa);
+    void entregarPedidoAlCliente(ordenDeComida comidaParaEntregar);
 };
 
 
