@@ -20,6 +20,7 @@ private:
 
     int id;
     FifoLectura *fifoPedidoMozo;
+    FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
     std::map<int,Semaforo*> semaforosPedidoDeMesas;
     struct indicacionAlMozo pedido;
@@ -34,14 +35,15 @@ public:
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
     void setFifoCocineroEscritura(FifoEscritura *f);
 
+    void setFifoMozosCocineroLectura(FifoLectura *f);
+
 private:
 
     void _run();
 
     void solicitarPedidoAlCocinero();
 
-    void entregarPedidoAlCliente();
-
+    void entregarPedidoAlCliente(int numeroDeMesa);
 };
 
 

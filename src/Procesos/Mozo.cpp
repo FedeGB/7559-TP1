@@ -17,6 +17,10 @@ void Mozo::setFifoPedidoMozo(FifoLectura *fifoPedidoMozo) {
     Mozo::fifoPedidoMozo = fifoPedidoMozo;
 }
 
+void Mozo::setFifoMozosCocineroLectura(FifoLectura * f){
+    Mozo::fifoMozosCocineroLectura = f;
+}
+
 void Mozo::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas) {
     Mozo::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
 }
@@ -36,6 +40,7 @@ void Mozo::_run() {
     char* buffer;
 
     fifoPedidoMozo->obtenerCopia();
+    fifoMozosCocineroLectura->obtenerCopia();
     fifoCocineroEscritura->obtenerCopia();
 
     LockFile lock(LOCK_MOZOS);
@@ -66,12 +71,12 @@ void Mozo::_run() {
         delete buffer;
 
         if(pedido.pedido){
-
             this->solicitarPedidoAlCocinero();
 
         } else {
-
-            this->entregarPedidoAlCliente();
+            Logger::getInstance().log("no deberia llegar aca");
+            throw 2;
+//            this->entregarPedidoAlCliente();
 
         }
 
@@ -82,9 +87,11 @@ void Mozo::_run() {
     clientesPorComer.liberar();
 
     fifoPedidoMozo->cerrar();
+    fifoMozosCocineroLectura->cerrar();
     fifoCocineroEscritura->cerrar();
 
     delete fifoPedidoMozo;
+    delete fifoMozosCocineroLectura;
     delete fifoCocineroEscritura;
 
     for(auto const &ent1 : semaforosPedidoDeMesas) {
@@ -109,17 +116,25 @@ void Mozo::solicitarPedidoAlCocinero() {
 
     fifoCocineroEscritura->escribir(&orden,sizeof(ordenDeComida));
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " mando un pedido de plato " +  std::to_string(orden.numeroPlato)
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " pidio plato " +  std::to_string(orden.numeroPlato)
                               +" de la mesa " + std::to_string(orden.numeroDeMesa) + " al cocinero");
+
+    //todo: lock aca ?
+    indicacionAlMozo comidaParaEntregar;
+    fifoMozosCocineroLectura->leer(&comidaParaEntregar,sizeof(indicacionAlMozo));
+
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " recibio plato del cocinero para la mesa: " + std::to_string(comidaParaEntregar.numeroDeMesa));
+
+    this->entregarPedidoAlCliente(comidaParaEntregar.numeroDeMesa);
 
 }
 
-void Mozo::entregarPedidoAlCliente() {
+void Mozo::entregarPedidoAlCliente(int numeroDeMesa) {
 
     //Estas dos lineas irian en el metodo entregarPedidoAlCliente
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " entrego pedido a la meza: " + std::to_string(pedido.numeroDeMesa));
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " entrego pedido a la meza: " + std::to_string(numeroDeMesa));
 
-    semaforosPedidoDeMesas[pedido.numeroDeMesa]->v();
+    semaforosPedidoDeMesas[numeroDeMesa]->v();
 
 }

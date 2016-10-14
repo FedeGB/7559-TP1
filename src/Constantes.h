@@ -11,6 +11,7 @@
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define ARCHIVO_FIFO_MOZOS "/tmp/fifoMozos"
 #define ARCHIVO_FIFO_COCINERO "/tmp/fifoCocinero"
+#define ARCHIVO_FIFO_MOZOS_Y_COCINERO "/tmp/mozosYCocineros"
 #define LOCK_RECEPCION "/tmp/lockRecepcion"
 #define LOCK_MESAS "/tmp/lockMesas"
 #define LOCK_LIVING "/tmp/lockLiving"

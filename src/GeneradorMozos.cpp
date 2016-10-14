@@ -22,6 +22,7 @@ pid_t GeneradorMozos::cargarMozos() {
     if (pid == 0) {
 
         fifoMozosLectura->abrir();
+        fifoMozosCocineroLectura->abrir();
         fifoCocineroEscritura->abrir();
 
 
@@ -40,9 +41,11 @@ pid_t GeneradorMozos::cargarMozos() {
         }
 
         fifoMozosLectura->cerrar();
+        fifoMozosCocineroLectura->cerrar();
         fifoCocineroEscritura->cerrar();
 
         delete fifoMozosLectura;
+        delete fifoMozosCocineroLectura;
         delete fifoCocineroEscritura;
 
         for(auto const &ent1 : semaforosPedidoDeMesas) {
@@ -73,6 +76,7 @@ void GeneradorMozos::setFifoMozosLectura(FifoLectura *fifoMozosLectura) {
 void GeneradorMozos::configurarMozos(Mozo &mozo) {
 
     mozo.setFifoPedidoMozo(fifoMozosLectura);
+    mozo.setFifoMozosCocineroLectura(fifoMozosCocineroLectura);
     mozo.setFifoCocineroEscritura(fifoCocineroEscritura);
     mozo.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
 
@@ -80,6 +84,10 @@ void GeneradorMozos::configurarMozos(Mozo &mozo) {
 
 void GeneradorMozos::setFifoCocineroEscritura(FifoEscritura * f){
     this->fifoCocineroEscritura = f;
+}
+
+void GeneradorMozos::setFifoMozosCocineroLectura(FifoLectura *f) {
+    this->fifoMozosCocineroLectura = f;
 }
 
 

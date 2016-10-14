@@ -30,6 +30,8 @@ private:
     FifoEscritura *fifoLivingEscritura;
     FifoEscritura *fifoMozosEscritura;
     FifoLectura *fifoMozosLectura;
+    FifoEscritura *fifoMozosCocineroEscritura;
+    FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
     FifoLectura *fifoCocineroLectura;
     GeneradorRecepcionistas *recepcionistas;

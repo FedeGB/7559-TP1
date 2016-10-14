@@ -26,6 +26,8 @@ void Configurador::crearEstructuras() {
     fifoLivingEscritura = new FifoEscritura(ARCHIVO_FIFO_LIVING);
     fifoMozosEscritura = new FifoEscritura(ARCHIVO_FIFO_MOZOS);
     fifoMozosLectura = new FifoLectura(ARCHIVO_FIFO_MOZOS);
+    fifoMozosCocineroEscritura = new FifoEscritura(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
+    fifoMozosCocineroLectura = new FifoLectura(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
     fifoCocineroEscritura = new FifoEscritura(ARCHIVO_FIFO_COCINERO);
     fifoCocineroLectura = new FifoLectura(ARCHIVO_FIFO_COCINERO);
 
@@ -101,6 +103,8 @@ void Configurador::destruirEstructuras() {
     delete fifoRecepcionLectura;
     delete fifoMozosEscritura;
     delete fifoMozosLectura;
+    delete fifoMozosCocineroEscritura;
+    delete fifoMozosCocineroLectura;
     delete fifoCocineroEscritura;
     delete fifoCocineroLectura;
     delete recepcionistas;
@@ -136,10 +140,11 @@ void Configurador::cargarGeneradorDeMozos() {
 
     mozos->setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     mozos->setFifoMozosLectura(fifoMozosLectura);
+    mozos->setFifoMozosCocineroLectura(fifoMozosCocineroLectura);
     mozos->setFifoCocineroEscritura(fifoCocineroEscritura);
 }
 
 void Configurador::cargarCocinero(){
-    cocinero->setFifoMozosEscritura(fifoMozosEscritura);
+    cocinero->setFifoMozosCocineroEscritura(fifoMozosCocineroEscritura);
     cocinero->setFifoCocineroLectura(fifoCocineroLectura);
 }

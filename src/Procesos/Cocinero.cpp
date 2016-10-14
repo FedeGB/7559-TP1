@@ -11,30 +11,35 @@ Cocinero::Cocinero() {
 }
 
 void Cocinero::_run() {
-
+    fifoMozosCocineroEscritura->abrir();
+    fifoMozosCocineroEscritura->obtenerCopia();
     fifoCocineroLectura->abrir();
     fifoCocineroLectura->obtenerCopia();
-    fifoMozosEscritura->abrir();
-    fifoMozosEscritura->obtenerCopia();
 
-
-    ClientesPorComer clientesPorComer;
-
-    while (clientesPorComer.quedanClientes()) {
+    while (1) {
         ordenDeComida orden;
-        fifoCocineroLectura->leer(&orden, sizeof(ordenDeComida));
-        Logger::getInstance().log("Cocinero recibio pedido de plato " + std::to_string(orden.numeroPlato) + " de la mesa " + std::to_string(orden.numeroDeMesa) + " ,procede a cocinarlo");
+        ssize_t leido = fifoCocineroLectura->leer(&orden, sizeof(ordenDeComida));
+
+        //Se cerro el fifo del cocinero
+        if (leido == 0) {
+            break;
+        }
+        Logger::getInstance().log(
+                "Cocinero recibio pedido de plato " + std::to_string(orden.numeroPlato) + " de la mesa " +
+                std::to_string(orden.numeroDeMesa) + " ,procede a cocinarlo");
 
         // Tiempo de cocinar
         sleep(5);
 
-        enviarComidaAMozos(orden.numeroPlato,orden.numeroDeMesa);
+        enviarComidaAMozos(orden.numeroPlato, orden.numeroDeMesa);
     }
 
-    fifoMozosEscritura->cerrar();
+    Logger::getInstance().log("COCINERO se las toma");
+
+    fifoMozosCocineroEscritura->cerrar();
     fifoCocineroLectura->cerrar();
     delete fifoCocineroLectura;
-    delete fifoMozosEscritura;
+    delete fifoMozosCocineroEscritura;
 }
 
 void Cocinero::enviarComidaAMozos(int numeroPlato, int numeroMesa) {
@@ -47,13 +52,14 @@ void Cocinero::enviarComidaAMozos(int numeroPlato, int numeroMesa) {
     entregaComida.pedido = false;
 
 
-    Logger::getInstance().log("Soy el cocinero y acabo de entregar a algun mozo comida para la mesa " + std::to_string(numeroMesa));
+    Logger::getInstance().log(
+            "Cocinero acaba de entregar a algun mozo comida para la mesa " + std::to_string(numeroMesa));
 
-    fifoMozosEscritura->escribir(&entregaComida, sizeof(entregaComida));
+    fifoMozosCocineroEscritura->escribir(&entregaComida, sizeof(entregaComida));
 }
 
-void Cocinero::setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura) {
-    this->fifoMozosEscritura = fifoMozosEscritura;
+void Cocinero::setFifoMozosCocineroEscritura(FifoEscritura *fifoMozosCocineroEscritura) {
+    this->fifoMozosCocineroEscritura = fifoMozosCocineroEscritura;
 }
 
 void Cocinero::setFifoCocineroLectura(FifoLectura *f) {

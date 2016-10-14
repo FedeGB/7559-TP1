@@ -14,11 +14,11 @@ class Cocinero: public Proceso {
 
 public:
     Cocinero();
-    void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
+    void setFifoMozosCocineroEscritura(FifoEscritura *fifoMozosCocineroEscritura);
     void setFifoCocineroLectura(FifoLectura * f);
 
 private:
-    FifoEscritura *fifoMozosEscritura;
+    FifoEscritura *fifoMozosCocineroEscritura;
     FifoLectura *fifoCocineroLectura;
 
     void _run();
