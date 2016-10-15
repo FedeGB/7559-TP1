@@ -75,8 +75,6 @@ void Cliente::pedirPlatos() {
     ordenDeComida pedidoDePlato;
 
     pedidoDePlato.numeroDeMesa = mesaAsignada;
-    // todo: numerode plato (o mas cosas en el struct) de acuerdo al menu disponible
-    pedidoDePlato.numeroPlato = getRandomInt(1,17);
 
     fifoMozosEscritura->obtenerCopia();
 
@@ -84,7 +82,9 @@ void Cliente::pedirPlatos() {
     //Tendria que ser con los platos y la cantidad de plata
     for(int i=0;i<3;i++){
 
-        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a pedir un plato");
+        pedidoDePlato.numeroPlato = menu->getPlatoRandom();
+
+        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a pedir el plato: "+menu->getPlato(pedidoDePlato.numeroPlato).getNombre());
 
         fifoMozosEscritura->escribir(&pedidoDePlato,sizeof(pedidoDePlato));
 
@@ -94,9 +94,6 @@ void Cliente::pedirPlatos() {
 
     fifoMozosEscritura->cerrar();
 
-    /*ClientesPorComer clientesPorComer;
-    clientesPorComer.descontarCliente();
-    clientesPorComer.liberar();*/
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " el mozo entrego mi plato, ahora me voy");
 
@@ -106,19 +103,6 @@ void Cliente::pedirPlatos() {
 
     sem_living->v();
 
-    //delete sem_entrada;
-    //delete sem_living;
-    //delete sem_recepcion;
-    //delete fifoLivingLectura;
-    //delete fifoRecepcionLectura;
-    //delete fifoMozosEscritura;
-
-    /*for(auto const &ent1 : semaforosPedidoDeMesas) {
-
-        delete ent1.second;
-
-    }*/
-
 }
 
 void Cliente::esperarEnElLiving() {
@@ -126,11 +110,8 @@ void Cliente::esperarEnElLiving() {
     Logger::getInstance().log("cliente " + std::to_string(id) + " mesas ocupadas, voy al living ");
 
     AdministradorLiving administradorLiving;
+
     administradorLiving.agregarClienteAlLiving();
-
-    //char* buffer;
-
-    //buffer = new char[sizeof(int)];
 
     fifoLivingLectura->obtenerCopia();
 
@@ -143,10 +124,6 @@ void Cliente::esperarEnElLiving() {
     lock.liberarLock();
 
     fifoLivingLectura->cerrar();
-
-    //memcpy(&mesaAsignada,buffer,sizeof(int));
-
-    //delete buffer;
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " se libero mesa, voy a comer ");
 
@@ -180,4 +157,8 @@ void Cliente::setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforos
 
 void Cliente::setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura) {
     Cliente::fifoMozosEscritura = fifoMozosEscritura;
+}
+
+void Cliente::setMenu(Menu *menu) {
+    Cliente::menu = menu;
 }

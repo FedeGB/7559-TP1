@@ -11,6 +11,7 @@
 #include "Estructuras/FifoLectura.h"
 #include "Procesos/Mozo.h"
 #include "Estructuras/FifoEscritura.h"
+#include "Menu.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -24,6 +25,7 @@ private:
     FifoLectura *fifoMozosLectura;
     FifoEscritura *fifoCocineroEscritura;
     FifoLectura *fifoMozosCocineroLectura;
+    Menu *menu;
 
 public:
 
@@ -40,7 +42,10 @@ public:
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
 
     void setFifoCocineroEscritura(FifoEscritura *f);
+
     void setFifoMozosCocineroLectura(FifoLectura *f);
+
+    void setMenu(Menu *menu);
 
 private:
 

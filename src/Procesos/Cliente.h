@@ -17,6 +17,7 @@
 #include "../Constantes.h"
 #include "../Mesas.h"
 #include "../Estructuras/FifoEscritura.h"
+#include "../Menu.h"
 
 class Cliente : public Proceso {
 
@@ -31,6 +32,7 @@ private:
     FifoEscritura *fifoMozosEscritura;
     int mesaAsignada;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
+    Menu *menu;
 
 public:
 
@@ -49,6 +51,8 @@ public:
     void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
 
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
+
+    void setMenu(Menu *menu);
 
 private:
 

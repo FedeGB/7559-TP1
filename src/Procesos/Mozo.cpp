@@ -43,8 +43,6 @@ void Mozo::_run() {
 
     LockFile lock(LOCK_MOZOS);
 
-    //ClientesPorComer clientesPorComer;
-
     while(true) {
 
         lock.tomarLock();
@@ -68,21 +66,9 @@ void Mozo::_run() {
 
     Logger::getInstance().log("Mozo " + std::to_string(id) +" No Hay mas clientes me retiro");
 
-    //clientesPorComer.liberar();
-
     fifoPedidoMozo->cerrar();
     fifoMozosCocineroLectura->cerrar();
     fifoCocineroEscritura->cerrar();
-
-    //delete fifoPedidoMozo;
-    //delete fifoMozosCocineroLectura;
-    //delete fifoCocineroEscritura;
-
-    /*for(auto const &ent1 : semaforosPedidoDeMesas) {
-
-        delete ent1.second;
-
-    }*/
 
 }
 
@@ -93,14 +79,14 @@ void Mozo::solicitarPedidoAlCocinero(ordenDeComida orden) {
     sleep(3);
     fifoCocineroEscritura->escribir(&orden,sizeof(orden));
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " pidio plato " +  std::to_string(orden.numeroPlato)
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " pidio plato " +  menu->getPlato(orden.numeroPlato).getNombre()
                               +" de la mesa " + std::to_string(orden.numeroDeMesa) + " al cocinero");
 
     //todo: lock aca ?
     ordenDeComida comidaParaEntregar;
     fifoMozosCocineroLectura->leer(&comidaParaEntregar,sizeof(comidaParaEntregar));
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " recibio plato del cocinero para la mesa: " + std::to_string(comidaParaEntregar.numeroDeMesa));
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " recibio plato "+ menu->getPlato(comidaParaEntregar.numeroPlato).getNombre() +" del cocinero para la mesa: " + std::to_string(comidaParaEntregar.numeroDeMesa));
 
     this->entregarPedidoAlCliente(comidaParaEntregar);
 
@@ -116,4 +102,8 @@ void Mozo::entregarPedidoAlCliente(ordenDeComida comidaParaEntregar) {
 
     semaforosPedidoDeMesas[comidaParaEntregar.numeroDeMesa].v();
 
+}
+
+void Mozo::setMenu(Menu *menu) {
+    Mozo::menu = menu;
 }

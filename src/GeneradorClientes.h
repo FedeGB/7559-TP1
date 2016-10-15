@@ -7,6 +7,7 @@
 #include "Estructuras/FifoLectura.h"
 #include "Constantes.h"
 #include "Estructuras/FifoEscritura.h"
+#include "Menu.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -19,11 +20,10 @@ private:
     FifoLectura *fifoLivingLectura;
     FifoEscritura *fifoMozosEscritura;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
-
-private:
     Semaforo *sem_entrada;
     Semaforo *sem_recepcion;
     Semaforo *sem_living;
+    Menu *menu;
 
 public:
 
@@ -44,6 +44,8 @@ public:
     void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
 
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
+
+    void setMenu(Menu *menu);
 
 private:
     void configurarCliente(Cliente &cliente);

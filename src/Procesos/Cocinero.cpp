@@ -14,7 +14,7 @@ void Cocinero::_run() {
     fifoMozosCocineroEscritura->abrir();
     fifoCocineroLectura->abrir();
 
-    while (1) {
+    while (true) {
         ordenDeComida orden;
         ssize_t leido = fifoCocineroLectura->leer(&orden, sizeof(orden));
 
@@ -23,34 +23,28 @@ void Cocinero::_run() {
             break;
         }
         Logger::getInstance().log(
-                "Cocinero recibio pedido de plato " + std::to_string(orden.numeroPlato) + " de la mesa " +
+                "Cocinero recibio pedido de plato " + menu->getPlato(orden.numeroPlato).getNombre() + " de la mesa " +
                 std::to_string(orden.numeroDeMesa) + " ,procede a cocinarlo");
 
         // Tiempo de cocinar
         sleep(5);
 
-        enviarComidaAMozos(orden.numeroPlato, orden.numeroDeMesa);
+        enviarComidaAMozos(orden);
     }
 
     Logger::getInstance().log("COCINERO se las toma");
 
     fifoMozosCocineroEscritura->cerrar();
     fifoCocineroLectura->cerrar();
-    //delete fifoCocineroLectura;
-    //delete fifoMozosCocineroEscritura;
+
 }
 
-void Cocinero::enviarComidaAMozos(int numeroPlato, int numeroMesa) {
-    ordenDeComida entregaComida;
-
-    entregaComida.numeroDeMesa = numeroMesa;
-    entregaComida.numeroPlato = numeroPlato;
-
+void Cocinero::enviarComidaAMozos(const ordenDeComida &orden) {
 
     Logger::getInstance().log(
-            "Cocinero acaba de entregar a algun mozo comida para la mesa " + std::to_string(numeroMesa));
+            "Cocinero acaba de entregar a algun mozo el plato " + menu->getPlato(orden.numeroPlato).getNombre() +" para la mesa " + std::to_string(orden.numeroDeMesa));
 
-    fifoMozosCocineroEscritura->escribir(&entregaComida, sizeof(entregaComida));
+    fifoMozosCocineroEscritura->escribir(&orden, sizeof(orden));
 }
 
 void Cocinero::setFifoMozosCocineroEscritura(FifoEscritura *fifoMozosCocineroEscritura) {
@@ -59,4 +53,8 @@ void Cocinero::setFifoMozosCocineroEscritura(FifoEscritura *fifoMozosCocineroEsc
 
 void Cocinero::setFifoCocineroLectura(FifoLectura *f) {
     this->fifoCocineroLectura = f;
+}
+
+void Cocinero::setMenu(Menu *menu) {
+    Cocinero::menu = menu;
 }

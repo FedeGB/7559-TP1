@@ -9,21 +9,34 @@
 #include "Proceso.h"
 #include "../Estructuras/FifoEscritura.h"
 #include "../Estructuras/FifoLectura.h"
+#include "../Menu.h"
+#include "../Constantes.h"
 
 class Cocinero: public Proceso {
 
+private:
+
+    FifoEscritura *fifoMozosCocineroEscritura;
+
+    FifoLectura *fifoCocineroLectura;
+
+    Menu *menu;
+
 public:
+
     Cocinero();
+
     void setFifoMozosCocineroEscritura(FifoEscritura *fifoMozosCocineroEscritura);
+
     void setFifoCocineroLectura(FifoLectura * f);
 
+    void setMenu(Menu *menu);
+
 private:
-    FifoEscritura *fifoMozosCocineroEscritura;
-    FifoLectura *fifoCocineroLectura;
 
     void _run();
 
-    void enviarComidaAMozos(int numeroPlato,int numeroMesa);
+    void enviarComidaAMozos(const ordenDeComida &orden);
 };
 
 

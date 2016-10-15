@@ -88,6 +88,7 @@ void GeneradorMozos::configurarMozos(Mozo &mozo) {
     mozo.setFifoMozosCocineroLectura(fifoMozosCocineroLectura);
     mozo.setFifoCocineroEscritura(fifoCocineroEscritura);
     mozo.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
+    mozo.setMenu(menu);
 
 }
 
@@ -97,5 +98,9 @@ void GeneradorMozos::setFifoCocineroEscritura(FifoEscritura * f){
 
 void GeneradorMozos::setFifoMozosCocineroLectura(FifoLectura *f) {
     this->fifoMozosCocineroLectura = f;
+}
+
+void GeneradorMozos::setMenu(Menu *menu) {
+    GeneradorMozos::menu = menu;
 }
 

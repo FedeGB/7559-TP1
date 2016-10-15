@@ -13,6 +13,7 @@
 #include "../Estructuras/LockFile.h"
 #include "../Constantes.h"
 #include "../Estructuras/FifoEscritura.h"
+#include "../Menu.h"
 
 class Mozo : public Proceso {
 
@@ -23,6 +24,7 @@ private:
     FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
+    Menu *menu;
 
 public:
 
@@ -32,9 +34,12 @@ public:
     void setFifoPedidoMozo(FifoLectura *fifoPedidoMozo);
 
     void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
+
     void setFifoCocineroEscritura(FifoEscritura *f);
 
     void setFifoMozosCocineroLectura(FifoLectura *f);
+
+    void setMenu(Menu *menu);
 
 private:
 

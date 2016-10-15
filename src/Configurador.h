@@ -40,6 +40,7 @@ private:
     Cocinero cocinero;
     Mesas mesas;
     AdministradorLiving administradorLiving;
+    Menu menu;
     //ClientesPorComer clientesPorComer;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;

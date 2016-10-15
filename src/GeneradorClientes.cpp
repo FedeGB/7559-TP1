@@ -103,5 +103,10 @@ void GeneradorClientes::configurarCliente(Cliente &cliente) {
     cliente.setFifoLivingLectura(fifoLivingLectura);
     cliente.setFifoMozosEscritura(fifoMozosEscritura);
     cliente.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
+    cliente.setMenu(menu);
 
+}
+
+void GeneradorClientes::setMenu(Menu *menu) {
+    GeneradorClientes::menu = menu;
 }

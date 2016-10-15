@@ -29,6 +29,7 @@ bool Menu::fill(std::string str) {
     std::string tokenInner;
     PlatoComida* nuevoPlato;
     float precioPlato;
+    int i = 0;
     while ((posOuter = str.find(delimiterMenu))) {
         tokenOuter = str.substr(prevOuter, posOuter);
         valueNumber = 0;
@@ -43,7 +44,9 @@ bool Menu::fill(std::string str) {
                 if(stringIsValidPrice(tokenInner)) {
                     precioPlato = std::stof(tokenInner);
                     PlatoComida nuevoPlato = PlatoComida(nombrePlato, precioPlato);
-                    this->platosDisponibles.push_back(nuevoPlato);
+                    //this->platosDisponibles.push_back(nuevoPlato);
+                    this->platosDisponibles[i] = nuevoPlato;
+                    i++;
                 } else {
                     throw "Los precios del menu deben ser numeros con decimales positivos";
                 }
@@ -60,7 +63,7 @@ bool Menu::fill(std::string str) {
     return  true;
 }
 
-PlatoComida Menu::eleccionRandom() {
+/*PlatoComida Menu::eleccionRandom() {
     if(this->platosDisponibles.empty()) {
         throw "No se cargo ningun plato al Menu.";
     }
@@ -70,4 +73,22 @@ PlatoComida Menu::eleccionRandom() {
         throw "Error de seleccion, evitando seg fault";
     }
     return PlatoComida(this->platosDisponibles[seleccion]);
+}*/
+
+int Menu::getPlatoRandom() {
+    if(this->platosDisponibles.empty()) {
+        throw "No se cargo ningun plato al Menu.";
+    }
+    srand((unsigned int)time(NULL));
+    unsigned long seleccion = rand() % this->platosDisponibles.size();
+    if(seleccion >= this->platosDisponibles.size()) {
+        throw "Error de seleccion, evitando seg fault";
+    }
+    return seleccion;
+}
+
+PlatoComida Menu::getPlato(int identificador) {
+
+    return this->platosDisponibles[identificador];
+
 }

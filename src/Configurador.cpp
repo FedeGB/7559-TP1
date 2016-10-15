@@ -45,6 +45,8 @@ void Configurador::crearEstructuras() {
     //fifoCocineroLectura = new FifoLectura(ARCHIVO_FIFO_COCINERO);
     fifoCocineroLectura.cargar(ARCHIVO_FIFO_COCINERO);
 
+    menu = config->getMenu();
+
     //recepcionistas = new GeneradorRecepcionistas(config->getRecepcionistas());
     recepcionistas.setCantidadDeRecepcionistas(config->getRecepcionistas());
     //clientes = new GeneradorClientes();
@@ -64,6 +66,7 @@ void Configurador::crearEstructuras() {
     //clientesPorComer.inicializar();
     mesas.armarMesas();
     administradorLiving.armarLiving();
+
 
 }
 
@@ -108,32 +111,6 @@ void Configurador::destruirEstructuras() {
     fifoMozosCocineroLectura.eliminar();
     mesas.desarmarMesas();
     administradorLiving.desarmarLiving();
-    //clientesPorComer.liberar();
-
-    /*for(auto const &ent1 : semaforosPedidoDeMesas) {
-
-        ent1.second->eliminar();
-        delete ent1.second;
-
-    }*/
-
-    //delete sem_entrada;
-    //delete sem_recepcion;
-    //delete sem_living;
-    //delete fifoLivingEscritura;
-    //delete fifoLivingLectura;
-    //delete fifoRecepcionEscritura;
-    //delete fifoRecepcionLectura;
-    //delete fifoMozosEscritura;
-    //delete fifoMozosLectura;
-    //delete fifoMozosCocineroEscritura;
-    //delete fifoMozosCocineroLectura;
-    //delete fifoCocineroEscritura;
-    //delete fifoCocineroLectura;
-    //delete recepcionistas;
-    //delete clientes;
-    //delete mesas;
-    //delete administradorLiving;
 
 }
 
@@ -146,6 +123,7 @@ void Configurador::cargarGeneradorDeClientes() {
     clientes.setSem_living(&sem_living);
     clientes.setSem_recepcion(&sem_recepcion);
     clientes.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
+    clientes.setMenu(&menu);
 
 }
 
@@ -165,9 +143,11 @@ void Configurador::cargarGeneradorDeMozos() {
     mozos.setFifoMozosLectura(&fifoMozosLectura);
     mozos.setFifoMozosCocineroLectura(&fifoMozosCocineroLectura);
     mozos.setFifoCocineroEscritura(&fifoCocineroEscritura);
+    mozos.setMenu(&menu);
 }
 
 void Configurador::cargarCocinero(){
     cocinero.setFifoMozosCocineroEscritura(&fifoMozosCocineroEscritura);
     cocinero.setFifoCocineroLectura(&fifoCocineroLectura);
+    cocinero.setMenu(&menu);
 }

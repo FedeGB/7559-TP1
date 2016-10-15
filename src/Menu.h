@@ -11,17 +11,21 @@
 #include "PlatoComida.h"
 #include <stdlib.h>
 #include <time.h>
+#include <map>
 
 class Menu {
 private:
-    std::vector<PlatoComida> platosDisponibles;
+    //std::vector<PlatoComida> platosDisponibles;
+    std::map<int,PlatoComida> platosDisponibles;
 
 public:
     // Constructor que carga segun el archivo de configuracion el menu con los platos
     Menu();
     ~Menu();
     bool fill(std::string);
-    PlatoComida eleccionRandom();
+    //PlatoComida eleccionRandom();
+    int getPlatoRandom();
+    PlatoComida getPlato(int identificador);
 
 };
 
