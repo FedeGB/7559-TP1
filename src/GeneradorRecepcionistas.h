@@ -30,7 +30,9 @@ private:
     Semaforo *sem_living;
 public:
 
-    GeneradorRecepcionistas(int cantidadDeRecepcionistas);
+    GeneradorRecepcionistas();
+
+    void setCantidadDeRecepcionistas(int cantidadDeRecepcionistas);
 
     pid_t cargarRecepcionistas(int cantidadDeMesas);
 

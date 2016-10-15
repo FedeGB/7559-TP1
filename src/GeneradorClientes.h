@@ -18,7 +18,7 @@ private:
     FifoLectura *fifoRecepcionLectura;
     FifoLectura *fifoLivingLectura;
     FifoEscritura *fifoMozosEscritura;
-    std::map<int,Semaforo*> semaforosPedidoDeMesas;
+    std::map<int,Semaforo> semaforosPedidoDeMesas;
 
 private:
     Semaforo *sem_entrada;
@@ -43,7 +43,7 @@ public:
 
     void setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura);
 
-    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
+    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
 
 private:
     void configurarCliente(Cliente &cliente);

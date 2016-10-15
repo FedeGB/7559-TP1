@@ -34,8 +34,8 @@ void RecepcionLiving::_run(){
 
     fifoLivingEscritura->cerrar();
 
-    delete fifoLivingEscritura;
-    delete sem_living;
+    //delete fifoLivingEscritura;
+    //delete sem_living;
 
 }
 

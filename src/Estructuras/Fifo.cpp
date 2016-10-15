@@ -6,7 +6,18 @@ Fifo::Fifo(const std::string nombre) : nombre(nombre), fd(-1) {
 
 }
 
+Fifo::Fifo() {
+
+}
+
 Fifo::~Fifo() {
+}
+
+
+void Fifo::cargar(const std::string nombre) {
+	this->nombre = nombre;
+	this->fd = -1;
+	mknod ( static_cast<const char*>(nombre.c_str()),S_IFIFO|0666,0 );
 }
 
 void Fifo::cerrar() {
@@ -30,3 +41,5 @@ void Fifo::obtenerCopia() {
 	fd = dup(this->fd);
 
 }
+
+

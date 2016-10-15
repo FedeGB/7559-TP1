@@ -19,7 +19,6 @@ pid_t GeneradorClientes::cargarClientes() {
     }
 
     if (pid == 0) {
-
         fifoRecepcionLectura->abrir();
         fifoLivingLectura->abrir();
         fifoMozosEscritura->abrir();
@@ -42,18 +41,18 @@ pid_t GeneradorClientes::cargarClientes() {
         fifoLivingLectura->cerrar();
         fifoMozosEscritura->cerrar();
 
-        delete fifoLivingLectura;
-        delete fifoRecepcionLectura;
-        delete fifoMozosEscritura;
-        delete sem_entrada;
-        delete sem_recepcion;
-        delete sem_living;
+        //delete fifoLivingLectura;
+        //delete fifoRecepcionLectura;
+        //delete fifoMozosEscritura;
+        //delete sem_entrada;
+        //delete sem_recepcion;
+        //delete sem_living;
 
-        for(auto const &ent1 : semaforosPedidoDeMesas) {
+        /*for(auto const &ent1 : semaforosPedidoDeMesas) {
 
             delete ent1.second;
 
-        }
+        }*/
 
         exit(0);
 
@@ -90,7 +89,7 @@ void GeneradorClientes::setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura)
     GeneradorClientes::fifoMozosEscritura = fifoMozosEscritura;
 }
 
-void GeneradorClientes::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas) {
+void GeneradorClientes::setSemaforosPedidoDeMesas(const std::map<int, Semaforo > &semaforosPedidoDeMesas) {
     GeneradorClientes::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
 }
 

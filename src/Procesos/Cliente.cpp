@@ -30,9 +30,9 @@ void Cliente::_run() {
 void Cliente::esperarMesa() {
 
     struct asignarMesa mesaAsignada;
-    char* buffer;
+    //char* buffer;
 
-    buffer = new char[sizeof(mesaAsignada)];
+    //buffer = new char[sizeof(mesaAsignada)];
 
     fifoRecepcionLectura->obtenerCopia();
 
@@ -40,15 +40,15 @@ void Cliente::esperarMesa() {
 
     lock.tomarLock();
 
-    fifoRecepcionLectura->leer(buffer,sizeof(mesaAsignada));
+    fifoRecepcionLectura->leer(&mesaAsignada,sizeof(mesaAsignada));
 
     lock.liberarLock();
 
     fifoRecepcionLectura->cerrar();
 
-    memcpy(&mesaAsignada,buffer,sizeof(mesaAsignada));
+   // memcpy(&mesaAsignada,buffer,sizeof(mesaAsignada));
 
-    delete buffer;
+    //delete buffer;
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " fue atendido por un recepcionista");
 
@@ -88,15 +88,15 @@ void Cliente::pedirPlatos() {
 
         fifoMozosEscritura->escribir(&pedidoDePlato,sizeof(pedidoDePlato));
 
-        semaforosPedidoDeMesas[mesaAsignada]->p();
+        semaforosPedidoDeMesas[mesaAsignada].p();
 
     }
 
     fifoMozosEscritura->cerrar();
 
-    ClientesPorComer clientesPorComer;
+    /*ClientesPorComer clientesPorComer;
     clientesPorComer.descontarCliente();
-    clientesPorComer.liberar();
+    clientesPorComer.liberar();*/
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " el mozo entrego mi plato, ahora me voy");
 
@@ -106,18 +106,18 @@ void Cliente::pedirPlatos() {
 
     sem_living->v();
 
-    delete sem_entrada;
-    delete sem_living;
-    delete sem_recepcion;
-    delete fifoLivingLectura;
-    delete fifoRecepcionLectura;
-    delete fifoMozosEscritura;
+    //delete sem_entrada;
+    //delete sem_living;
+    //delete sem_recepcion;
+    //delete fifoLivingLectura;
+    //delete fifoRecepcionLectura;
+    //delete fifoMozosEscritura;
 
-    for(auto const &ent1 : semaforosPedidoDeMesas) {
+    /*for(auto const &ent1 : semaforosPedidoDeMesas) {
 
         delete ent1.second;
 
-    }
+    }*/
 
 }
 
@@ -128,9 +128,9 @@ void Cliente::esperarEnElLiving() {
     AdministradorLiving administradorLiving;
     administradorLiving.agregarClienteAlLiving();
 
-    char* buffer;
+    //char* buffer;
 
-    buffer = new char[sizeof(int)];
+    //buffer = new char[sizeof(int)];
 
     fifoLivingLectura->obtenerCopia();
 
@@ -138,15 +138,15 @@ void Cliente::esperarEnElLiving() {
 
     lock.tomarLock();
 
-    fifoLivingLectura->leer(buffer,sizeof(int));
+    fifoLivingLectura->leer(&mesaAsignada,sizeof(int));
 
     lock.liberarLock();
 
     fifoLivingLectura->cerrar();
 
-    memcpy(&mesaAsignada,buffer,sizeof(int));
+    //memcpy(&mesaAsignada,buffer,sizeof(int));
 
-    delete buffer;
+    //delete buffer;
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " se libero mesa, voy a comer ");
 
@@ -174,7 +174,7 @@ void Cliente::setFifoLivingLectura(FifoLectura *fifoLivingLectura) {
     Cliente::fifoLivingLectura = fifoLivingLectura;
 }
 
-void Cliente::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas) {
+void Cliente::setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas) {
     Cliente::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
 }
 

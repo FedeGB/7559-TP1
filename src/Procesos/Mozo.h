@@ -22,7 +22,7 @@ private:
     FifoLectura *fifoPedidoMozo;
     FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
-    std::map<int,Semaforo*> semaforosPedidoDeMesas;
+    std::map<int,Semaforo> semaforosPedidoDeMesas;
 
 public:
 
@@ -31,7 +31,7 @@ public:
 
     void setFifoPedidoMozo(FifoLectura *fifoPedidoMozo);
 
-    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
+    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
     void setFifoCocineroEscritura(FifoEscritura *f);
 
     void setFifoMozosCocineroLectura(FifoLectura *f);

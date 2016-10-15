@@ -10,9 +10,11 @@
 
 class Fifo {
 public:
+	Fifo();
 	Fifo(const std::string nombre);
 	virtual ~Fifo();
 	virtual void abrir() = 0;
+	void cargar(const std::string nombre);
 	void cerrar();
 	void eliminar() const;
 	void obtenerCopia();

@@ -1,10 +1,15 @@
 #include "GeneradorRecepcionistas.h"
 
-GeneradorRecepcionistas::GeneradorRecepcionistas(int cantidadDeRecepcionistas){
+GeneradorRecepcionistas::GeneradorRecepcionistas(){
+
+}
+
+void GeneradorRecepcionistas::setCantidadDeRecepcionistas(int cantidadDeRecepcionistas) {
 
     this->cantidadRecepcionistas = cantidadDeRecepcionistas;
 
 }
+
 
 pid_t GeneradorRecepcionistas::cargarRecepcionistas(int cantidadDeMesas) {
 
@@ -42,11 +47,11 @@ pid_t GeneradorRecepcionistas::cargarRecepcionistas(int cantidadDeMesas) {
         fifoRecepcionEscritura->cerrar();
         fifoLivingEscritura->cerrar();
 
-        delete fifoLivingEscritura;
-        delete fifoRecepcionEscritura;
-        delete sem_living;
-        delete sem_recepcion;
-        delete sem_entrada;
+        //delete fifoLivingEscritura;
+        //delete fifoRecepcionEscritura;
+        //delete sem_living;
+        //delete sem_recepcion;
+        //delete sem_entrada;
 
         exit(0);
 
@@ -90,3 +95,4 @@ void GeneradorRecepcionistas::cargarRecepcionistaLiving(RecepcionLiving &recepci
     recepcionistaLiving.setFifoLivingEscritura(fifoLivingEscritura);
 
 }
+

@@ -16,8 +16,9 @@ private:
     int inicializar() const;
 
 public:
+    Semaforo();
     Semaforo(int projID, const int valorInicial, bool undo);
-
+    void crear(int projID, const int valorInicial, bool undo);
     ~Semaforo();
 
     int p() const; // decrementa

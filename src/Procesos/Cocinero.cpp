@@ -36,8 +36,8 @@ void Cocinero::_run() {
 
     fifoMozosCocineroEscritura->cerrar();
     fifoCocineroLectura->cerrar();
-    delete fifoCocineroLectura;
-    delete fifoMozosCocineroEscritura;
+    //delete fifoCocineroLectura;
+    //delete fifoMozosCocineroEscritura;
 }
 
 void Cocinero::enviarComidaAMozos(int numeroPlato, int numeroMesa) {

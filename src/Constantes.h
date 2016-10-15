@@ -6,7 +6,7 @@
 #define TP1_CONSTANTES_H
 
 
-#define CLIENTES 2
+#define CLIENTES 4
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define ARCHIVO_FIFO_MOZOS "/tmp/fifoMozos"

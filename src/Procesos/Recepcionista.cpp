@@ -32,9 +32,9 @@ void Recepcionista::_run() {
 
     fifoRecepcionEscritura->cerrar();
 
-    delete fifoRecepcionEscritura;
-    delete sem_entrada;
-    delete sem_recepcion;
+    //delete fifoRecepcionEscritura;
+    //delete sem_entrada;
+    //delete sem_recepcion;
 
 }
 

@@ -20,7 +20,7 @@
 class GeneradorMozos {
 private:
     int cantidadDeMozos;
-    std::map<int,Semaforo*> semaforosPedidoDeMesas;
+    std::map<int,Semaforo> semaforosPedidoDeMesas;
     FifoLectura *fifoMozosLectura;
     FifoEscritura *fifoCocineroEscritura;
     FifoLectura *fifoMozosCocineroLectura;
@@ -29,11 +29,15 @@ public:
 
     GeneradorMozos(int cantidadDeMozos);
 
+    GeneradorMozos();
+
+    void setCantidadDeMozos(int cantidadDeMozos);
+
     pid_t cargarMozos();
 
     void setFifoMozosLectura(FifoLectura *fifoMozosLectura);
 
-    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas);
+    void setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas);
 
     void setFifoCocineroEscritura(FifoEscritura *f);
     void setFifoMozosCocineroLectura(FifoLectura *f);

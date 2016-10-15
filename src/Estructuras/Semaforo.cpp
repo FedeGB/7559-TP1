@@ -58,3 +58,17 @@ int Semaforo::v() const {
 void Semaforo::eliminar() const {
     semctl(this->id, 0, IPC_RMID);
 }
+
+void Semaforo::crear(int projID, const int valorInicial, bool undo) {
+
+    this->valorInicial = valorInicial;
+    this->undo = undo;
+    key_t clave = ftok("/bin/bash", projID);
+    this->id = semget(clave, 1, 0666 | IPC_CREAT);
+
+    this->inicializar();
+}
+
+Semaforo::Semaforo() {
+
+}

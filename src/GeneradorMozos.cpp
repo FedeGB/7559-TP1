@@ -9,6 +9,15 @@ GeneradorMozos::GeneradorMozos(int cantidadDeMozos) {
     this->cantidadDeMozos = cantidadDeMozos;
 }
 
+
+GeneradorMozos::GeneradorMozos() {
+
+}
+
+void GeneradorMozos::setCantidadDeMozos(int cantidadDeMozos) {
+    this->cantidadDeMozos = cantidadDeMozos;
+}
+
 pid_t GeneradorMozos::cargarMozos() {
 
     pid_t pid = fork();
@@ -44,15 +53,15 @@ pid_t GeneradorMozos::cargarMozos() {
         fifoMozosCocineroLectura->cerrar();
         fifoCocineroEscritura->cerrar();
 
-        delete fifoMozosLectura;
-        delete fifoMozosCocineroLectura;
-        delete fifoCocineroEscritura;
+        //delete fifoMozosLectura;
+        //delete fifoMozosCocineroLectura;
+        //delete fifoCocineroEscritura;
 
-        for(auto const &ent1 : semaforosPedidoDeMesas) {
+        /*for(auto const &ent1 : semaforosPedidoDeMesas) {
 
             delete ent1.second;
 
-        }
+        }*/
 
         exit(0);
 
@@ -65,7 +74,7 @@ pid_t GeneradorMozos::cargarMozos() {
 }
 
 
-void GeneradorMozos::setSemaforosPedidoDeMesas(const std::map<int, Semaforo *> &semaforosPedidoDeMesas) {
+void GeneradorMozos::setSemaforosPedidoDeMesas(const std::map<int, Semaforo> &semaforosPedidoDeMesas) {
     GeneradorMozos::semaforosPedidoDeMesas = semaforosPedidoDeMesas;
 }
 
@@ -89,5 +98,4 @@ void GeneradorMozos::setFifoCocineroEscritura(FifoEscritura * f){
 void GeneradorMozos::setFifoMozosCocineroLectura(FifoLectura *f) {
     this->fifoMozosCocineroLectura = f;
 }
-
 

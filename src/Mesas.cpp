@@ -14,6 +14,12 @@ Mesas::Mesas() {
 
 }
 
+void Mesas::setNumeroDeMesas(int numeroDeMesas) {
+
+    this->numeroDeMesas = numeroDeMesas;
+
+}
+
 void Mesas::armarMesas() {
 
     for (int i = 0; i < numeroDeMesas ; ++i) {

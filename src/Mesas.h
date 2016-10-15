@@ -22,7 +22,10 @@ private:
 public:
 
     Mesas(int numeroDeMesas);
+
     Mesas();
+
+    void setNumeroDeMesas(int numeroDeMesas);
 
     void armarMesas();
 
