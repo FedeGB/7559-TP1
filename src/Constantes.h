@@ -5,7 +5,8 @@
 #ifndef TP1_CONSTANTES_H
 #define TP1_CONSTANTES_H
 
-
+#define PIDO_PLATO 1
+#define MAXIMO_PLATOS_A_PEDIR 5
 #define CLIENTES 4
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"

@@ -10,6 +10,7 @@ Cliente::Cliente(int id){
 
     this->id = id;
     this->plata = id * 10 + 100;
+    this->platoPedidos = 0;
 
 }
 
@@ -80,7 +81,7 @@ void Cliente::pedirPlatos() {
 
     //Realizo tres pedidos
     //Tendria que ser con los platos y la cantidad de plata
-    for(int i=0;i<3;i++){
+    do{
 
         pedidoDePlato.numeroPlato = menu->getPlatoRandom();
 
@@ -90,12 +91,16 @@ void Cliente::pedirPlatos() {
 
         semaforosPedidoDeMesas[mesaAsignada].p();
 
-    }
+        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a comer: "+menu->getPlato(pedidoDePlato.numeroPlato).getNombre());
+
+        this->platoPedidos++;
+
+    }while(this->pedirOtroPlato());
 
     fifoMozosEscritura->cerrar();
 
 
-    Logger::getInstance().log("cliente " + std::to_string(id) + " el mozo entrego mi plato, ahora me voy");
+    Logger::getInstance().log("cliente " + std::to_string(id) + " no como mas, me voy");
 
     Mesas mesa;
 
@@ -161,4 +166,18 @@ void Cliente::setFifoMozosEscritura(FifoEscritura *fifoMozosEscritura) {
 
 void Cliente::setMenu(Menu *menu) {
     Cliente::menu = menu;
+}
+
+bool Cliente::pedirOtroPlato() {
+
+    if( this->platoPedidos > MAXIMO_PLATOS_A_PEDIR ) {
+
+        return false;
+
+    }
+
+    srand(time(0));
+
+    return ((1 + rand() % 2) == PIDO_PLATO) ;
+
 }

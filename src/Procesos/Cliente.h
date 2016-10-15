@@ -33,6 +33,7 @@ private:
     int mesaAsignada;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
     Menu *menu;
+    int platoPedidos;
 
 public:
 
@@ -60,6 +61,8 @@ private:
     void esperarMesa();
     void pedirPlatos();
     void esperarEnElLiving();
+    bool pedirOtroPlato();
+
 };
 
 
