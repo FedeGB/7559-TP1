@@ -18,6 +18,7 @@
 #include "Procesos/Cocinero.h"
 #include "Procesos/SaldoDeMesa.h"
 #include "Estructuras/Caja.h"
+#include "Procesos/Gerente.h"
 
 class Configurador {
 private:
@@ -41,6 +42,7 @@ private:
     GeneradorClientes clientes;
     GeneradorMozos mozos;
     Cocinero cocinero;
+    Gerente gerente;
     Mesas mesas;
     AdministradorLiving administradorLiving;
     Menu menu;
@@ -62,8 +64,8 @@ private:
     void cargarGeneradorDeClientes();
     void cagarGeneradorDeRecepcionistas();
     void cargarGeneradorDeMozos();
-
     void cargarCocinero();
+    void cargarGerente();
 };
 
 

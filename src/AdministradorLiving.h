@@ -13,12 +13,14 @@
 class AdministradorLiving {
 private:
     MemoriaCompartida<int> clientesEnElLiving;
+    MemoriaCompartida<int> cantidadDeClientesEnElLiving;
 public:
     void armarLiving();
     void desarmarLiving();
     void agregarClienteAlLiving();
     void sacarClienteDelLiving();
     bool hayClientesEnElLiving();
+    int clientesQueEsperaronEnElLiving();
 };
 
 

@@ -59,6 +59,7 @@ void Configurador::crearEstructuras() {
     this->cargarGeneradorDeClientes();
     this->cargarGeneradorDeMozos();
     this->cargarCocinero();
+    this->cargarGerente();
 
     //mesas = new Mesas(config->getMesas());
     mesas.setNumeroDeMesas(config->getMesas());
@@ -96,7 +97,11 @@ void Configurador::simular() {
 
     waitpid(pid_cocinero,NULL,0);
 
-    Logger::getInstance().log("Se cierra el dia con un total de "+std::to_string(caja.consultarDinero()));
+    pid_t pid_gerente = gerente.run();
+
+    waitpid(pid_gerente,NULL,0);
+
+    //Logger::getInstance().log("Se cierra el dia con un total de "+std::to_string(caja.consultarDinero()));
 
 }
 
@@ -164,4 +169,9 @@ void Configurador::cargarCocinero(){
     cocinero.setFifoMozosCocineroEscritura(&fifoMozosCocineroEscritura);
     cocinero.setFifoCocineroLectura(&fifoCocineroLectura);
     cocinero.setMenu(&menu);
+}
+
+void Configurador::cargarGerente() {
+    gerente.setAdministradorLiving(&administradorLiving);
+    gerente.setCaja(&caja);
 }

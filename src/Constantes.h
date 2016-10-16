@@ -7,7 +7,7 @@
 
 #define PIDO_PLATO 1
 #define MAXIMO_PLATOS_A_PEDIR 5
-#define CLIENTES 2
+#define CLIENTES 4
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define ARCHIVO_FIFO_MOZOS "/tmp/fifoMozos"
@@ -24,6 +24,7 @@
 #define MEMORIA_CLIENTES_POR_COMER "/bin/bash"
 #define MEMORIA_DINERO_CAJA "/bin/bash"
 #define MEMORIA_COMPARTIDA_SALDOS "/bin/cat"
+#define MEMORIA_COMPARTIDA_CANTIDAD_LIVING "/bin/cat"
 #define LOCK_CLIENTES_POR_COMER "/tmp/clientesPorComer"
 #define LOCK_SALDOS "/tmp/lockSaldos"
 
