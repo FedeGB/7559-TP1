@@ -16,6 +16,7 @@ private:
 public:
     Caja();
     ~Caja();
+    void abrirCaja();
     float consultarDinero();
     void agregarDinero(float deposito);
     void cerrarCaja();

@@ -68,6 +68,7 @@ void Configurador::crearEstructuras() {
     mesas.armarMesas();
     administradorLiving.armarLiving();
     saldos.inicializarSaldoDeMesas(config->getMesas());
+    caja.abrirCaja();
 
 }
 
@@ -95,6 +96,8 @@ void Configurador::simular() {
 
     waitpid(pid_cocinero,NULL,0);
 
+    Logger::getInstance().log("Se cierra el dia con un total de "+std::to_string(caja.consultarDinero()));
+
 }
 
 
@@ -113,6 +116,7 @@ void Configurador::destruirEstructuras() {
     mesas.desarmarMesas();
     administradorLiving.desarmarLiving();
     saldos.liberar();
+    caja.cerrarCaja();
 
     for (int i=0;i< config->getMesas();i++) {
         semaforosPedidoDeMesas[i].eliminar();

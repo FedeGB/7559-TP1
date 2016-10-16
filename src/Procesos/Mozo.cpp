@@ -8,6 +8,7 @@
 #include "../Estructuras/FifoEscritura.h"
 #include "../Utils.h"
 #include "SaldoDeMesa.h"
+#include "../Estructuras/Caja.h"
 
 
 Mozo::Mozo(int id) {
@@ -125,9 +126,9 @@ void Mozo::buscarSaldoAPagar(ordenDeComida pedido) {
     Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + " y voy a consultar lo que debe la mesa " + std::to_string(pedido.numeroDeMesa));
 
     SaldoDeMesa saldo;
-    float totalAPagar = saldo.obtenerSaldo(pedido.numeroDeMesa);
+    float totalACobrar = saldo.obtenerSaldo(pedido.numeroDeMesa);
 
-    Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + " y el cliente de la mesa " + std::to_string(pedido.numeroDeMesa)+" debe pagar "+std::to_string(totalAPagar));
+    Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + " y el cliente de la mesa " + std::to_string(pedido.numeroDeMesa)+" debe pagar "+std::to_string(totalACobrar));
 
     semaforosPedidoDeMesas[pedido.numeroDeMesa].v();
 
@@ -136,6 +137,10 @@ void Mozo::buscarSaldoAPagar(ordenDeComida pedido) {
     Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + " y recibi el pago de la mesa " + std::to_string(pedido.numeroDeMesa));
 
     saldo.reiniciar(pedido.numeroDeMesa);
+
+    Caja caja;
+
+    caja.agregarDinero(totalACobrar);
 
 }
 

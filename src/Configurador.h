@@ -17,6 +17,7 @@
 #include "ClientesPorComer.h"
 #include "Procesos/Cocinero.h"
 #include "Procesos/SaldoDeMesa.h"
+#include "Estructuras/Caja.h"
 
 class Configurador {
 private:
@@ -44,6 +45,7 @@ private:
     AdministradorLiving administradorLiving;
     Menu menu;
     SaldoDeMesa saldos;
+    Caja caja;
     //ClientesPorComer clientesPorComer;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;
