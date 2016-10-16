@@ -95,9 +95,11 @@ void Mozo::solicitarPedidoAlCocinero(ordenDeComida orden) {
     Logger::getInstance().log("Mozo " + std::to_string(id) + " pidio plato " +  menu->getPlato(orden.numeroPlato).getNombre()
                               +" de la mesa " + std::to_string(orden.numeroDeMesa) + " al cocinero");
 
-    //todo: lock aca ?
+    LockFile lock(LOCK_MOZOS_LECTURA_COMIDA_DE_COCINERO);
+    lock.tomarLock();
     ordenDeComida comidaParaEntregar;
     fifoMozosCocineroLectura->leer(&comidaParaEntregar,sizeof(comidaParaEntregar));
+    lock.liberarLock();
 
     Logger::getInstance().log("Mozo " + std::to_string(id) + " recibio plato "+ menu->getPlato(comidaParaEntregar.numeroPlato).getNombre() +" del cocinero para la mesa: " + std::to_string(comidaParaEntregar.numeroDeMesa));
 

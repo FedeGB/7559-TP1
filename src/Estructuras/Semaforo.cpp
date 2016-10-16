@@ -1,7 +1,7 @@
 #include "Semaforo.h"
 
 Semaforo::Semaforo(int projID, const int valorInicial, bool undo) : valorInicial(valorInicial), undo(undo) {
-    key_t clave = ftok("/bin/bash", projID);
+    key_t clave = ftok("/bin/mv", projID);
     this->id = semget(clave, 1, 0666 | IPC_CREAT);
 
     this->inicializar();

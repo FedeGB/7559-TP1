@@ -18,6 +18,7 @@
 #define LOCK_LIVING_ESPERA "/tmp/lockLivingEspera"
 #define LOCK_CAJA "/tmp/lockCaja"
 #define LOCK_MOZOS "/tmp/lockMozos"
+#define LOCK_MOZOS_LECTURA_COMIDA_DE_COCINERO "/tmp/lockMozosLecturaCocic"
 #define MEMORIA_COMPARTIDA_MESAS "/bin/bash"
 #define MEMORIA_CLIENTES_LIVING "/bin/bash"
 #define MEMORIA_CLIENTES_POR_COMER "/bin/bash"
