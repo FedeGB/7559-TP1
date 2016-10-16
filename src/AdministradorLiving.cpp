@@ -18,6 +18,7 @@ void AdministradorLiving::armarLiving() {
 void AdministradorLiving::desarmarLiving() {
 
     clientesEnElLiving.liberar();
+    cantidadDeClientesEnElLiving.liberar();
 
 }
 

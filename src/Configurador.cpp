@@ -22,7 +22,7 @@ void Configurador::crearEstructuras() {
         semaforosPedidoDeMesas[i] = Semaforo();
         semaforosPedidoDeMesas[i].crear(SEM_MESAS+i,0,false);
         semaforosSaldos[i] = Semaforo();
-        semaforosSaldos[i].crear(SEM_SALDOS+i,0,false);
+        semaforosSaldos[i].crear(config->getMesas()+SEM_SALDOS+i,0,false);
     }
 
     //fifoRecepcionLectura = new FifoLectura(ARCHIVO_FIFO);
