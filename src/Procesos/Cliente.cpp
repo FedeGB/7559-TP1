@@ -5,6 +5,7 @@
 #include "Cliente.h"
 #include "../ClientesPorComer.h"
 #include "../Utils.h"
+#include "SaldoDeMesa.h"
 
 Cliente::Cliente(int id){
 
@@ -76,6 +77,7 @@ void Cliente::pedirPlatos() {
     ordenDeComida pedidoDePlato;
 
     pedidoDePlato.numeroDeMesa = mesaAsignada;
+    pedidoDePlato.pedidoDeCuenta = false;
 
     fifoMozosEscritura->obtenerCopia();
 
@@ -97,8 +99,9 @@ void Cliente::pedirPlatos() {
 
     }while(this->pedirOtroPlato());
 
-    fifoMozosEscritura->cerrar();
+    this->pedirCuenta();
 
+    fifoMozosEscritura->cerrar();
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " no como mas, me voy");
 
@@ -180,4 +183,33 @@ bool Cliente::pedirOtroPlato() {
 
     return ((1 + rand() % 2) == PIDO_PLATO) ;
 
+}
+
+void Cliente::pedirCuenta() {
+
+    ordenDeComida orden;
+
+    orden.pedidoDeCuenta = true;
+    orden.numeroDeMesa = mesaAsignada;
+
+    Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a pedir la cuenta");
+
+    fifoMozosEscritura->escribir(&orden,sizeof(orden));
+
+    semaforosPedidoDeMesas[mesaAsignada].p();
+
+    Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y el mozo me entrego la cuenta");
+
+    SaldoDeMesa saldo;
+
+    float totalAPagar = saldo.obtenerSaldo(mesaAsignada);
+
+    Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y pago: "+std::to_string(totalAPagar));
+
+    semaforosSaldos[mesaAsignada].v();
+
+}
+
+void Cliente::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
+    Cliente::semaforosSaldos = semaforosSaldos;
 }

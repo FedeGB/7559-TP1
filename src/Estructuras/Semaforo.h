@@ -23,6 +23,8 @@ public:
 
     int p() const; // decrementa
     int v() const; // incrementa
+    int v(int incremento);
+    int esperarCero();
     void eliminar() const;
 };
 

@@ -3,7 +3,6 @@
 //
 
 #include "Configurador.h"
-#include "Logger.h"
 
 Configurador::Configurador(ConfigLoader *config) {
     this->config = config;
@@ -22,6 +21,8 @@ void Configurador::crearEstructuras() {
     for (int i=0;i< config->getMesas();i++) {
         semaforosPedidoDeMesas[i] = Semaforo();
         semaforosPedidoDeMesas[i].crear(SEM_MESAS+i,0,false);
+        semaforosSaldos[i] = Semaforo();
+        semaforosSaldos[i].crear(SEM_SALDOS+i,0,false);
     }
 
     //fifoRecepcionLectura = new FifoLectura(ARCHIVO_FIFO);
@@ -66,7 +67,7 @@ void Configurador::crearEstructuras() {
     //clientesPorComer.inicializar();
     mesas.armarMesas();
     administradorLiving.armarLiving();
-
+    saldos.inicializarSaldoDeMesas(config->getMesas());
 
 }
 
@@ -111,6 +112,12 @@ void Configurador::destruirEstructuras() {
     fifoMozosCocineroLectura.eliminar();
     mesas.desarmarMesas();
     administradorLiving.desarmarLiving();
+    saldos.liberar();
+
+    for (int i=0;i< config->getMesas();i++) {
+        semaforosPedidoDeMesas[i].eliminar();
+        semaforosSaldos[i].eliminar();
+    }
 
 }
 
@@ -124,6 +131,7 @@ void Configurador::cargarGeneradorDeClientes() {
     clientes.setSem_recepcion(&sem_recepcion);
     clientes.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     clientes.setMenu(&menu);
+    clientes.setSemaforosSaldos(semaforosSaldos);
 
 }
 
@@ -144,6 +152,8 @@ void Configurador::cargarGeneradorDeMozos() {
     mozos.setFifoMozosCocineroLectura(&fifoMozosCocineroLectura);
     mozos.setFifoCocineroEscritura(&fifoCocineroEscritura);
     mozos.setMenu(&menu);
+    mozos.setSemaforosSaldos(semaforosSaldos);
+
 }
 
 void Configurador::cargarCocinero(){

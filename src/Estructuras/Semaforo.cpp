@@ -72,3 +72,38 @@ void Semaforo::crear(int projID, const int valorInicial, bool undo) {
 Semaforo::Semaforo() {
 
 }
+
+int Semaforo::esperarCero() {
+
+    struct sembuf operacion;
+
+    operacion.sem_num = 0;    // numero de semaforo
+    operacion.sem_op = 0;    //
+    if (this->undo) {
+        operacion.sem_flg = SEM_UNDO;
+    } else {
+        operacion.sem_flg = 0;
+    }
+    int resultado = semop(this->id, &operacion, 1);
+
+    return resultado;
+
+}
+
+int Semaforo::v(int incremento) {
+
+    int resultado = -1;
+
+    if(incremento<=0){
+        return resultado;
+    }
+
+    for(int i=0;i<incremento;i++){
+        resultado = this->v();
+        if(resultado == -1) {
+            return resultado;
+        }
+    }
+
+    return resultado;
+}

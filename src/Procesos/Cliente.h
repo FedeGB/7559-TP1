@@ -32,6 +32,7 @@ private:
     FifoEscritura *fifoMozosEscritura;
     int mesaAsignada;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
+    std::map<int, Semaforo> semaforosSaldos;
     Menu *menu;
     int platoPedidos;
 
@@ -55,6 +56,8 @@ public:
 
     void setMenu(Menu *menu);
 
+    void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
+
 private:
 
     void _run();
@@ -62,6 +65,7 @@ private:
     void pedirPlatos();
     void esperarEnElLiving();
     bool pedirOtroPlato();
+    void pedirCuenta();
 
 };
 

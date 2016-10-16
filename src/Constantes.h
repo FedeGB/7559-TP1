@@ -23,7 +23,9 @@
 #define MEMORIA_CLIENTES_LIVING "/bin/bash"
 #define MEMORIA_CLIENTES_POR_COMER "/bin/bash"
 #define MEMORIA_DINERO_CAJA "/bin/bash"
+#define MEMORIA_COMPARTIDA_SALDOS "/bin/cat"
 #define LOCK_CLIENTES_POR_COMER "/tmp/clientesPorComer"
+#define LOCK_SALDOS "/tmp/lockSaldos"
 
 struct asignarMesa {
     int mesa;
@@ -34,6 +36,7 @@ struct asignarMesa {
 struct ordenDeComida {
     int numeroDeMesa;
     int numeroPlato; // temporal
+    bool pedidoDeCuenta;
 };
 
 

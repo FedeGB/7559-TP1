@@ -16,6 +16,7 @@
 #include "GeneradorMozos.h"
 #include "ClientesPorComer.h"
 #include "Procesos/Cocinero.h"
+#include "Procesos/SaldoDeMesa.h"
 
 class Configurador {
 private:
@@ -24,6 +25,7 @@ private:
     Semaforo sem_recepcion;
     Semaforo sem_living;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
+    std::map<int,Semaforo> semaforosSaldos;
     FifoLectura fifoRecepcionLectura;
     FifoEscritura fifoRecepcionEscritura;
     FifoLectura fifoLivingLectura;
@@ -41,6 +43,7 @@ private:
     Mesas mesas;
     AdministradorLiving administradorLiving;
     Menu menu;
+    SaldoDeMesa saldos;
     //ClientesPorComer clientesPorComer;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;

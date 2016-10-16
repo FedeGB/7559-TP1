@@ -104,9 +104,14 @@ void GeneradorClientes::configurarCliente(Cliente &cliente) {
     cliente.setFifoMozosEscritura(fifoMozosEscritura);
     cliente.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     cliente.setMenu(menu);
+    cliente.setSemaforosSaldos(semaforosSaldos);
 
 }
 
 void GeneradorClientes::setMenu(Menu *menu) {
     GeneradorClientes::menu = menu;
+}
+
+void GeneradorClientes::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
+    GeneradorClientes::semaforosSaldos = semaforosSaldos;
 }

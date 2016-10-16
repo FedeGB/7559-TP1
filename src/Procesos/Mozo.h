@@ -24,6 +24,7 @@ private:
     FifoLectura *fifoMozosCocineroLectura;
     FifoEscritura *fifoCocineroEscritura;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
+    std::map<int, Semaforo> semaforosSaldos;
     Menu *menu;
 
 public:
@@ -41,6 +42,8 @@ public:
 
     void setMenu(Menu *menu);
 
+    void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
+
 private:
 
     void _run();
@@ -48,6 +51,9 @@ private:
     void solicitarPedidoAlCocinero(ordenDeComida orden);
 
     void entregarPedidoAlCliente(ordenDeComida comidaParaEntregar);
+
+    void buscarSaldoAPagar(ordenDeComida pedido);
+
 };
 
 

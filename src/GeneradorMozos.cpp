@@ -89,6 +89,7 @@ void GeneradorMozos::configurarMozos(Mozo &mozo) {
     mozo.setFifoCocineroEscritura(fifoCocineroEscritura);
     mozo.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     mozo.setMenu(menu);
+    mozo.setSemaforosSaldos(semaforosSaldos);
 
 }
 
@@ -102,5 +103,9 @@ void GeneradorMozos::setFifoMozosCocineroLectura(FifoLectura *f) {
 
 void GeneradorMozos::setMenu(Menu *menu) {
     GeneradorMozos::menu = menu;
+}
+
+void GeneradorMozos::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
+    GeneradorMozos::semaforosSaldos = semaforosSaldos;
 }
 
