@@ -7,7 +7,6 @@
 
 #define PIDO_PLATO 1
 #define MAXIMO_PLATOS_A_PEDIR 5
-#define CLIENTES 4
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
 #define ARCHIVO_FIFO_LIVING "/tmp/fifoLiving"
 #define ARCHIVO_FIFO_MOZOS "/tmp/fifoMozos"

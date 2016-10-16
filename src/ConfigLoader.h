@@ -19,6 +19,7 @@ private:
     int cantMesas;
     int cantMozos;
     int cantRecepcionistas;
+    int cantClientes;
     Menu menuRestaurante;
 
     void setValueWithKey(std::string, std::string);
@@ -32,6 +33,7 @@ public:
     int getMozos();
     int getMesas();
     int getRecepcionistas();
+    int getClientes();
     Menu getMenu();
 };
 

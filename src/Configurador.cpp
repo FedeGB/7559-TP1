@@ -53,6 +53,7 @@ void Configurador::crearEstructuras() {
     //clientes = new GeneradorClientes();
     //mozos = new GeneradorMozos(config->getMozos());
     mozos.setCantidadDeMozos(config->getMozos());
+    clientes.setCantidadDeClientes(config->getClientes());
     //cocinero = new Cocinero();
 
     this->cagarGeneradorDeRecepcionistas();

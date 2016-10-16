@@ -9,6 +9,7 @@ ConfigLoader::ConfigLoader(std::string path) {
     cantMozos = 0;
     cantMesas = 0;
     cantRecepcionistas = 0;
+    cantClientes = 0;
     confPath = path;
 }
 
@@ -26,6 +27,10 @@ int ConfigLoader::getMesas(){
 
 int ConfigLoader::getRecepcionistas() {
     return cantRecepcionistas;
+}
+
+int ConfigLoader::getClientes() {
+    return cantClientes;
 }
 
 Menu ConfigLoader::getMenu() {
@@ -83,6 +88,11 @@ void ConfigLoader::setValueWithKey(std::string key, std::string value) {
         if(!menuRestaurante.fill(value)) {
             throw "Configuración invalida para el menu";
         }
+    } else if(key.compare("clientes") == 0) {
+        if(!stringIsInt(value)) {
+            throw "Configuración invalida para clientes";
+        }
+        cantClientes = std::stoi(value);
     }
 }
 

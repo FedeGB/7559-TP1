@@ -16,6 +16,8 @@
 
 class GeneradorClientes {
 private:
+    GeneradorClientes(int cantClientes);
+
     FifoLectura *fifoRecepcionLectura;
     FifoLectura *fifoLivingLectura;
     FifoEscritura *fifoMozosEscritura;
@@ -25,6 +27,7 @@ private:
     Semaforo *sem_recepcion;
     Semaforo *sem_living;
     Menu *menu;
+    int cantidadDeClientes;
 
 public:
 
@@ -49,6 +52,8 @@ public:
     void setMenu(Menu *menu);
 
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
+
+    void setCantidadDeClientes(int);
 
 private:
     void configurarCliente(Cliente &cliente);

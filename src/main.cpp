@@ -32,7 +32,8 @@ int main() {
     }
     Logger::getInstance().log("Se cargaron mesas: " + std::to_string(config.getMesas()));
     Logger::getInstance().log("Se cargaron mozos: " + std::to_string(config.getMozos()));
-    Logger::getInstance().log("Se cargaron recep: " + std::to_string(config.getRecepcionistas()));
+    Logger::getInstance().log("Se cargaron recepcionistas: " + std::to_string(config.getRecepcionistas()));
+    Logger::getInstance().log("Se cargaron clientes: " + std::to_string(config.getClientes()));
     /*Menu menu = config.getMenu();
     PlatoComida platoRandom = menu.eleccionRandom();
     Logger::getInstance().log("Se cargo el menu y un plato random es: " +

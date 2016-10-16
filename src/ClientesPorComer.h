@@ -13,12 +13,15 @@ class ClientesPorComer {
 
 private:
     MemoriaCompartida<int> clientesQueFaltanComer;
+    int cantidadDeClientes;
 public:
     ClientesPorComer();
+    ClientesPorComer(int);
     void inicializar();
     void descontarCliente();
     void liberar();
     bool quedanClientes();
+    void setCantidadDeClientesDisponibles(int);
 };
 
 

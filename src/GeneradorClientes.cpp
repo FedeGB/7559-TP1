@@ -8,6 +8,10 @@ GeneradorClientes::GeneradorClientes(){
 
 }
 
+GeneradorClientes::GeneradorClientes(int cantClientes){
+    cantidadDeClientes = cantClientes;
+}
+
 pid_t GeneradorClientes::cargarClientes() {
 
     pid_t pid = fork();
@@ -23,7 +27,7 @@ pid_t GeneradorClientes::cargarClientes() {
         fifoLivingLectura->abrir();
         fifoMozosEscritura->abrir();
 
-        for (int i = 0; i < CLIENTES; ++i) {
+        for (int i = 0; i < cantidadDeClientes; ++i) {
 
             Cliente cliente(i);
             this->configurarCliente(cliente);
@@ -31,7 +35,7 @@ pid_t GeneradorClientes::cargarClientes() {
 
         }
 
-        for (int i = 0; i < CLIENTES; ++i) {
+        for (int i = 0; i < cantidadDeClientes; ++i) {
 
             wait(NULL);
 
@@ -114,4 +118,8 @@ void GeneradorClientes::setMenu(Menu *menu) {
 
 void GeneradorClientes::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
     GeneradorClientes::semaforosSaldos = semaforosSaldos;
+}
+
+void GeneradorClientes::setCantidadDeClientes(int cantClientes) {
+    cantidadDeClientes = cantClientes;
 }

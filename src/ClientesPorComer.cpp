@@ -14,7 +14,7 @@ ClientesPorComer::ClientesPorComer() {
 
 void ClientesPorComer::inicializar(){
 
-    clientesQueFaltanComer.escribir(CLIENTES);
+    clientesQueFaltanComer.escribir(cantidadDeClientes);
 
 }
 
@@ -51,6 +51,15 @@ bool ClientesPorComer::quedanClientes(){
 
     return (clientes != 0);
 
+}
+
+ClientesPorComer::ClientesPorComer(int cantClientesDisp) {
+    clientesQueFaltanComer.crear(MEMORIA_CLIENTES_POR_COMER,'C');
+    cantidadDeClientes = cantClientesDisp;
+}
+
+void ClientesPorComer::setCantidadDeClientesDisponibles(int cantClientesDisp) {
+    cantidadDeClientes = cantClientesDisp;
 }
 
 

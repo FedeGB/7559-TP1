@@ -22,7 +22,11 @@ void FifoEscritura::abrir() {
 }
 
 ssize_t FifoEscritura::escribir(const void* buffer,const ssize_t buffsize) const {
-	return write ( fd,buffer,buffsize );
+	ssize_t escribio = write ( fd,buffer,buffsize );
+	if(escribio < 0 ) {
+		std::string errMsg = std::string(std::string (strerror(errno)));
+		throw "Fallo al escribir el fifo escritura: " + errMsg;
+	}
 }
 
 
