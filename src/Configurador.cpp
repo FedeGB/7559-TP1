@@ -6,16 +6,12 @@
 
 Configurador::Configurador(ConfigLoader *config) {
     this->config = config;
-    //Logger::getInstance().log("MESAS: "+std::to_string(config->getMesas()));
 }
 
 void Configurador::crearEstructuras() {
 
-    //sem_entrada = new Semaforo(SEM_ENTRADA, 0, false);
     sem_entrada.crear(SEM_ENTRADA, 0, false);
-    //sem_recepcion = new Semaforo(SEM_RECEPCION, 0, false);
     sem_recepcion.crear(SEM_RECEPCION, 0, false);
-    //sem_living = new Semaforo(SEM_LIVING, 0, false);
     sem_living.crear(SEM_LIVING, 0, false);
 
     for (int i=0;i< config->getMesas();i++) {
@@ -25,36 +21,22 @@ void Configurador::crearEstructuras() {
         semaforosSaldos[i].crear(config->getMesas()+SEM_SALDOS+i,0,false);
     }
 
-    //fifoRecepcionLectura = new FifoLectura(ARCHIVO_FIFO);
     fifoRecepcionLectura.cargar(ARCHIVO_FIFO);
-    //fifoRecepcionEscritura = new FifoEscritura(ARCHIVO_FIFO);
     fifoRecepcionEscritura.cargar(ARCHIVO_FIFO);
-    //fifoLivingLectura = new FifoLectura(ARCHIVO_FIFO_LIVING);
     fifoLivingLectura.cargar(ARCHIVO_FIFO_LIVING);
-    //fifoLivingEscritura = new FifoEscritura(ARCHIVO_FIFO_LIVING);
     fifoLivingEscritura.cargar(ARCHIVO_FIFO_LIVING);
-    //fifoMozosEscritura = new FifoEscritura(ARCHIVO_FIFO_MOZOS);
     fifoMozosEscritura.cargar(ARCHIVO_FIFO_MOZOS);
-    //fifoMozosLectura = new FifoLectura(ARCHIVO_FIFO_MOZOS);
     fifoMozosLectura.cargar(ARCHIVO_FIFO_MOZOS);
-    //fifoMozosCocineroEscritura = new FifoEscritura(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
     fifoMozosCocineroEscritura.cargar(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
-    //fifoMozosCocineroLectura = new FifoLectura(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
     fifoMozosCocineroLectura.cargar(ARCHIVO_FIFO_MOZOS_Y_COCINERO);
-    //fifoCocineroEscritura = new FifoEscritura(ARCHIVO_FIFO_COCINERO);
     fifoCocineroEscritura.cargar(ARCHIVO_FIFO_COCINERO);
-    //fifoCocineroLectura = new FifoLectura(ARCHIVO_FIFO_COCINERO);
     fifoCocineroLectura.cargar(ARCHIVO_FIFO_COCINERO);
 
     menu = config->getMenu();
 
-    //recepcionistas = new GeneradorRecepcionistas(config->getRecepcionistas());
     recepcionistas.setCantidadDeRecepcionistas(config->getRecepcionistas());
-    //clientes = new GeneradorClientes();
-    //mozos = new GeneradorMozos(config->getMozos());
     mozos.setCantidadDeMozos(config->getMozos());
     clientes.setCantidadDeClientes(config->getClientes());
-    //cocinero = new Cocinero();
 
     this->cagarGeneradorDeRecepcionistas();
     this->cargarGeneradorDeClientes();
@@ -62,11 +44,8 @@ void Configurador::crearEstructuras() {
     this->cargarCocinero();
     this->cargarGerente();
 
-    //mesas = new Mesas(config->getMesas());
     mesas.setNumeroDeMesas(config->getMesas());
-    //administradorLiving = new AdministradorLiving();
 
-    //clientesPorComer.inicializar();
     mesas.armarMesas();
     administradorLiving.armarLiving();
     saldos.inicializarSaldoDeMesas(config->getMesas());
@@ -84,6 +63,19 @@ void Configurador::simular() {
 
     pid_cocinero = cocinero.run();
 
+    std::vector<pid_t> pids_clientes = clientes.getPidClientes();
+    std::vector<pid_t> pids_recepcionistas = recepcionistas.getPidRecepcionistas();
+
+    std::vector<pid_t> pids;
+
+    pids.insert(pids.end(), pids_clientes.begin(), pids_clientes.end());
+    pids.insert(pids.end(), pids_recepcionistas.begin(), pids_recepcionistas.end());
+    pids.push_back(pid_mozos);
+
+    corteDeLuz.setPidProcesos(pids);
+
+    pid_t pid_corteDeLuz = corteDeLuz.run();
+
     waitpid(pid_clientes,NULL,0);
 
     // eliminar semaforos
@@ -93,7 +85,6 @@ void Configurador::simular() {
 
     waitpid(pid_recepcionistas,NULL,0);
 
-    //Falta ver como avisar a los mozos que terminaron
     waitpid(pid_mozos,NULL,0);
 
     waitpid(pid_cocinero,NULL,0);
@@ -102,7 +93,7 @@ void Configurador::simular() {
 
     waitpid(pid_gerente,NULL,0);
 
-    //Logger::getInstance().log("Se cierra el dia con un total de "+std::to_string(caja.consultarDinero()));
+    kill(pid_corteDeLuz,2);
 
 }
 

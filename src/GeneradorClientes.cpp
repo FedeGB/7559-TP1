@@ -23,6 +23,7 @@ pid_t GeneradorClientes::cargarClientes() {
     }
 
     if (pid == 0) {
+
         fifoRecepcionLectura->abrir();
         fifoLivingLectura->abrir();
         fifoMozosEscritura->abrir();
@@ -31,9 +32,14 @@ pid_t GeneradorClientes::cargarClientes() {
 
             Cliente cliente(i);
             this->configurarCliente(cliente);
-            cliente.run();
+            pid_t pidCliente = cliente.run();
+
+            canal.escribir(&pidCliente,sizeof(pid_t));
 
         }
+
+        canal.cerrar();
+
 
         for (int i = 0; i < cantidadDeClientes; ++i) {
 
@@ -44,19 +50,6 @@ pid_t GeneradorClientes::cargarClientes() {
         fifoRecepcionLectura->cerrar();
         fifoLivingLectura->cerrar();
         fifoMozosEscritura->cerrar();
-
-        //delete fifoLivingLectura;
-        //delete fifoRecepcionLectura;
-        //delete fifoMozosEscritura;
-        //delete sem_entrada;
-        //delete sem_recepcion;
-        //delete sem_living;
-
-        /*for(auto const &ent1 : semaforosPedidoDeMesas) {
-
-            delete ent1.second;
-
-        }*/
 
         exit(0);
 
@@ -122,4 +115,20 @@ void GeneradorClientes::setSemaforosSaldos(const std::map<int, Semaforo> &semafo
 
 void GeneradorClientes::setCantidadDeClientes(int cantClientes) {
     cantidadDeClientes = cantClientes;
+}
+
+std::vector<pid_t> GeneradorClientes::getPidClientes() {
+
+    for (int i = 0; i < cantidadDeClientes; ++i) {
+
+        pid_t pidCliente;
+        canal.leer(&pidCliente,sizeof(pid_t));
+        this->pidClientes.push_back(pidCliente);
+
+    }
+
+    canal.cerrar();
+
+    return pidClientes;
+
 }

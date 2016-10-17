@@ -7,15 +7,20 @@
 #include "../Utils.h"
 #include "SaldoDeMesa.h"
 
+
 Cliente::Cliente(int id){
 
+    this->cortesDeLuz = 0;
     this->id = id;
     this->plata = id * 10 + 100;
     this->platoPedidos = 0;
+    this->estoyDentro = false;
 
 }
 
 void Cliente::_run() {
+
+    SignalHandler :: getInstance()->registrarHandler ( SIGINT,this );
 
     Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
 
@@ -24,6 +29,8 @@ void Cliente::_run() {
 
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     sem_recepcion->p();
+
+    this->estoyDentro = true;
 
     this->esperarMesa();
 
@@ -78,6 +85,7 @@ void Cliente::pedirPlatos() {
 
     pedidoDePlato.numeroDeMesa = mesaAsignada;
     pedidoDePlato.pedidoDeCuenta = false;
+    pedidoDePlato.cortesDeLuz = this->cortesDeLuz;
 
     fifoMozosEscritura->obtenerCopia();
 
@@ -191,6 +199,7 @@ void Cliente::pedirCuenta() {
 
     orden.pedidoDeCuenta = true;
     orden.numeroDeMesa = mesaAsignada;
+    orden.cortesDeLuz = this->cortesDeLuz;
 
     Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a pedir la cuenta");
 
@@ -212,4 +221,21 @@ void Cliente::pedirCuenta() {
 
 void Cliente::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
     Cliente::semaforosSaldos = semaforosSaldos;
+}
+
+void Cliente::atenderSenial() {
+
+    if ( this->estoyDentro ) {
+        LockFile lockLivingEspera(LOCK_LIVING_ESPERA);
+        lockLivingEspera.liberarLock();
+        fifoRecepcionLectura->cerrar();
+        fifoRecepcionLectura->cerrar();
+        fifoLivingLectura->cerrar();
+        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y me voy");
+        exit(0);
+    } else {
+        this->cortesDeLuz++;
+        sem_recepcion->p();
+    }
+
 }

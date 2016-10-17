@@ -13,6 +13,14 @@
 
 Mozo::Mozo(int id) {
     this->id = id;
+    this->cortesDeLuz = 0;
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " empiezo a trabajar");
+}
+
+Mozo::Mozo(int id, int cortesDeLuz) {
+    this->id = id;
+    this->cortesDeLuz = cortesDeLuz;
+    Logger::getInstance().log("Mozo " + std::to_string(id) + " retorno despues del corte de luz");
 }
 
 void Mozo::setFifoPedidoMozo(FifoLectura *fifoPedidoMozo) {
@@ -37,7 +45,7 @@ Mozo::Mozo() {
 
 void Mozo::_run() {
 
-    Logger::getInstance().log("Mozo " + std::to_string(id) + " creado");
+    //Logger::getInstance().log("Mozo " + std::to_string(id) + " creado");
 
     fifoPedidoMozo->obtenerCopia();
     fifoMozosCocineroLectura->obtenerCopia();
@@ -60,6 +68,10 @@ void Mozo::_run() {
         }
 
         lock.liberarLock();
+
+        if(pedido.cortesDeLuz != this->cortesDeLuz){
+            continue;
+        }
 
         if(pedido.pedidoDeCuenta){
 
@@ -100,6 +112,10 @@ void Mozo::solicitarPedidoAlCocinero(ordenDeComida orden) {
     ordenDeComida comidaParaEntregar;
     fifoMozosCocineroLectura->leer(&comidaParaEntregar,sizeof(comidaParaEntregar));
     lock.liberarLock();
+
+    if(comidaParaEntregar.cortesDeLuz != this->cortesDeLuz ) {
+        return;
+    }
 
     Logger::getInstance().log("Mozo " + std::to_string(id) + " recibio plato "+ menu->getPlato(comidaParaEntregar.numeroPlato).getNombre() +" del cocinero para la mesa: " + std::to_string(comidaParaEntregar.numeroDeMesa));
 

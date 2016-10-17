@@ -11,7 +11,6 @@ GeneradorMozos::GeneradorMozos(int cantidadDeMozos) {
 
 
 GeneradorMozos::GeneradorMozos() {
-
 }
 
 void GeneradorMozos::setCantidadDeMozos(int cantidadDeMozos) {
@@ -19,6 +18,9 @@ void GeneradorMozos::setCantidadDeMozos(int cantidadDeMozos) {
 }
 
 pid_t GeneradorMozos::cargarMozos() {
+
+    SignalHandler :: getInstance()->registrarHandler ( SIGINT,this );
+    this->existioCorteDeLuz = false;
 
     pid_t pid = fork();
 
@@ -34,34 +36,23 @@ pid_t GeneradorMozos::cargarMozos() {
         fifoMozosCocineroLectura->abrir();
         fifoCocineroEscritura->abrir();
 
+        this->crearMozos();
 
-        for (int i = 0; i < cantidadDeMozos; ++i) {
+        this->esperarMozos();
 
-            Mozo mozo(i);
-            this->configurarMozos(mozo);
-            mozo.run();
+        while( this->existioCorteDeLuz ) {
 
-        }
+            this->existioCorteDeLuz = false;
 
-        for (int i = 0; i < cantidadDeMozos; ++i) {
+            this->crearMozosDespuesDelCorte();
 
-            wait(NULL);
+            this->esperarMozos();
 
         }
 
         fifoMozosLectura->cerrar();
         fifoMozosCocineroLectura->cerrar();
         fifoCocineroEscritura->cerrar();
-
-        //delete fifoMozosLectura;
-        //delete fifoMozosCocineroLectura;
-        //delete fifoCocineroEscritura;
-
-        /*for(auto const &ent1 : semaforosPedidoDeMesas) {
-
-            delete ent1.second;
-
-        }*/
 
         exit(0);
 
@@ -108,4 +99,58 @@ void GeneradorMozos::setMenu(Menu *menu) {
 void GeneradorMozos::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
     GeneradorMozos::semaforosSaldos = semaforosSaldos;
 }
+
+
+void GeneradorMozos::crearMozos() {
+
+    for (int i = 0; i < cantidadDeMozos; ++i) {
+
+        Mozo mozo(i);
+        this->configurarMozos(mozo);
+        pid_t pidMozo = mozo.run();
+
+        pidMozos.push_back(pidMozo);
+
+    }
+
+}
+
+void GeneradorMozos::esperarMozos() {
+
+    for (int i = 0; i < cantidadDeMozos; ++i) {
+
+        wait(NULL);
+
+    }
+
+}
+
+void GeneradorMozos::crearMozosDespuesDelCorte() {
+
+    for (int i = 0; i < cantidadDeMozos ; ++i) {
+
+        Mozo mozo(i,cortesDeLuz);
+        this->configurarMozos(mozo);
+        pid_t pidMozo = mozo.run();
+
+        pidMozos.push_back(pidMozo);
+
+    }
+
+}
+
+void GeneradorMozos::atenderSenial() {
+
+    this->existioCorteDeLuz = true;
+    this->cortesDeLuz++;
+    Logger::getInstance().log("CORTE DE LUZ"+std::to_string(this->cortesDeLuz));
+
+    for(auto pid_mozo : pidMozos ) {
+
+        kill(pid_mozo,CORTE_DE_LUZ);
+
+    }
+
+}
+
 

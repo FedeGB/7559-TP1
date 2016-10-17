@@ -48,6 +48,8 @@ int main() {
     Logger::getInstance().log("FIN");
     Logger::destruir();
 
+    SignalHandler::destruir();
+
     return 0;
 
     /*Mesas mesas(config.getMesas());

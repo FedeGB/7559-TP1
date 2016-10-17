@@ -19,7 +19,7 @@
 #include "../Estructuras/FifoEscritura.h"
 #include "../Menu.h"
 
-class Cliente : public Proceso {
+class Cliente : public Proceso, public EventHandler {
 
 private:
     int id;
@@ -35,6 +35,8 @@ private:
     std::map<int, Semaforo> semaforosSaldos;
     Menu *menu;
     int platoPedidos;
+    bool estoyDentro;
+    int cortesDeLuz;
 
 public:
 
@@ -57,6 +59,15 @@ public:
     void setMenu(Menu *menu);
 
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
+
+    void atenderSenial();
+
+    virtual int handleSignal ( int signum ) {
+        assert ( signum == SIGINT );
+        this->atenderSenial();
+        return 0;
+    }
+
 
 private:
 

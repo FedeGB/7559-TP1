@@ -33,7 +33,7 @@ void Logger::log(const std::string &msg) {
     lock->tomarLock();
 
     std::string mensaje = this->obtenerFecha() + " " + msg;
-    std::cout << this->obtenerFecha() << " " << msg << std::endl;
+    //std::cout << this->obtenerFecha() << " " << msg << std::endl;
     archivo->escribir(mensaje);
 
     lock->liberarLock();

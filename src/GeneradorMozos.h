@@ -12,14 +12,17 @@
 #include "Procesos/Mozo.h"
 #include "Estructuras/FifoEscritura.h"
 #include "Menu.h"
+#include "Estructuras/Pipe.h"
+#include "Logger.h"
 
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdexcept>
 
-class GeneradorMozos {
+class GeneradorMozos : public EventHandler {
 private:
+    std::vector<pid_t> pidMozos;
     int cantidadDeMozos;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
     std::map<int,Semaforo> semaforosSaldos;
@@ -27,6 +30,8 @@ private:
     FifoEscritura *fifoCocineroEscritura;
     FifoLectura *fifoMozosCocineroLectura;
     Menu *menu;
+    bool existioCorteDeLuz;
+    int cortesDeLuz;
 
 public:
 
@@ -50,9 +55,23 @@ public:
 
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
 
+    void atenderSenial();
+
+    virtual int handleSignal ( int signum ) {
+        assert ( signum == SIGINT );
+        this->atenderSenial();
+        return 0;
+    }
+
 private:
 
     void configurarMozos(Mozo &mozo);
+
+    void crearMozos();
+
+    void esperarMozos();
+
+    void crearMozosDespuesDelCorte();
 
 };
 

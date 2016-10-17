@@ -10,6 +10,7 @@
 #include "Estructuras/FifoEscritura.h"
 #include "Constantes.h"
 #include "Procesos/RecepcionLiving.h"
+#include "Estructuras/Pipe.h"
 
 #include <string>
 
@@ -22,6 +23,8 @@ class GeneradorRecepcionistas {
 
 private:
 
+    Pipe canal;
+    std::vector<pid_t> pidRecepcionistas;
     int cantidadRecepcionistas;
     FifoEscritura *fifoRecepcionEscritura;
     FifoEscritura *fifoLivingEscritura;
@@ -45,6 +48,8 @@ public:
     void setSem_recepcion(Semaforo *sem_recepcion);
 
     void setSem_living(Semaforo *sem_living);
+
+    std::vector<pid_t> getPidRecepcionistas();
 
 private:
 

@@ -26,10 +26,14 @@ private:
     std::map<int,Semaforo> semaforosPedidoDeMesas;
     std::map<int, Semaforo> semaforosSaldos;
     Menu *menu;
+    int cortesDeLuz;
 
 public:
 
     Mozo(int id);
+
+    Mozo(int id, int cortesDeLuz);
+
     Mozo();
 
     void setFifoPedidoMozo(FifoLectura *fifoPedidoMozo);

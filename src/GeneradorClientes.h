@@ -8,6 +8,7 @@
 #include "Constantes.h"
 #include "Estructuras/FifoEscritura.h"
 #include "Menu.h"
+#include "Estructuras/Pipe.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -18,6 +19,8 @@ class GeneradorClientes {
 private:
     GeneradorClientes(int cantClientes);
 
+    Pipe canal;
+    std::vector<pid_t> pidClientes;
     FifoLectura *fifoRecepcionLectura;
     FifoLectura *fifoLivingLectura;
     FifoEscritura *fifoMozosEscritura;
@@ -54,6 +57,8 @@ public:
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
 
     void setCantidadDeClientes(int);
+
+    std::vector<pid_t> getPidClientes();
 
 private:
     void configurarCliente(Cliente &cliente);

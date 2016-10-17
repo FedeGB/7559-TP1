@@ -5,6 +5,7 @@
 #ifndef TP1_CONSTANTES_H
 #define TP1_CONSTANTES_H
 
+#define CORTE_DE_LUZ 2
 #define PIDO_PLATO 1
 #define MAXIMO_PLATOS_A_PEDIR 5
 #define ARCHIVO_FIFO "/tmp/fifoRecepcion"
@@ -37,8 +38,15 @@ struct asignarMesa {
 struct ordenDeComida {
     int numeroDeMesa;
     int numeroPlato; // temporal
+    int cortesDeLuz;
     bool pedidoDeCuenta;
 };
 
+enum TipoDePid {CLIENTE,RECEPCIONISTA,CONINERO,MOZO};
+
+struct PID {
+    TipoDePid tipoDePid;
+    pid_t pid;
+};
 
 #endif //TP1_CONSTANTES_H

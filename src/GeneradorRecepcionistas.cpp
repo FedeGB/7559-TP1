@@ -30,9 +30,13 @@ pid_t GeneradorRecepcionistas::cargarRecepcionistas(int cantidadDeMesas) {
 
             Recepcionista recepcionista(std::to_string(i),cantidadDeMesas);
             this->cargarRecepcionista(recepcionista);
-            recepcionista.run();
+            pid_t pidRecepcionista = recepcionista.run();
+
+            canal.escribir(&pidRecepcionista,sizeof(pid_t));
 
         }
+
+        canal.cerrar();
 
         RecepcionLiving recepcionistaLiving(cantidadDeMesas);
         this->cargarRecepcionistaLiving(recepcionistaLiving);
@@ -46,12 +50,6 @@ pid_t GeneradorRecepcionistas::cargarRecepcionistas(int cantidadDeMesas) {
 
         fifoRecepcionEscritura->cerrar();
         fifoLivingEscritura->cerrar();
-
-        //delete fifoLivingEscritura;
-        //delete fifoRecepcionEscritura;
-        //delete sem_living;
-        //delete sem_recepcion;
-        //delete sem_entrada;
 
         exit(0);
 
@@ -93,6 +91,22 @@ void GeneradorRecepcionistas::cargarRecepcionistaLiving(RecepcionLiving &recepci
 
     recepcionistaLiving.setSem_living(sem_living);
     recepcionistaLiving.setFifoLivingEscritura(fifoLivingEscritura);
+
+}
+
+std::vector<pid_t> GeneradorRecepcionistas::getPidRecepcionistas() {
+
+    for (int i = 0; i < cantidadRecepcionistas; ++i) {
+
+        pid_t pidRecepcionista;
+        canal.leer(&pidRecepcionista,sizeof(pid_t));
+        this->pidRecepcionistas.push_back(pidRecepcionista);
+
+    }
+
+    canal.cerrar();
+
+    return pidRecepcionistas;
 
 }
 

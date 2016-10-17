@@ -19,6 +19,7 @@
 #include "Procesos/SaldoDeMesa.h"
 #include "Estructuras/Caja.h"
 #include "Procesos/Gerente.h"
+#include "Procesos/CorteDeLuz.h"
 
 class Configurador {
 private:
@@ -48,7 +49,7 @@ private:
     Menu menu;
     SaldoDeMesa saldos;
     Caja caja;
-    //ClientesPorComer clientesPorComer;
+    CorteDeLuz corteDeLuz;
     pid_t pid_recepcionistas;
     pid_t pid_clientes;
     pid_t pid_mozos;

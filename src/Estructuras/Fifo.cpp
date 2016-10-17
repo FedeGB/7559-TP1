@@ -22,6 +22,10 @@ void Fifo::cargar(const std::string nombre) {
 
 void Fifo::cerrar() {
 
+	if( fd == -1 ) {
+		return;
+	}
+
 	if (close ( fd ) == -1) {
 
 		std::string errMsg = std::string(std::string (strerror(errno)));
