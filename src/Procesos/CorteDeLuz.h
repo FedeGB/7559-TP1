@@ -23,6 +23,8 @@ private:
     Mesas *mesas;
     SaldoDeMesa *saldos;
     AdministradorLiving *administradorLiving;
+    Semaforo *sem_espera_luz;
+    int cantidadDeProcesosActivar;
 
 public:
     void setPidProcesos(std::vector<pid_t> pid_procesos);
@@ -31,6 +33,8 @@ public:
     void setCaja(Caja *caja);
     void setSaldosDeMesa(SaldoDeMesa *saldos);
     void setAdministradorLiving(AdministradorLiving *administradorLiving);
+    void setSem_espera_luz(Semaforo *sem_espera_luz);
+    void setCantidadDeProcesosActivar(int cantidad);
 
 private:
 

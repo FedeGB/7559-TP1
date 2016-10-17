@@ -31,6 +31,11 @@ private:
     Semaforo *sem_entrada;
     Semaforo *sem_recepcion;
     Semaforo *sem_living;
+    SIGINT_Handler *sigint_handler;
+
+private:
+    Semaforo *sem_espera_luz;
+
 public:
 
     GeneradorRecepcionistas();
@@ -50,6 +55,10 @@ public:
     void setSem_living(Semaforo *sem_living);
 
     std::vector<pid_t> getPidRecepcionistas();
+
+    void setSigint_handler(SIGINT_Handler *sigint_handler);
+
+    void setSem_espera_luz(Semaforo *sem_espera_luz);
 
 private:
 

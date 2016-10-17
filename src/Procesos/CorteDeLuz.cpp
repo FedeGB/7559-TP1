@@ -20,6 +20,15 @@ void CorteDeLuz::_run() {
         float totalSinCobrar = saldos->anularSaldos();
         caja->agregarDineroSinCobrar(totalSinCobrar);
         administradorLiving->limpiarLiving();
+
+        Logger::getInstance().log("Reestableciendo la luz ... ");
+        std::cout << "Reestableciendo la luz ... " << std::endl;
+        sleep(2);
+        Logger::getInstance().log("luz reestablecida ");
+        std::cout << "luz reestablecida " << std::endl;
+
+        this->sem_espera_luz->v(this->cantidadDeProcesosActivar);
+
         existio = true;
 
     }
@@ -48,4 +57,14 @@ void CorteDeLuz::setSaldosDeMesa(SaldoDeMesa *saldos){
 
 void CorteDeLuz::setAdministradorLiving(AdministradorLiving *administradorLiving) {
     CorteDeLuz::administradorLiving = administradorLiving;
+}
+
+void CorteDeLuz::setSem_espera_luz(Semaforo *sem_espera_luz) {
+    this->sem_espera_luz = sem_espera_luz;
+}
+
+void CorteDeLuz::setCantidadDeProcesosActivar(int cantidad) {
+
+    this->cantidadDeProcesosActivar = cantidad + 2;
+
 }

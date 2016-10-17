@@ -16,6 +16,7 @@ void Configurador::crearEstructuras() {
     sem_entrada.crear(SEM_ENTRADA, 0, false);
     sem_recepcion.crear(SEM_RECEPCION, 0, false);
     sem_living.crear(SEM_LIVING, 0, false);
+    sem_espera_luz.crear(SEM_ESPERA_LUZ,0,false);
 
     for (int i=0;i< config->getMesas();i++) {
         semaforosPedidoDeMesas[i] = Semaforo();
@@ -69,12 +70,12 @@ void Configurador::simular() {
     pid_cocinero = cocinero.cargarCocinero();
 
     std::vector<pid_t> pids_clientes = clientes.getPidClientes();
-    //std::vector<pid_t> pids_recepcionistas = recepcionistas.getPidRecepcionistas();
+    std::vector<pid_t> pids_recepcionistas = recepcionistas.getPidRecepcionistas();
 
     std::vector<pid_t> pids;
 
     pids.insert(pids.end(), pids_clientes.begin(), pids_clientes.end());
-    //pids.insert(pids.end(), pids_recepcionistas.begin(), pids_recepcionistas.end());
+    pids.insert(pids.end(), pids_recepcionistas.begin(), pids_recepcionistas.end());
     pids.push_back(pid_mozos);
     pids.push_back(pid_cocinero);
 
@@ -126,6 +127,8 @@ void Configurador::destruirEstructuras() {
         semaforosSaldos[i].eliminar();
     }
 
+    sem_espera_luz.eliminar();
+
 }
 
 void Configurador::cargarGeneradorDeClientes() {
@@ -150,6 +153,8 @@ void Configurador::cagarGeneradorDeRecepcionistas() {
     recepcionistas.setSem_entrada(&sem_entrada);
     recepcionistas.setSem_recepcion(&sem_recepcion);
     recepcionistas.setSem_living(&sem_living);
+    recepcionistas.setSigint_handler(&sigint_handler);
+    recepcionistas.setSem_espera_luz(&sem_espera_luz);
 
 }
 
@@ -163,6 +168,7 @@ void Configurador::cargarGeneradorDeMozos() {
     mozos.setMenu(&menu);
     mozos.setSemaforosSaldos(semaforosSaldos);
     mozos.setSigint_handler(&sigint_handler);
+    mozos.setSem_espera_luz(&sem_espera_luz);
 
 }
 
@@ -171,6 +177,7 @@ void Configurador::cargarCocinero(){
     cocinero.setFifoCocineroLectura(&fifoCocineroLectura);
     cocinero.setMenu(&menu);
     cocinero.setSigint_handler(&sigint_handler);
+    cocinero.setSem_espera_luz(&sem_espera_luz);
 }
 
 void Configurador::cargarGerente() {
@@ -184,5 +191,7 @@ void Configurador::cargarCorteDeLuz() {
     corteDeLuz.setMesas(&mesas);
     corteDeLuz.setSaldosDeMesa(&saldos);
     corteDeLuz.setAdministradorLiving(&administradorLiving);
+    corteDeLuz.setSem_espera_luz(&sem_espera_luz);
+    corteDeLuz.setCantidadDeProcesosActivar(config->getRecepcionistas());
 
 }

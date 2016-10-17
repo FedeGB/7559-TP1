@@ -98,12 +98,16 @@ int Semaforo::v(int incremento) {
         return resultado;
     }
 
-    for(int i=0;i<incremento;i++){
-        resultado = this->v();
-        if(resultado == -1) {
-            return resultado;
-        }
-    }
+    struct sembuf operacion;
 
+    operacion.sem_num = 0;    // numero de semaforo
+    operacion.sem_op = incremento;    // sumar 1 al semaforo
+    if (this->undo) {
+        operacion.sem_flg = SEM_UNDO;
+    } else {
+        operacion.sem_flg = 0;
+    }
+    resultado = semop(this->id, &operacion, 1);
     return resultado;
+
 }

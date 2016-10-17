@@ -29,6 +29,7 @@ private:
     Semaforo sem_entrada;
     Semaforo sem_recepcion;
     Semaforo sem_living;
+    Semaforo sem_espera_luz;
     std::map<int,Semaforo> semaforosPedidoDeMesas;
     std::map<int,Semaforo> semaforosSaldos;
     FifoLectura fifoRecepcionLectura;

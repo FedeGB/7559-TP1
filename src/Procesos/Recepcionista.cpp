@@ -12,6 +12,8 @@ Recepcionista::Recepcionista(std::string nombre, int cantidadDeMesas) : nombre(n
 
 void Recepcionista::_run() {
 
+    this->sigint_handler->setAtenderSignal(this);
+
     Logger::getInstance().log("Recepcionista " + nombre + " creado");
 
     fifoRecepcionEscritura->obtenerCopia();
@@ -31,10 +33,6 @@ void Recepcionista::_run() {
     }
 
     fifoRecepcionEscritura->cerrar();
-
-    //delete fifoRecepcionEscritura;
-    //delete sem_entrada;
-    //delete sem_recepcion;
 
 }
 
@@ -69,4 +67,24 @@ void Recepcionista::setSem_recepcion(Semaforo *sem_recepcion) {
 
 void Recepcionista::setFifoRecepcionEscritura(FifoEscritura *fifoRecepcionEscritura) {
     Recepcionista::fifoRecepcionEscritura = fifoRecepcionEscritura;
+}
+
+void Recepcionista::setSigint_handler(SIGINT_Handler *sigint_handler) {
+    Recepcionista::sigint_handler = sigint_handler;
+}
+
+void Recepcionista::setSem_espera_luz(Semaforo *sem_espera_luz) {
+
+    this->sem_espera_luz = sem_espera_luz;
+
+}
+
+void Recepcionista::atenderSenial() {
+
+    Logger::getInstance().log("Recepcionista " + nombre + " se corto la luz, espero que vuelva para atender mas clientes");
+
+    this->sem_espera_luz->p();
+
+    Logger::getInstance().log("Recepcionista " + nombre + " volvio la luz regreso al trabajo");
+
 }

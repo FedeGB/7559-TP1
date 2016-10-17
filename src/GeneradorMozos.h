@@ -34,6 +34,7 @@ private:
     bool existioCorteDeLuz;
     int cortesDeLuz;
     SIGINT_Handler *sigint_handler;
+    Semaforo *sem_espera_luz;
 
 public:
 
@@ -60,6 +61,8 @@ public:
     void atenderSenial();
 
     void setSigint_handler(SIGINT_Handler *sigint_handler);
+
+    void setSem_espera_luz(Semaforo *sem_espera_luz);
 
 private:
 

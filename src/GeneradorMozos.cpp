@@ -45,11 +45,11 @@ pid_t GeneradorMozos::cargarMozos() {
 
         while( this->existioCorteDeLuz ) {
 
-            Logger::getInstance().log("MOZO EXISTIO CORTE");
             wait(NULL);
 
-            Logger::getInstance().log("MOZO CREO NUEVOS MOSOS");
             this->existioCorteDeLuz = false;
+
+            this->sem_espera_luz->p();
 
             this->crearMozosDespuesDelCorte();
 
@@ -167,6 +167,10 @@ void GeneradorMozos::atenderSenial() {
 void GeneradorMozos::setSigint_handler(SIGINT_Handler *sigint_handler) {
     this->sigint_handler = sigint_handler;
 
+}
+
+void GeneradorMozos::setSem_espera_luz(Semaforo *sem_espera_luz) {
+    GeneradorMozos::sem_espera_luz = sem_espera_luz;
 }
 
 

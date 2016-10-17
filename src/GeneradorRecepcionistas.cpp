@@ -84,6 +84,8 @@ void GeneradorRecepcionistas::cargarRecepcionista(Recepcionista &recepcionista) 
     recepcionista.setSem_entrada(sem_entrada);
     recepcionista.setSem_recepcion(sem_recepcion);
     recepcionista.setFifoRecepcionEscritura(fifoRecepcionEscritura);
+    recepcionista.setSigint_handler(sigint_handler);
+    recepcionista.setSem_espera_luz(sem_espera_luz);
 
 }
 
@@ -108,5 +110,13 @@ std::vector<pid_t> GeneradorRecepcionistas::getPidRecepcionistas() {
 
     return pidRecepcionistas;
 
+}
+
+void GeneradorRecepcionistas::setSigint_handler(SIGINT_Handler *sigint_handler) {
+    GeneradorRecepcionistas::sigint_handler = sigint_handler;
+}
+
+void GeneradorRecepcionistas::setSem_espera_luz(Semaforo *sem_espera_luz) {
+    GeneradorRecepcionistas::sem_espera_luz = sem_espera_luz;
 }
 

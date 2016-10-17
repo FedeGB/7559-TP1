@@ -42,6 +42,8 @@ pid_t GeneradorDeCocinero::cargarCocinero() {
 
             this->existioCorteDeLuz = false;
 
+            sem_espera_luz->p();
+
             this->crearCocineroDespuesDelCorte();
 
             wait(NULL);
@@ -104,4 +106,8 @@ void GeneradorDeCocinero::atenderSenial() {
 
     kill(pidCocinero,CORTE_DE_LUZ);
 
+}
+
+void GeneradorDeCocinero::setSem_espera_luz(Semaforo *sem_espera_luz) {
+    GeneradorDeCocinero::sem_espera_luz = sem_espera_luz;
 }

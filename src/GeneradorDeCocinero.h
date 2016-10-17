@@ -11,6 +11,7 @@
 #include "Estructuras/FifoEscritura.h"
 #include "Estructuras/SIGINT_Handler.h"
 #include "Procesos/Cocinero.h"
+#include "Estructuras/Semaforo.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -34,6 +35,9 @@ private:
 
     pid_t pidCocinero;
 
+    Semaforo *sem_espera_luz;
+
+
 public:
 
     GeneradorDeCocinero();
@@ -49,6 +53,8 @@ public:
     void setSigint_handler(SIGINT_Handler *sigint_handler);
 
     void atenderSenial();
+
+    void setSem_espera_luz(Semaforo *sem_espera_luz);
 
 private:
 
