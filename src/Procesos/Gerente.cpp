@@ -15,6 +15,7 @@ void Gerente::setCaja(Caja *caja) {
 void Gerente::_run() {
 
     Logger::getInstance().log("Soy el gerente y el total de la caja es: " + std::to_string(caja->consultarDinero()));
+    Logger::getInstance().log("Soy el gerente y el total perdido por cortes de luz es: " + std::to_string(caja->consultarDineroPerdido()));
     Logger::getInstance().log("Soy el gerente y en el living esperaron: " + std::to_string(administradorLiving->clientesQueEsperaronEnElLiving()) + " clientes");
 
 }

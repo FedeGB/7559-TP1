@@ -20,6 +20,8 @@
 #include "Estructuras/Caja.h"
 #include "Procesos/Gerente.h"
 #include "Procesos/CorteDeLuz.h"
+#include "Estructuras/SIGINT_Handler.h"
+#include "GeneradorDeCocinero.h"
 
 class Configurador {
 private:
@@ -42,7 +44,7 @@ private:
     GeneradorRecepcionistas recepcionistas;
     GeneradorClientes clientes;
     GeneradorMozos mozos;
-    Cocinero cocinero;
+    GeneradorDeCocinero cocinero;
     Gerente gerente;
     Mesas mesas;
     AdministradorLiving administradorLiving;
@@ -54,6 +56,7 @@ private:
     pid_t pid_clientes;
     pid_t pid_mozos;
     pid_t pid_cocinero;
+    SIGINT_Handler sigint_handler;
 
 public:
     Configurador(ConfigLoader *config);
@@ -67,6 +70,7 @@ private:
     void cargarGeneradorDeMozos();
     void cargarCocinero();
     void cargarGerente();
+    void cargarCorteDeLuz();
 };
 
 

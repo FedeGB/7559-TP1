@@ -1,7 +1,3 @@
-//
-// Created by mafv on 10/10/16.
-//
-
 #include "AdministradorLiving.h"
 
 
@@ -90,4 +86,18 @@ int AdministradorLiving::clientesQueEsperaronEnElLiving() {
     cantidadDeClientesEnElLiving.liberar();
 
     return clientesQueEsperaron;
+}
+
+void AdministradorLiving::limpiarLiving() {
+
+    LockFile lock(LOCK_LIVING);
+
+    lock.liberarLock();
+
+    clientesEnElLiving.crear(MEMORIA_CLIENTES_LIVING,'L');
+
+    clientesEnElLiving.escribir(0);
+
+    clientesEnElLiving.liberar();
+
 }

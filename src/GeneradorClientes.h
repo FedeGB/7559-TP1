@@ -9,6 +9,7 @@
 #include "Estructuras/FifoEscritura.h"
 #include "Menu.h"
 #include "Estructuras/Pipe.h"
+#include "Estructuras/SIGINT_Handler.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -31,6 +32,7 @@ private:
     Semaforo *sem_living;
     Menu *menu;
     int cantidadDeClientes;
+    SIGINT_Handler *sigint_handler;
 
 public:
 
@@ -59,6 +61,8 @@ public:
     void setCantidadDeClientes(int);
 
     std::vector<pid_t> getPidClientes();
+
+    void setSigint_handler(SIGINT_Handler *sigint_handler);
 
 private:
     void configurarCliente(Cliente &cliente);

@@ -78,6 +78,27 @@ void SaldoDeMesa::liberar() {
 
 }
 
+float SaldoDeMesa::anularSaldos() {
+
+    LockFile lock(LOCK_SALDOS);
+
+    lock.liberarLock();
+
+    float saldosSinCobrar = 0.0f;
+
+    for (int i = 0; i < numeroDeMesas ; ++i) {
+
+        saldosSinCobrar += saldos[i].leer();
+
+        saldos[i].escribir(0.0f);
+
+    }
+
+    return saldosSinCobrar;
+
+}
+
+
 void SaldoDeMesa::reiniciar(int numeroDeMesa) {
 
     LockFile lock(LOCK_SALDOS);
@@ -95,3 +116,5 @@ void SaldoDeMesa::reiniciar(int numeroDeMesa) {
     lock.liberarLock();
 
 }
+
+

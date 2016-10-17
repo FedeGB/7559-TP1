@@ -83,6 +83,19 @@ void Mesas::desocuparMesa(int numeroDeMesa) {
 
 }
 
+void Mesas::desocuparTodaLasMesas() {
+
+    std::cout << "MESAS "<<numeroDeMesas << std::endl;
+    LockFile lock(LOCK_MESAS);
+
+    //Por si fue tomado antes del corte de luz
+    lock.liberarLock();
+
+    for (int i = 0; i < numeroDeMesas ; ++i) {
+        memorias[i].escribir(true);
+    }
+
+}
 
 Mesas::~Mesas() {
 
@@ -129,6 +142,5 @@ int Mesas::buscarMesaLibre() {
     return mesaAsignada;
 
 }
-
 
 

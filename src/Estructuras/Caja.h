@@ -13,12 +13,15 @@ class Caja {
 
 private:
     MemoriaCompartida<float> dinero;
+    MemoriaCompartida<float> dineroSinCobrar;
 public:
     Caja();
     ~Caja();
     void abrirCaja();
     float consultarDinero();
+    float consultarDineroPerdido();
     void agregarDinero(float deposito);
+    void agregarDineroSinCobrar(float deposito);
     void cerrarCaja();
 };
 

@@ -20,8 +20,6 @@ Cliente::Cliente(int id){
 
 void Cliente::_run() {
 
-    SignalHandler :: getInstance()->registrarHandler ( SIGINT,this );
-
     Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
 
     sem_entrada->v(); // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
@@ -231,7 +229,7 @@ void Cliente::atenderSenial() {
         fifoRecepcionLectura->cerrar();
         fifoRecepcionLectura->cerrar();
         fifoLivingLectura->cerrar();
-        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y me voy");
+        Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " se corto la luz y me voy indignado");
         exit(0);
     } else {
         this->cortesDeLuz++;

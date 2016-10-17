@@ -37,6 +37,8 @@ public:
 
     void desocuparMesa(int numeroDeMesa);
 
+    void desocuparTodaLasMesas();
+
     ~Mesas();
 
 private:

@@ -18,6 +18,7 @@ void RecepcionLiving::_run(){
     //fifoLivingEscritura.abrir();
 
     while (sem_living->p() > -1) {
+
         AdministradorLiving administradorLiving;
         Mesas mesas(cantidadDeMesas);
 
@@ -33,9 +34,6 @@ void RecepcionLiving::_run(){
     }
 
     fifoLivingEscritura->cerrar();
-
-    //delete fifoLivingEscritura;
-    //delete sem_living;
 
 }
 

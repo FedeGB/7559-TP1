@@ -47,6 +47,8 @@ void Mozo::_run() {
 
     //Logger::getInstance().log("Mozo " + std::to_string(id) + " creado");
 
+    this->sigint_handler->setAtenderSignal(this);
+
     fifoPedidoMozo->obtenerCopia();
     fifoMozosCocineroLectura->obtenerCopia();
     fifoCocineroEscritura->obtenerCopia();
@@ -164,4 +166,27 @@ void Mozo::buscarSaldoAPagar(ordenDeComida pedido) {
 
 void Mozo::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
     Mozo::semaforosSaldos = semaforosSaldos;
+}
+
+
+void Mozo::atenderSenial() {
+
+    Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + "espero a que vuelva la luz");
+    fifoPedidoMozo->cerrar();
+    fifoMozosCocineroLectura->cerrar();
+    fifoCocineroEscritura->cerrar();
+    LockFile lock(LOCK_MOZOS);
+    lock.liberarLock();
+    LockFile lock2(LOCK_MOZOS_LECTURA_COMIDA_DE_COCINERO);
+    lock2.liberarLock();
+
+    exit(0);
+
+}
+
+
+void Mozo::setSigint_handler(SIGINT_Handler *sigint_handler) {
+
+    this->sigint_handler = sigint_handler;
+
 }

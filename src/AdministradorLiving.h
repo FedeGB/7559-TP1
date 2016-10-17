@@ -21,6 +21,7 @@ public:
     void sacarClienteDelLiving();
     bool hayClientesEnElLiving();
     int clientesQueEsperaronEnElLiving();
+    void limpiarLiving();
 };
 
 

@@ -19,8 +19,8 @@ void GeneradorMozos::setCantidadDeMozos(int cantidadDeMozos) {
 
 pid_t GeneradorMozos::cargarMozos() {
 
-    SignalHandler :: getInstance()->registrarHandler ( SIGINT,this );
     this->existioCorteDeLuz = false;
+    this->cortesDeLuz = 0;
 
     pid_t pid = fork();
 
@@ -32,6 +32,9 @@ pid_t GeneradorMozos::cargarMozos() {
 
     if (pid == 0) {
 
+
+        this->sigint_handler->setAtenderSignal(this);
+
         fifoMozosLectura->abrir();
         fifoMozosCocineroLectura->abrir();
         fifoCocineroEscritura->abrir();
@@ -42,6 +45,10 @@ pid_t GeneradorMozos::cargarMozos() {
 
         while( this->existioCorteDeLuz ) {
 
+            Logger::getInstance().log("MOZO EXISTIO CORTE");
+            wait(NULL);
+
+            Logger::getInstance().log("MOZO CREO NUEVOS MOSOS");
             this->existioCorteDeLuz = false;
 
             this->crearMozosDespuesDelCorte();
@@ -106,6 +113,7 @@ void GeneradorMozos::crearMozos() {
     for (int i = 0; i < cantidadDeMozos; ++i) {
 
         Mozo mozo(i);
+        mozo.setSigint_handler(this->sigint_handler);
         this->configurarMozos(mozo);
         pid_t pidMozo = mozo.run();
 
@@ -127,9 +135,12 @@ void GeneradorMozos::esperarMozos() {
 
 void GeneradorMozos::crearMozosDespuesDelCorte() {
 
+    pidMozos.clear();
+
     for (int i = 0; i < cantidadDeMozos ; ++i) {
 
         Mozo mozo(i,cortesDeLuz);
+        mozo.setSigint_handler(this->sigint_handler);
         this->configurarMozos(mozo);
         pid_t pidMozo = mozo.run();
 
@@ -150,6 +161,11 @@ void GeneradorMozos::atenderSenial() {
         kill(pid_mozo,CORTE_DE_LUZ);
 
     }
+
+}
+
+void GeneradorMozos::setSigint_handler(SIGINT_Handler *sigint_handler) {
+    this->sigint_handler = sigint_handler;
 
 }
 

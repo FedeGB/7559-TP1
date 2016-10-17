@@ -29,6 +29,8 @@ public:
 
     float obtenerSaldo(int numeroDeMesa);
 
+    float anularSaldos();
+
     void reiniciar(int numeroDeMesa);
 
     void liberar();

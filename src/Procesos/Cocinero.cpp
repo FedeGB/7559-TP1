@@ -8,11 +8,22 @@
 #include "../ClientesPorComer.h"
 
 Cocinero::Cocinero() {
+
+    this->cortesDeLuz = 0;
+
 }
 
+Cocinero::Cocinero(int cortesDeLuz) {
+    this->cortesDeLuz = cortesDeLuz;
+}
+
+
 void Cocinero::_run() {
-    fifoMozosCocineroEscritura->abrir();
-    fifoCocineroLectura->abrir();
+
+    this->sigint_handler->setAtenderSignal(this);
+
+    fifoMozosCocineroEscritura->obtenerCopia();
+    fifoCocineroLectura->obtenerCopia();
 
     while (true) {
         ordenDeComida orden;
@@ -22,6 +33,11 @@ void Cocinero::_run() {
         if (leido == 0) {
             break;
         }
+
+        if(orden.cortesDeLuz != this->cortesDeLuz){
+            continue;
+        }
+
         Logger::getInstance().log(
                 "Cocinero recibio pedido de plato " + menu->getPlato(orden.numeroPlato).getNombre() + " de la mesa " +
                 std::to_string(orden.numeroDeMesa) + " ,procede a cocinarlo");
@@ -58,3 +74,21 @@ void Cocinero::setFifoCocineroLectura(FifoLectura *f) {
 void Cocinero::setMenu(Menu *menu) {
     Cocinero::menu = menu;
 }
+
+void Cocinero::setSigint_handler(SIGINT_Handler *sigint_handler) {
+
+    this->sigint_handler = sigint_handler;
+
+}
+
+void Cocinero::atenderSenial() {
+
+    fifoMozosCocineroEscritura->cerrar();
+    fifoCocineroLectura->cerrar();
+
+    Logger::getInstance().log("Cocinero se corto la luz espero a que vuelva");
+
+    exit(0);
+
+}
+

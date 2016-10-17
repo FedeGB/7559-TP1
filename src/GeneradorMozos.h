@@ -14,13 +14,14 @@
 #include "Menu.h"
 #include "Estructuras/Pipe.h"
 #include "Logger.h"
+#include "Estructuras/SIGINT_Handler.h"
 
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdexcept>
 
-class GeneradorMozos : public EventHandler {
+class GeneradorMozos : public AtenderSignal {
 private:
     std::vector<pid_t> pidMozos;
     int cantidadDeMozos;
@@ -32,6 +33,7 @@ private:
     Menu *menu;
     bool existioCorteDeLuz;
     int cortesDeLuz;
+    SIGINT_Handler *sigint_handler;
 
 public:
 
@@ -57,11 +59,7 @@ public:
 
     void atenderSenial();
 
-    virtual int handleSignal ( int signum ) {
-        assert ( signum == SIGINT );
-        this->atenderSenial();
-        return 0;
-    }
+    void setSigint_handler(SIGINT_Handler *sigint_handler);
 
 private:
 

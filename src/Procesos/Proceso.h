@@ -4,9 +4,8 @@
 
 #ifndef TP1_PROCESO_H
 #define TP1_PROCESO_H
+
 #include <sys/types.h>
-#include "../Estructuras/SIGINT_Handler.h"
-#include "../Estructuras/SignalHandler.h"
 
 class Proceso {
 public:

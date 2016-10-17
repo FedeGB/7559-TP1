@@ -32,6 +32,7 @@ pid_t GeneradorClientes::cargarClientes() {
 
             Cliente cliente(i);
             this->configurarCliente(cliente);
+            this->sigint_handler->setAtenderSignal(&cliente);
             pid_t pidCliente = cliente.run();
 
             canal.escribir(&pidCliente,sizeof(pid_t));
@@ -130,5 +131,11 @@ std::vector<pid_t> GeneradorClientes::getPidClientes() {
     canal.cerrar();
 
     return pidClientes;
+
+}
+
+void GeneradorClientes::setSigint_handler(SIGINT_Handler *sigint_handler) {
+
+    this->sigint_handler = sigint_handler;
 
 }

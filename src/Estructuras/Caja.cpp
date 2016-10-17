@@ -12,7 +12,9 @@ Caja::~Caja() {
 
 void Caja::abrirCaja() {
     dinero.crear(MEMORIA_DINERO_CAJA, 'D');
-    dinero.escribir(0);
+    dinero.escribir(0.0f);
+    dineroSinCobrar.crear(MEMORIA_DINERO_CAJA,'S');
+    dineroSinCobrar.escribir(0.0f);
 }
 
 float Caja::consultarDinero() {
@@ -36,7 +38,27 @@ void Caja::agregarDinero(float deposito) {
     lock.liberarLock();
 }
 
-void Caja::cerrarCaja() {
-    dinero.liberar();
+void Caja::agregarDineroSinCobrar(float deposito) {
+
+    LockFile lock(LOCK_CAJA);
+    lock.liberarLock();
+
+    float dinero =dineroSinCobrar.leer();
+    dinero += deposito;
+    dineroSinCobrar.escribir(dinero);
 }
 
+void Caja::cerrarCaja() {
+    dinero.liberar();
+    dineroSinCobrar.liberar();
+}
+
+float Caja::consultarDineroPerdido() {
+    LockFile lock(LOCK_CAJA);
+    lock.tomarLock();
+    dineroSinCobrar.crear(MEMORIA_DINERO_CAJA, 'S');
+    float saldoActual = dineroSinCobrar.leer();
+    dineroSinCobrar.liberar();
+    lock.liberarLock();
+    return saldoActual;
+}

@@ -3,12 +3,15 @@
 //
 
 #include "Configurador.h"
+#include "Estructuras/SignalHandler.h"
 
 Configurador::Configurador(ConfigLoader *config) {
     this->config = config;
 }
 
 void Configurador::crearEstructuras() {
+
+    SignalHandler :: getInstance() ->registrarHandler(SIGINT,&sigint_handler);
 
     sem_entrada.crear(SEM_ENTRADA, 0, false);
     sem_recepcion.crear(SEM_RECEPCION, 0, false);
@@ -51,6 +54,8 @@ void Configurador::crearEstructuras() {
     saldos.inicializarSaldoDeMesas(config->getMesas());
     caja.abrirCaja();
 
+    this->cargarCorteDeLuz();
+
 }
 
 void Configurador::simular() {
@@ -61,16 +66,17 @@ void Configurador::simular() {
 
     pid_mozos = mozos.cargarMozos();
 
-    pid_cocinero = cocinero.run();
+    pid_cocinero = cocinero.cargarCocinero();
 
     std::vector<pid_t> pids_clientes = clientes.getPidClientes();
-    std::vector<pid_t> pids_recepcionistas = recepcionistas.getPidRecepcionistas();
+    //std::vector<pid_t> pids_recepcionistas = recepcionistas.getPidRecepcionistas();
 
     std::vector<pid_t> pids;
 
     pids.insert(pids.end(), pids_clientes.begin(), pids_clientes.end());
-    pids.insert(pids.end(), pids_recepcionistas.begin(), pids_recepcionistas.end());
+    //pids.insert(pids.end(), pids_recepcionistas.begin(), pids_recepcionistas.end());
     pids.push_back(pid_mozos);
+    pids.push_back(pid_cocinero);
 
     corteDeLuz.setPidProcesos(pids);
 
@@ -89,11 +95,11 @@ void Configurador::simular() {
 
     waitpid(pid_cocinero,NULL,0);
 
+    kill(pid_corteDeLuz,SIGINT);
+
     pid_t pid_gerente = gerente.run();
 
     waitpid(pid_gerente,NULL,0);
-
-    kill(pid_corteDeLuz,2);
 
 }
 
@@ -133,6 +139,7 @@ void Configurador::cargarGeneradorDeClientes() {
     clientes.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     clientes.setMenu(&menu);
     clientes.setSemaforosSaldos(semaforosSaldos);
+    clientes.setSigint_handler(&sigint_handler);
 
 }
 
@@ -148,12 +155,14 @@ void Configurador::cagarGeneradorDeRecepcionistas() {
 
 void Configurador::cargarGeneradorDeMozos() {
 
+    //this->sigint_handler.setAtenderSignal(&mozos);
     mozos.setSemaforosPedidoDeMesas(semaforosPedidoDeMesas);
     mozos.setFifoMozosLectura(&fifoMozosLectura);
     mozos.setFifoMozosCocineroLectura(&fifoMozosCocineroLectura);
     mozos.setFifoCocineroEscritura(&fifoCocineroEscritura);
     mozos.setMenu(&menu);
     mozos.setSemaforosSaldos(semaforosSaldos);
+    mozos.setSigint_handler(&sigint_handler);
 
 }
 
@@ -161,9 +170,19 @@ void Configurador::cargarCocinero(){
     cocinero.setFifoMozosCocineroEscritura(&fifoMozosCocineroEscritura);
     cocinero.setFifoCocineroLectura(&fifoCocineroLectura);
     cocinero.setMenu(&menu);
+    cocinero.setSigint_handler(&sigint_handler);
 }
 
 void Configurador::cargarGerente() {
     gerente.setAdministradorLiving(&administradorLiving);
     gerente.setCaja(&caja);
+}
+
+void Configurador::cargarCorteDeLuz() {
+
+    corteDeLuz.setCaja(&caja);
+    corteDeLuz.setMesas(&mesas);
+    corteDeLuz.setSaldosDeMesa(&saldos);
+    corteDeLuz.setAdministradorLiving(&administradorLiving);
+
 }

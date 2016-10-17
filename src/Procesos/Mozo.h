@@ -14,8 +14,10 @@
 #include "../Constantes.h"
 #include "../Estructuras/FifoEscritura.h"
 #include "../Menu.h"
+#include "../AtenderSignal.h"
+#include "../Estructuras/SIGINT_Handler.h"
 
-class Mozo : public Proceso {
+class Mozo : public Proceso , public AtenderSignal {
 
 private:
 
@@ -27,6 +29,7 @@ private:
     std::map<int, Semaforo> semaforosSaldos;
     Menu *menu;
     int cortesDeLuz;
+    SIGINT_Handler *sigint_handler;
 
 public:
 
@@ -47,6 +50,10 @@ public:
     void setMenu(Menu *menu);
 
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
+
+    void atenderSenial();
+
+    void setSigint_handler(SIGINT_Handler *sigint_handler);
 
 private:
 

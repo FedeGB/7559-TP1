@@ -18,8 +18,9 @@
 #include "../Mesas.h"
 #include "../Estructuras/FifoEscritura.h"
 #include "../Menu.h"
+#include "../AtenderSignal.h"
 
-class Cliente : public Proceso, public EventHandler {
+class Cliente : public Proceso, public AtenderSignal {
 
 private:
     int id;
@@ -61,12 +62,6 @@ public:
     void setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos);
 
     void atenderSenial();
-
-    virtual int handleSignal ( int signum ) {
-        assert ( signum == SIGINT );
-        this->atenderSenial();
-        return 0;
-    }
 
 
 private:
