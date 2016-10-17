@@ -14,7 +14,7 @@
 #include <sys/types.h>
 #include <signal.h>
 
-class CorteDeLuz : public Proceso {
+class CorteDeLuz : public Proceso, public AtenderSignal {
 
 private:
 
@@ -25,16 +25,19 @@ private:
     AdministradorLiving *administradorLiving;
     Semaforo *sem_espera_luz;
     int cantidadDeProcesosActivar;
+    SIGINT_Handler *sigint_handler;
 
 public:
+    CorteDeLuz();
     void setPidProcesos(std::vector<pid_t> pid_procesos);
-
     void setMesas(Mesas *mesas);
     void setCaja(Caja *caja);
     void setSaldosDeMesa(SaldoDeMesa *saldos);
     void setAdministradorLiving(AdministradorLiving *administradorLiving);
     void setSem_espera_luz(Semaforo *sem_espera_luz);
     void setCantidadDeProcesosActivar(int cantidad);
+    void setSigint_handler(SIGINT_Handler *sigint_handler);
+    void atenderSenial();
 
 private:
 

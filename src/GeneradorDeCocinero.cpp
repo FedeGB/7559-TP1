@@ -32,8 +32,6 @@ pid_t GeneradorDeCocinero::cargarCocinero() {
         this->configurarCocinero(cocinero);
         pidCocinero = cocinero.run();
 
-        Logger::getInstance().log("CREADO COCINERO CON PID "+std::to_string(pidCocinero));
-
         wait(NULL);
 
         while( this->existioCorteDeLuz ) {
@@ -101,8 +99,6 @@ void GeneradorDeCocinero::atenderSenial() {
 
     this->existioCorteDeLuz = true;
     this->cortesDeLuz++;
-
-    Logger::getInstance().log("CORTE DE LUZ COCINERO "+std::to_string(pidCocinero));
 
     kill(pidCocinero,CORTE_DE_LUZ);
 

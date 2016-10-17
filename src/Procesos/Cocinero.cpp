@@ -1,7 +1,3 @@
-//
-// Created by horacio on 10/13/16.
-//
-
 #include "Cocinero.h"
 #include "../Logger.h"
 #include "../Constantes.h"
@@ -14,6 +10,7 @@ Cocinero::Cocinero() {
 }
 
 Cocinero::Cocinero(int cortesDeLuz) {
+    Logger::getInstance().log("Cocinero vuelve la luz, regreso al trabajo");
     this->cortesDeLuz = cortesDeLuz;
 }
 

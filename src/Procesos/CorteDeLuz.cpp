@@ -1,14 +1,19 @@
 #include "CorteDeLuz.h"
 
+
+CorteDeLuz::CorteDeLuz() {
+
+}
+
 void CorteDeLuz::_run() {
 
-    bool existio = false;
+    this->sigint_handler->setAtenderSignal(this);
 
-    while (!existio) {
+    while (true) {
 
-        char t;
         std::cout << "Presione enter para disparar el corte de luz: " << std::endl;
-        std::cin >> t;
+
+        std::cin.get();
 
         for(auto pid : pid_procesos) {
 
@@ -21,19 +26,15 @@ void CorteDeLuz::_run() {
         caja->agregarDineroSinCobrar(totalSinCobrar);
         administradorLiving->limpiarLiving();
 
-        Logger::getInstance().log("Reestableciendo la luz ... ");
-        std::cout << "Reestableciendo la luz ... " << std::endl;
+        Logger::getInstance().log("Restableciendo la luz ... ");
+        std::cout << "Restableciendo la luz ... " << std::endl;
         sleep(2);
-        Logger::getInstance().log("luz reestablecida ");
-        std::cout << "luz reestablecida " << std::endl;
+        Logger::getInstance().log("luz restablecida ");
+        std::cout << "luz restablecida " << std::endl;
 
         this->sem_espera_luz->v(this->cantidadDeProcesosActivar);
 
-        existio = true;
-
     }
-
-    std::cout << "No se aceptan mas cortes de luz: " << std::endl;
 
 }
 
@@ -67,4 +68,12 @@ void CorteDeLuz::setCantidadDeProcesosActivar(int cantidad) {
 
     this->cantidadDeProcesosActivar = cantidad + 2;
 
+}
+
+void CorteDeLuz::setSigint_handler(SIGINT_Handler *sigint_handler) {
+    CorteDeLuz::sigint_handler = sigint_handler;
+}
+
+void CorteDeLuz::atenderSenial() {
+    exit(0);
 }

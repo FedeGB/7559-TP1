@@ -154,7 +154,6 @@ void GeneradorMozos::atenderSenial() {
 
     this->existioCorteDeLuz = true;
     this->cortesDeLuz++;
-    Logger::getInstance().log("CORTE DE LUZ"+std::to_string(this->cortesDeLuz));
 
     for(auto pid_mozo : pidMozos ) {
 

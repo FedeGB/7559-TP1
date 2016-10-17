@@ -98,6 +98,8 @@ void Configurador::simular() {
 
     kill(pid_corteDeLuz,SIGINT);
 
+    waitpid(pid_corteDeLuz,NULL,0);
+
     pid_t pid_gerente = gerente.run();
 
     waitpid(pid_gerente,NULL,0);
@@ -193,5 +195,6 @@ void Configurador::cargarCorteDeLuz() {
     corteDeLuz.setAdministradorLiving(&administradorLiving);
     corteDeLuz.setSem_espera_luz(&sem_espera_luz);
     corteDeLuz.setCantidadDeProcesosActivar(config->getRecepcionistas());
+    corteDeLuz.setSigint_handler(&sigint_handler);
 
 }
