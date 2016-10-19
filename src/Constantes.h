@@ -26,6 +26,7 @@
 #define MEMORIA_DINERO_CAJA "/bin/bash"
 #define MEMORIA_COMPARTIDA_SALDOS "/bin/cat"
 #define MEMORIA_COMPARTIDA_CANTIDAD_LIVING "/bin/cat"
+#define MEMORIA_COMPARTIDA_GERENTE_CONSULTA "/bin/nano"
 #define LOCK_CLIENTES_POR_COMER "/tmp/clientesPorComer"
 #define LOCK_SALDOS "/tmp/lockSaldos"
 

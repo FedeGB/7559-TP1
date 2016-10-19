@@ -81,7 +81,12 @@ void Configurador::simular() {
 
     corteDeLuz.setPidProcesos(pids);
 
+    pid_t pid_gerente = gerente.run();
     pid_t pid_corteDeLuz = corteDeLuz.run();
+
+    MemoriaCompartida<bool> gerenteConsulta;
+    gerenteConsulta.crear(MEMORIA_COMPARTIDA_GERENTE_CONSULTA, 'G');
+    gerenteConsulta.escribir(true);
 
     waitpid(pid_clientes,NULL,0);
 
@@ -100,7 +105,7 @@ void Configurador::simular() {
 
     waitpid(pid_corteDeLuz,NULL,0);
 
-    pid_t pid_gerente = gerente.run();
+    gerenteConsulta.escribir(false);
 
     waitpid(pid_gerente,NULL,0);
 
@@ -185,6 +190,7 @@ void Configurador::cargarCocinero(){
 void Configurador::cargarGerente() {
     gerente.setAdministradorLiving(&administradorLiving);
     gerente.setCaja(&caja);
+    gerente.setSigint_handler(&sigint_handler);
 }
 
 void Configurador::cargarCorteDeLuz() {

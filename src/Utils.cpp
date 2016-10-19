@@ -41,3 +41,7 @@ bool stringIsValidPrice(std::string str) {
     if(str[0] == '-') return false; // No puede ser negativo
     return iss.eof() && !iss.fail(); // Chequeamos que sea un float valido
 }
+
+void simularAccion(int minT, int maxT) {
+    sleep(getRandomInt(minT, maxT));
+}

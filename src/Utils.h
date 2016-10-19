@@ -17,5 +17,6 @@ bool stringIsInt(std::string);
 
 bool stringIsValidPrice(std::string);
 
+void simularAccion(int minT, int maxT);
 
 #endif //TP1_UTILS_H

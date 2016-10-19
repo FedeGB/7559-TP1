@@ -102,7 +102,7 @@ void Cliente::pedirPlatos() {
         Logger::getInstance().log("Soy el cliente " + std::to_string(id) + " y voy a comer: "+menu->getPlato(pedidoDePlato.numeroPlato).getNombre());
 
         this->platoPedidos++;
-
+        simularAccion(2, 3);
     }while(this->pedirOtroPlato());
 
     this->pedirCuenta();

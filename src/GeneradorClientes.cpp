@@ -29,7 +29,6 @@ pid_t GeneradorClientes::cargarClientes() {
         fifoMozosEscritura->abrir();
 
         for (int i = 0; i < cantidadDeClientes; ++i) {
-
             Cliente cliente(i);
             this->configurarCliente(cliente);
             this->sigint_handler->setAtenderSignal(&cliente);
