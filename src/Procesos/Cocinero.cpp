@@ -40,7 +40,7 @@ void Cocinero::_run() {
                 std::to_string(orden.numeroDeMesa) + " ,procede a cocinarlo");
 
         // Tiempo de cocinar
-        //sleep(5);
+        sleep(5);
 
         enviarComidaAMozos(orden);
     }

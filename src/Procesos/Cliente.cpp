@@ -20,20 +20,20 @@ Cliente::Cliente(int id){
 
 void Cliente::_run() {
 
-    Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
+    //Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
 
     // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
     sem_entrada->v();
 
-    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 1");
+   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 1");
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     this->semaforoEsperar();
 
-    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 2");
+   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 2");
 
     this->estoyDentro = true;
 
-    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 3");
+   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 3");
     this->esperarMesa();
 
 
@@ -237,14 +237,16 @@ void Cliente::semaforoEsperar() {
 
     int error = 0;
 
+    int estado = 0;
+
     do {
 
-        sem_recepcion->p();
+        estado = sem_recepcion->p();
 
         error = errno;
         errno = 0;
 
-    }while ((error == EXISTIO_CORTE_DE_LUZ));
+    } while ((error == EXISTIO_CORTE_DE_LUZ) && (estado == -1));
 
 
 }
