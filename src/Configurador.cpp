@@ -90,16 +90,21 @@ void Configurador::simular() {
 
     waitpid(pid_clientes,NULL,0);
 
+    Logger::getInstance().log("Terminaron los clientes");
+
     // eliminar semaforos
     sem_entrada.eliminar();
     sem_recepcion.eliminar();
     sem_living.eliminar();
 
     waitpid(pid_recepcionistas,NULL,0);
+    Logger::getInstance().log("Terminaron los pid_recepcionistas");
 
     waitpid(pid_mozos,NULL,0);
+    Logger::getInstance().log("Terminaron los pid_mozos");
 
     waitpid(pid_cocinero,NULL,0);
+    Logger::getInstance().log("Terminaron los pid_cocinero");
 
     kill(pid_corteDeLuz,SIGINT);
 

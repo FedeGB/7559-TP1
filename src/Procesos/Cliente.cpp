@@ -25,12 +25,17 @@ void Cliente::_run() {
     // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
     sem_entrada->v();
 
+    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 1");
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     this->semaforoEsperar();
 
+    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 2");
+
     this->estoyDentro = true;
 
+    Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 3");
     this->esperarMesa();
+
 
 }
 
@@ -104,7 +109,6 @@ void Cliente::pedirPlatos() {
     Mesas mesa;
 
     mesa.desocuparMesa(mesaAsignada);
-
     sem_living->v();
 
 }

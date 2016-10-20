@@ -22,7 +22,7 @@ void Recepcionista::_run() {
         sem_recepcion->v();
         Logger::getInstance().log("Recepcionista " + nombre + " esta atendiendo a un cliente");
 
-        sleep(4 + getRandomInt(1, 5)); // tiempo que tardo en atenderlo
+        sleep(1 + getRandomInt(1, 5)); // tiempo que tardo en atenderlo
 
         this->asignarMesa();
 
