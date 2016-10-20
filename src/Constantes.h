@@ -29,6 +29,7 @@
 #define MEMORIA_COMPARTIDA_GERENTE_CONSULTA "/bin/nano"
 #define LOCK_CLIENTES_POR_COMER "/tmp/clientesPorComer"
 #define LOCK_SALDOS "/tmp/lockSaldos"
+#define EXISTIO_CORTE_DE_LUZ 4
 
 struct asignarMesa {
     int mesa;

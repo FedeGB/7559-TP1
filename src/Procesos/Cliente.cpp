@@ -22,11 +22,11 @@ void Cliente::_run() {
 
     Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
 
-    sem_entrada->v(); // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
-    Logger::getInstance().log("cliente " + std::to_string(id) + " llego a la entrada");
+    // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
+    sem_entrada->v();
 
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
-    sem_recepcion->p();
+    this->semaforoEsperar();
 
     this->estoyDentro = true;
 
@@ -37,9 +37,6 @@ void Cliente::_run() {
 void Cliente::esperarMesa() {
 
     struct asignarMesa mesaAsignada;
-    //char* buffer;
-
-    //buffer = new char[sizeof(mesaAsignada)];
 
     fifoRecepcionLectura->obtenerCopia();
 
@@ -53,9 +50,6 @@ void Cliente::esperarMesa() {
 
     fifoRecepcionLectura->cerrar();
 
-   // memcpy(&mesaAsignada,buffer,sizeof(mesaAsignada));
-
-    //delete buffer;
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " fue atendido por un recepcionista");
 
@@ -75,9 +69,6 @@ void Cliente::esperarMesa() {
 void Cliente::pedirPlatos() {
 
     Logger::getInstance().log("cliente " + std::to_string(id) + " le toco la mesa " + std::to_string(mesaAsignada));
-    //Logger::getInstance().log("cliente " + std::to_string(id) + " falta implementar comidas, me voy");
-
-    //Sleep para que simule una espera antes de liberar la mesa
 
     ordenDeComida pedidoDePlato;
 
@@ -87,8 +78,6 @@ void Cliente::pedirPlatos() {
 
     fifoMozosEscritura->obtenerCopia();
 
-    //Realizo tres pedidos
-    //Tendria que ser con los platos y la cantidad de plata
     do{
 
         pedidoDePlato.numeroPlato = menu->getPlatoRandom();
@@ -103,6 +92,7 @@ void Cliente::pedirPlatos() {
 
         this->platoPedidos++;
         simularAccion(2, 3);
+
     }while(this->pedirOtroPlato());
 
     this->pedirCuenta();
@@ -225,6 +215,8 @@ void Cliente::atenderSenial() {
 
     if ( this->estoyDentro ) {
         LockFile lockLivingEspera(LOCK_LIVING_ESPERA);
+        LockFile lockRecepcion(LOCK_RECEPCION);
+        lockRecepcion.liberarLock();
         lockLivingEspera.liberarLock();
         fifoRecepcionLectura->cerrar();
         fifoRecepcionLectura->cerrar();
@@ -233,7 +225,22 @@ void Cliente::atenderSenial() {
         exit(0);
     } else {
         this->cortesDeLuz++;
-        sem_recepcion->p();
     }
+
+}
+
+void Cliente::semaforoEsperar() {
+
+    int error = 0;
+
+    do {
+
+        sem_recepcion->p();
+
+        error = errno;
+        errno = 0;
+
+    }while ((error == EXISTIO_CORTE_DE_LUZ));
+
 
 }

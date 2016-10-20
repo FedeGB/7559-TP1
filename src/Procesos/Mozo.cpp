@@ -55,14 +55,12 @@ void Mozo::_run() {
 
     LockFile lock(LOCK_MOZOS);
 
+
     while(true) {
 
         lock.tomarLock();
-
         ordenDeComida pedido;
-
         ssize_t leido = fifoPedidoMozo->leer(&pedido,sizeof(pedido));
-
         //Se cerro el fifo de los clientes
         if(leido == 0){
             lock.liberarLock();
@@ -171,14 +169,15 @@ void Mozo::setSemaforosSaldos(const std::map<int, Semaforo> &semaforosSaldos) {
 
 void Mozo::atenderSenial() {
 
-    Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + "espero a que vuelva la luz");
-    fifoPedidoMozo->cerrar();
-    fifoMozosCocineroLectura->cerrar();
-    fifoCocineroEscritura->cerrar();
     LockFile lock(LOCK_MOZOS);
     lock.liberarLock();
     LockFile lock2(LOCK_MOZOS_LECTURA_COMIDA_DE_COCINERO);
     lock2.liberarLock();
+
+    Logger::getInstance().log("Soy el Mozo " + std::to_string(id) + "espero a que vuelva la luz");
+    fifoPedidoMozo->cerrar();
+    fifoMozosCocineroLectura->cerrar();
+    fifoCocineroEscritura->cerrar();
 
     exit(0);
 

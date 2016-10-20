@@ -1,7 +1,3 @@
-//
-// Created by horacio on 9/24/16.
-//
-
 #include "Recepcionista.h"
 
 Recepcionista::Recepcionista(std::string nombre, int cantidadDeMesas) : nombre(nombre) {
@@ -14,23 +10,26 @@ void Recepcionista::_run() {
 
     this->sigint_handler->setAtenderSignal(this);
 
-    Logger::getInstance().log("Recepcionista " + nombre + " creado");
+    Logger::getInstance().log("Recepcionista " + nombre + " creada");
 
     fifoRecepcionEscritura->obtenerCopia();
     fifoRecepcionEscritura->abrir();
 
-    while (sem_entrada->p() > -1) { //mientras haya clientes en la entrada (si no hay niguno bloque aca)
+    //mientras haya clientes en la entrada (si no hay niguno bloque aca)
+    while ( this->esperarClientes() ) {
 
         //recibo a cliente:
         sem_recepcion->v();
         Logger::getInstance().log("Recepcionista " + nombre + " esta atendiendo a un cliente");
 
-        sleep(5 + getRandomInt(1, 5)); // tiempo que tardo en atenderlo
+        sleep(4 + getRandomInt(1, 5)); // tiempo que tardo en atenderlo
 
         this->asignarMesa();
 
         Logger::getInstance().log("Recepcionista " + nombre + " termino de atender a un cliente");
     }
+
+    Logger::getInstance().log("Recepcionista " + nombre + " termino el dia, me retiro");
 
     fifoRecepcionEscritura->cerrar();
 
@@ -86,5 +85,24 @@ void Recepcionista::atenderSenial() {
     this->sem_espera_luz->p();
 
     Logger::getInstance().log("Recepcionista " + nombre + " volvio la luz regreso al trabajo");
+
+}
+
+bool Recepcionista::esperarClientes() {
+
+    int estado = 0;
+    int error = 0;
+
+    do {
+
+        estado = sem_entrada->p();
+
+        error = errno;
+        errno = 0;
+
+    }while (error == EXISTIO_CORTE_DE_LUZ);
+
+
+    return estado != -1;
 
 }

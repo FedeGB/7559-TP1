@@ -101,7 +101,7 @@ int Semaforo::v(int incremento) {
     struct sembuf operacion;
 
     operacion.sem_num = 0;    // numero de semaforo
-    operacion.sem_op = incremento;    // sumar 1 al semaforo
+    operacion.sem_op = (short) incremento;    // sumar 1 al semaforo
     if (this->undo) {
         operacion.sem_flg = SEM_UNDO;
     } else {
@@ -111,3 +111,4 @@ int Semaforo::v(int incremento) {
     return resultado;
 
 }
+

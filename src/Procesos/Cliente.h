@@ -72,6 +72,7 @@ private:
     void esperarEnElLiving();
     bool pedirOtroPlato();
     void pedirCuenta();
+    void semaforoEsperar();
 
 };
 

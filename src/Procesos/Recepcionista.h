@@ -32,6 +32,7 @@ private:
     SIGINT_Handler *sigint_handler;
     Semaforo *sem_espera_luz;
 
+
 public:
 
     Recepcionista(std::string nombre, int cantidadDeMesas);
@@ -53,6 +54,7 @@ public:
 private:
     void _run();
     void asignarMesa();
+    bool esperarClientes();
 };
 
 

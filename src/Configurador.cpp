@@ -84,9 +84,9 @@ void Configurador::simular() {
     pid_t pid_gerente = gerente.run();
     pid_t pid_corteDeLuz = corteDeLuz.run();
 
-    MemoriaCompartida<bool> gerenteConsulta;
+   /* MemoriaCompartida<bool> gerenteConsulta;
     gerenteConsulta.crear(MEMORIA_COMPARTIDA_GERENTE_CONSULTA, 'G');
-    gerenteConsulta.escribir(true);
+    gerenteConsulta.escribir(true);*/
 
     waitpid(pid_clientes,NULL,0);
 
@@ -105,7 +105,7 @@ void Configurador::simular() {
 
     waitpid(pid_corteDeLuz,NULL,0);
 
-    gerenteConsulta.escribir(false);
+    //gerenteConsulta.escribir(false);
 
     waitpid(pid_gerente,NULL,0);
 
