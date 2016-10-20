@@ -16,7 +16,6 @@
 #include "../Estructuras/FifoEscritura.h"
 #include "../Constantes.h"
 #include "../Mesas.h"
-#include "../Estructuras/MemoriaCompartida2.h"
 #include "../AtenderSignal.h"
 #include "../Estructuras/SIGINT_Handler.h"
 #include <unistd.h>

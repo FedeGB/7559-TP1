@@ -19,6 +19,7 @@
 #include "../Estructuras/FifoEscritura.h"
 #include "../Menu.h"
 #include "../AtenderSignal.h"
+#include "SaldoDeMesa.h"
 
 class Cliente : public Proceso, public AtenderSignal {
 

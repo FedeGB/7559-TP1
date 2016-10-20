@@ -1,7 +1,4 @@
 #include "Cocinero.h"
-#include "../Logger.h"
-#include "../Constantes.h"
-#include "../ClientesPorComer.h"
 
 Cocinero::Cocinero() {
 

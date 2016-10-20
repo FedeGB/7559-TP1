@@ -3,12 +3,6 @@
 //
 
 #include "Mozo.h"
-#include "../Logger.h"
-#include "../ClientesPorComer.h"
-#include "../Estructuras/FifoEscritura.h"
-#include "../Utils.h"
-#include "SaldoDeMesa.h"
-#include "../Estructuras/Caja.h"
 
 
 Mozo::Mozo(int id) {
@@ -44,9 +38,6 @@ Mozo::Mozo() {
 }
 
 void Mozo::_run() {
-
-    //Logger::getInstance().log("Mozo " + std::to_string(id) + " creado");
-
     this->sigint_handler->setAtenderSignal(this);
 
     fifoPedidoMozo->obtenerCopia();
@@ -125,11 +116,10 @@ void Mozo::solicitarPedidoAlCocinero(ordenDeComida orden) {
 
 void Mozo::entregarPedidoAlCliente(ordenDeComida comidaParaEntregar) {
 
-    //Estas dos lineas irian en el metodo entregarPedidoAlCliente
-
     Logger::getInstance().log("Mozo " + std::to_string(id) + " entrego pedido a la meza: " + std::to_string(comidaParaEntregar.numeroDeMesa));
 
-    //sleep(3);
+    // Espera del mozo
+    sleep(3);
 
     semaforosPedidoDeMesas[comidaParaEntregar.numeroDeMesa].v();
 

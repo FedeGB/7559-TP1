@@ -3,9 +3,6 @@
 //
 
 #include "Cliente.h"
-#include "../ClientesPorComer.h"
-#include "../Utils.h"
-#include "SaldoDeMesa.h"
 
 
 Cliente::Cliente(int id){
@@ -20,20 +17,14 @@ Cliente::Cliente(int id){
 
 void Cliente::_run() {
 
-    //Logger::getInstance().log("Creado cliente " + std::to_string(id) + ", con plata " + std::to_string(plata));
-
     // meto al cliente en la entrada, si no habia ninguno los recepcionistas estaban bloqueados aca esperando
     sem_entrada->v();
 
-   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 1");
     // espero a que me "recepcionen", si no hay ningun recepcionista bloquea aca
     this->semaforoEsperar();
 
-   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 2");
-
     this->estoyDentro = true;
 
-   // Logger::getInstance().log("Creado cliente " + std::to_string(id) + " Pase 3");
     this->esperarMesa();
 
 

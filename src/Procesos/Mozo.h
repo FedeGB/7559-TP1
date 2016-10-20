@@ -16,6 +16,9 @@
 #include "../Menu.h"
 #include "../AtenderSignal.h"
 #include "../Estructuras/SIGINT_Handler.h"
+#include "SaldoDeMesa.h"
+#include "../Estructuras/Caja.h"
+#include "../Logger.h"
 
 class Mozo : public Proceso , public AtenderSignal {
 

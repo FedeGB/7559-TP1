@@ -3,8 +3,6 @@
 //
 
 #include "RecepcionLiving.h"
-#include "../Mesas.h"
-
 
 RecepcionLiving::RecepcionLiving(int cantidadDeMesas) {
 
@@ -15,7 +13,6 @@ void RecepcionLiving::_run(){
 
 
     fifoLivingEscritura->obtenerCopia();
-    //fifoLivingEscritura.abrir();
 
     while (sem_living->p() > -1) {
 

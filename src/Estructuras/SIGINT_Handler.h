@@ -12,11 +12,10 @@
 class SIGINT_Handler : public EventHandler {
 
 private:
-	sig_atomic_t gracefulQuit;
 	AtenderSignal *atender;
 public:
 
-		SIGINT_Handler () : gracefulQuit(0) , atender(NULL) {
+		SIGINT_Handler () : atender(NULL) {
 		}
 
 		~SIGINT_Handler () {
@@ -30,14 +29,9 @@ public:
 
 		virtual int handleSignal ( int signum ) {
 			assert ( signum == SIGINT );
-			this->gracefulQuit = 1;
 			if(atender!=NULL)
 				this->atender->atenderSenial();
 			return 0;
-		}
-
-		sig_atomic_t getGracefulQuit () const {
-			return this->gracefulQuit;
 		}
 
 };

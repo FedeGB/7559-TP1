@@ -1,10 +1,6 @@
 //
 // Created by horacio on 9/19/16.
 //
-
-#include <stdexcept>
-#include <unistd.h>
-#include <sys/types.h>
 #include "Proceso.h"
 
 Proceso::Proceso() {

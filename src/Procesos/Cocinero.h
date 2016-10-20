@@ -13,6 +13,7 @@
 #include "../Constantes.h"
 #include "../AtenderSignal.h"
 #include "../Estructuras/SIGINT_Handler.h"
+#include "../Logger.h"
 
 class Cocinero: public Proceso, public AtenderSignal {
 

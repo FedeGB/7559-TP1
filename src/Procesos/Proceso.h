@@ -6,6 +6,8 @@
 #define TP1_PROCESO_H
 
 #include <sys/types.h>
+#include <stdexcept>
+#include <unistd.h>
 
 class Proceso {
 public:

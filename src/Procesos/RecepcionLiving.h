@@ -10,6 +10,7 @@
 #include "../Estructuras/Semaforo.h"
 #include "../Estructuras/FifoEscritura.h"
 #include "../AdministradorLiving.h"
+#include "../Mesas.h"
 
 class RecepcionLiving : public Proceso {
 

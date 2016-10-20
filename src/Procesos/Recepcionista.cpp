@@ -93,15 +93,10 @@ bool Recepcionista::esperarClientes() {
     int estado = 0;
     int error = 0;
 
-    //do {
+    estado = sem_entrada->p();
 
-        estado = sem_entrada->p();
-
-        error = errno;
-        errno = 0;
-
-//    }while (error == EXISTIO_CORTE_DE_LUZ);
-
+    error = errno;
+    errno = 0;
 
     if(error == EXISTIO_CORTE_DE_LUZ){
         return true;
