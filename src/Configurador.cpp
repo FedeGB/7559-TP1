@@ -110,7 +110,7 @@ void Configurador::simular() {
     gerenteConsulta.escribir(false);
 
     waitpid(pid_gerente,NULL,0);
-
+    gerenteConsulta.liberar();
 }
 
 
