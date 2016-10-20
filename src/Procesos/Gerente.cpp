@@ -26,6 +26,7 @@ void Gerente::_run() {
         sleep(20); // Cada 20 segundos
         this->consultar = gerenteConsulta.leer();
     }
+    gerenteConsulta.liberar();
 }
 
 

@@ -128,7 +128,9 @@ void Configurador::destruirEstructuras() {
     administradorLiving.desarmarLiving();
     saldos.liberar();
     caja.cerrarCaja();
-
+    MemoriaCompartida<bool> gerenteConsulta;
+    gerenteConsulta.crear(MEMORIA_COMPARTIDA_GERENTE_CONSULTA, 'G');
+    gerenteConsulta.liberar();
     for (int i=0;i< config->getMesas();i++) {
         semaforosPedidoDeMesas[i].eliminar();
         semaforosSaldos[i].eliminar();
