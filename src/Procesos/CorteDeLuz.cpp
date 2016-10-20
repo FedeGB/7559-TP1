@@ -11,7 +11,11 @@ void CorteDeLuz::_run() {
 
     while (true) {
 
+        std::ios_base::sync_with_stdio(false);
+
         std::cout << "Presione enter para disparar el corte de luz: " << std::endl;
+
+        std::cin.ignore(std::cin.rdbuf()->in_avail(), EOF);
 
         std::cin.get();
 
