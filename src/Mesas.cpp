@@ -84,8 +84,7 @@ void Mesas::desocuparMesa(int numeroDeMesa) {
 }
 
 void Mesas::desocuparTodaLasMesas() {
-
-    std::cout << "MESAS "<<numeroDeMesas << std::endl;
+    
     LockFile lock(LOCK_MESAS);
 
     //Por si fue tomado antes del corte de luz
